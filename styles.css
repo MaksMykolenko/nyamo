@@ -1372,6 +1372,32 @@ button {
   border-radius: 28px;
   box-shadow: var(--shadow-lg);
   border: 8px solid #23201D;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.btn-sub-screen {
+  background-color: var(--cream-surface);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-sub-screen:hover {
+  background-color: var(--peach-container);
+  border-color: var(--peach-action);
+  color: var(--peach-action);
+}
+
+.btn-sub-screen.active {
+  background-color: var(--peach-action);
+  border-color: var(--peach-action);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
 }
 
 /* ==========================================================================

@@ -98,6 +98,28 @@ function initShowcaseTabs() {
       });
     });
   });
+
+  // Sub-screen switcher for recipe variants & recommendations
+  const subScreenButtons = document.querySelectorAll('.btn-sub-screen');
+  subScreenButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parentPane = btn.closest('.tab-pane');
+      if (!parentPane) return;
+      const targetImgPath = btn.getAttribute('data-target-img');
+      const phoneImg = parentPane.querySelector('.tab-phone-img');
+      if (phoneImg && targetImgPath) {
+        phoneImg.style.opacity = '0.3';
+        phoneImg.style.transform = 'scale(0.97)';
+        setTimeout(() => {
+          phoneImg.src = targetImgPath;
+          phoneImg.style.opacity = '1';
+          phoneImg.style.transform = 'scale(1)';
+        }, 150);
+      }
+      parentPane.querySelectorAll('.btn-sub-screen').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
 }
 
 /* ==========================================================================
