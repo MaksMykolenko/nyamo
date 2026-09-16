@@ -2,6 +2,12 @@
 
 Сучасна, швидка та адаптивна презентаційна вебсторінка для кулінарного Android-додатку **Nyamo**.
 
+🌐 **Офіційний сайт онлайн (GitHub Pages):**  
+👉 **[https://maksmykolenko.github.io/nyamo/](https://maksmykolenko.github.io/nyamo/)**
+
+📦 **Репозиторій:**  
+👉 **[https://github.com/MaksMykolenko/nyamo](https://github.com/MaksMykolenko/nyamo)**
+
 Сторінка розроблена у точній відповідності до фірмового кулінарного стилю додатку (кремовий фон `#FFF9F4`, поверхні теплого молока `#FFFEFC`, коралово-помаранчеві CTA `#EE6E4A` та тепла кавово-шоколадна типографіка).
 
 ---
