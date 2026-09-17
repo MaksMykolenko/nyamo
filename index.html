@@ -474,6 +474,124 @@
       </div>
     </section>
 
+    <!-- Atmospheric Transition: Dark Camera Canvas -> Warm Cream Guided Cooking Canvas -->
+    <div class="camera-transition-bottom" aria-hidden="true"></div>
+
+    <!-- Guided Cooking Section (Warm Cream Canvas) -->
+    <section class="section cooking-section" id="cooking-mode">
+      <div class="container">
+        <div class="cooking-editorial-grid">
+          <!-- LEFT: Editorial Storytelling Content (45%) -->
+          <div class="cooking-content-col">
+            <div class="cooking-badge" data-i18n="cooking.tag">Режим приготування</div>
+            <h2 class="cooking-title" data-i18n="cooking.title">
+              Далі просто готуй.<br>
+              Nyamo проведе<br>
+              крок за кроком.
+            </h2>
+            <p class="cooking-description" data-i18n="cooking.desc">
+              Один крок за раз, таймери під рукою та нічого зайвого перед очима.
+            </p>
+
+            <div class="cooking-handsfree-pill">
+              <span class="handsfree-icon">✋</span>
+              <span class="handsfree-text" data-i18n="cooking.handsFree">Руки зайняті? Наступний крок завжди перед тобою.</span>
+            </div>
+          </div>
+
+          <!-- RIGHT: Large Phone Mockup with Active Guided Cooking Experience (55%) -->
+          <div class="cooking-mockup-col">
+            <div class="cooking-mockup-wrapper">
+              <!-- Contextual Floating Elements -->
+              <!-- Floating Element 1: Step Pill (top-left) -->
+              <div class="cooking-floating-pill cooking-float-step" id="cookingFloatStep">
+                <span class="float-step-dot"></span>
+                <span class="float-step-text" id="cookingFloatStepText" data-i18n="cooking.floatingStep">Крок 3 / 7</span>
+              </div>
+
+              <!-- Floating Element 2: Active Timer Pill (top-right) -->
+              <div class="cooking-floating-pill cooking-float-timer" id="cookingFloatTimer">
+                <span class="float-timer-icon">⏱</span>
+                <strong class="float-timer-digits" id="cookingFloatTimerDigits">05:42</strong>
+              </div>
+
+              <!-- Floating Element 3: Remaining Time Pill (bottom-left) -->
+              <div class="cooking-floating-pill cooking-float-remaining" id="cookingFloatRemaining">
+                <span class="float-remaining-dot"></span>
+                <span class="float-remaining-text" data-i18n="cooking.floatingRemaining">~18 хв залишилось</span>
+              </div>
+
+              <!-- Smartphone Device Frame -->
+              <div class="phone-frame cooking-phone-frame" id="cookingPhoneFrame">
+                <div class="phone-speaker"></div>
+                <div class="phone-screen cooking-phone-screen">
+                  <div class="cooking-app-ui">
+                    <!-- App Header -->
+                    <div class="cooking-ui-top">
+                      <div class="cooking-ui-close" aria-label="Закрити рецепт">✕</div>
+                      <div class="cooking-ui-dish-info">
+                        <img src="assets/images/dishes/recipe_shakshuka.webp" alt="Шакшука" class="cooking-dish-thumb">
+                        <span class="cooking-dish-title" data-i18n="cooking.recipeTitle">Шакшука з томатами</span>
+                      </div>
+                      <div class="cooking-ui-sound" aria-label="Звук таймера">🔔</div>
+                    </div>
+
+                    <!-- Progress Track -->
+                    <div class="cooking-progress-container">
+                      <div class="cooking-progress-bar">
+                        <div class="cooking-progress-fill" id="cookingProgressFill"></div>
+                      </div>
+                    </div>
+
+                    <!-- Step Number Indicator -->
+                    <div class="cooking-step-header">
+                      <span class="cooking-step-counter" id="cookingStepCounter" data-i18n="cooking.step3Num">Крок 3 з 7</span>
+                      <span class="cooking-step-remaining" data-i18n="cooking.floatingRemaining">~18 хв залишилось</span>
+                    </div>
+
+                    <!-- Large Instruction Card -->
+                    <div class="cooking-instruction-card">
+                      <p class="cooking-instruction-text" id="cookingInstructionText" data-i18n="cooking.step3Text">
+                        Додай помідори та тушкуй 5–7 хвилин на середньому вогні.
+                      </p>
+
+                      <!-- Embedded Active Timer Pill -->
+                      <div class="cooking-timer-box" id="cookingTimerBox">
+                        <div class="cooking-timer-circle">
+                          <svg class="timer-svg" viewBox="0 0 36 36">
+                            <path class="timer-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="timer-circle-progress" id="timerCircleProgress" stroke-dasharray="72, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                          </svg>
+                          <span class="timer-play-icon">⏱</span>
+                        </div>
+                        <div class="cooking-timer-info">
+                          <span class="cooking-timer-time" id="cookingTimerTime">05:42</span>
+                          <span class="cooking-timer-label" data-i18n="cooking.timerRemaining">Залишилось часу</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Previous / Next Controls -->
+                    <div class="cooking-ui-controls">
+                      <button class="btn-cooking-control btn-cooking-back" id="cookingBtnBack" type="button" data-i18n="cooking.btnBack">
+                        ← Назад
+                      </button>
+                      <button class="btn-cooking-control btn-cooking-next" id="cookingBtnNext" type="button" data-i18n="cooking.btnNext">
+                        Далі →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Atmospheric Transition: Warm Cream Guided Cooking Canvas -> Dark Features Canvas -->
+    <div class="cooking-transition-bottom" aria-hidden="true"></div>
+
     <!-- Bento Grid Features Section -->
     <section class="section features-section" id="features">
       <div class="container">

@@ -1544,7 +1544,8 @@ button {
   background-color: #0a0a0a;
   position: relative;
   overflow: hidden;
-  padding: 160px 0;
+  padding: 192px 0 160px;
+  scroll-margin-top: 100px;
   color: var(--color-bone);
 }
 
@@ -1890,22 +1891,22 @@ button {
 .workflow-flow-bar {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .workflow-source-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--color-hairline);
+  gap: 9px;
+  padding: 10px 22px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius-pill);
   font-family: var(--font-heading);
-  font-size: 0.92rem;
+  font-size: 0.98rem;
   font-weight: 550;
-  color: var(--color-ash);
+  color: var(--color-bone);
 }
 
 .workflow-flow-arrow {
@@ -1915,31 +1916,26 @@ button {
   animation: arrowPulse 2.2s ease-in-out infinite;
 }
 
-@keyframes arrowPulse {
-  0%, 100% { transform: translateX(0); opacity: 0.8; }
-  50% { transform: translateX(4px); opacity: 1; }
-}
-
 .workflow-result-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 18px;
-  background: rgba(74, 222, 128, 0.12);
-  border: 1px solid rgba(74, 222, 128, 0.30);
+  padding: 10px 22px;
+  background: rgba(34, 197, 94, 0.10);
+  border: 1px solid rgba(34, 197, 94, 0.24);
   border-radius: var(--radius-pill);
   font-family: var(--font-heading);
-  font-size: 0.92rem;
+  font-size: 0.98rem;
   font-weight: 600;
-  color: #4ade80;
+  color: #22c55e;
 }
 
 .workflow-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: #4ade80;
-  box-shadow: 0 0 8px #4ade80;
+  background-color: #22c55e;
+  box-shadow: 0 0 5px rgba(34, 197, 94, 0.4);
 }
 
 /* 6 Detected Chips */
@@ -2043,7 +2039,7 @@ button {
 
 .scan-card-thumb {
   position: relative;
-  height: 120px;
+  height: 145px;
   overflow: hidden;
 }
 
@@ -2116,6 +2112,469 @@ button {
 
 .scan-recipe-card:hover .scan-card-link .link-arrow {
   transform: translateX(3px);
+}
+
+/* ==========================================================================
+   ATMOSPHERIC TRANSITION: Dark Camera Canvas -> Warm Cream Guided Cooking Canvas
+   Controlled 96px bridge with warm amber glow
+   ========================================================================== */
+.camera-transition-bottom {
+  height: 96px;
+  width: 100%;
+  position: relative;
+  background: linear-gradient(180deg, 
+    #0a0a0a 0%, 
+    #171210 18%, 
+    #2a1b14 42%, 
+    #5f3b26 68%, 
+    #b49a85 86%, 
+    #F6F2EC 100%
+  );
+  margin-top: -1px;
+  overflow: hidden;
+}
+
+.camera-transition-bottom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 1100px);
+  height: 100%;
+  background: radial-gradient(ellipse 65% 70% at 50% 30%, rgba(238, 110, 74, 0.12) 0%, rgba(238, 110, 74, 0.02) 55%, transparent 80%);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   GUIDED COOKING SECTION (Warm Cream Canvas)
+   Calm, focused, reassuring step-by-step cooking companion
+   ========================================================================== */
+.cooking-section {
+  background-color: #F6F2EC;
+  color: #1F1A17;
+  padding: 150px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cooking-editorial-grid {
+  display: grid;
+  grid-template-columns: 45fr 55fr;
+  gap: 72px;
+  align-items: center;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+/* Left: Editorial Storytelling Content */
+.cooking-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cooking-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 550;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #796D62;
+  background: rgba(31, 26, 23, 0.05);
+  border: 1px solid #DFD6C9;
+  margin-bottom: 24px;
+}
+
+.cooking-title {
+  color: #1F1A17;
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 4.2vw, 3.3rem);
+  font-weight: 600;
+  letter-spacing: -0.038em;
+  line-height: 1.08;
+  margin-bottom: 24px;
+}
+
+.cooking-description {
+  color: #5F544B;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.cooking-handsfree-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: #FFFFFF;
+  border: 1px solid #E5DDD2;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 16px rgba(45, 35, 25, 0.04);
+  color: #2D2520;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.handsfree-icon {
+  font-size: 1.1rem;
+}
+
+/* Right: Active Guided Cooking Phone Mockup */
+.cooking-mockup-col {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.cooking-mockup-wrapper {
+  position: relative;
+  width: 350px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Contextual Floating Elements */
+.cooking-floating-pill {
+  position: absolute;
+  background: #FFFFFF;
+  border: 1px solid #E8E1D5;
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  box-shadow: 0 12px 28px rgba(45, 35, 25, 0.07), 0 2px 6px rgba(45, 35, 25, 0.02);
+  z-index: 25;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 550;
+  color: #1F1A17;
+  pointer-events: none;
+  transition: transform 0.25s ease-out, opacity 0.4s ease;
+  will-change: transform;
+}
+
+.cooking-float-step {
+  top: 44px;
+  left: -48px;
+}
+
+.float-step-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-orange);
+}
+
+.cooking-float-timer {
+  top: 110px;
+  right: -52px;
+}
+
+.float-timer-digits {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1F1A17;
+  letter-spacing: 0.02em;
+}
+
+.cooking-float-remaining {
+  bottom: 56px;
+  left: -54px;
+}
+
+.float-remaining-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #8C7E72;
+}
+
+/* Cooking Phone Frame */
+.cooking-phone-frame {
+  width: 350px;
+  height: 690px;
+  background-color: #161616;
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow: 0 25px 65px -15px rgba(45, 35, 25, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.cooking-phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 34px;
+  overflow: hidden;
+  background-color: #FFFDF9;
+}
+
+/* Inside Cooking App UI */
+.cooking-app-ui {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px 22px;
+  background-color: #FFFDF9;
+  box-sizing: border-box;
+}
+
+.cooking-ui-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+}
+
+.cooking-ui-close {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #F4EFEB;
+  color: #5F544B;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cooking-ui-dish-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cooking-dish-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.cooking-dish-title {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1F1A17;
+}
+
+.cooking-ui-sound {
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+/* Thin Progress Track */
+.cooking-progress-container {
+  margin: 14px 0 12px;
+}
+
+.cooking-progress-bar {
+  width: 100%;
+  height: 4px;
+  background-color: #EDE5D8;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.cooking-progress-fill {
+  height: 100%;
+  width: 43%;
+  background-color: var(--color-orange);
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Step Header */
+.cooking-step-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.cooking-step-counter {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #8A5A36;
+}
+
+.cooking-step-remaining {
+  font-size: 0.78rem;
+  color: #8C7E72;
+  font-weight: 400;
+}
+
+/* Large Readable Instruction Card */
+.cooking-instruction-card {
+  background-color: #FFFFFF;
+  border: 1px solid #EBE3D6;
+  border-radius: 22px;
+  padding: 26px 20px 20px;
+  box-shadow: 0 6px 20px rgba(45, 35, 25, 0.04);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.cooking-instruction-text {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 550;
+  line-height: 1.45;
+  color: #1F1A17;
+  letter-spacing: -0.015em;
+  margin: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Active Timer Box */
+.cooking-timer-box {
+  background-color: #FAF7F2;
+  border: 1px solid #E7DFD2;
+  border-radius: 16px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.cooking-timer-circle {
+  width: 42px;
+  height: 42px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.timer-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timer-circle-bg {
+  fill: none;
+  stroke: #E4DCD0;
+  stroke-width: 3.2;
+}
+
+.timer-circle-progress {
+  fill: none;
+  stroke: var(--color-orange);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  transition: stroke-dasharray 1s linear;
+}
+
+.timer-play-icon {
+  position: absolute;
+  font-size: 0.8rem;
+}
+
+.cooking-timer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.cooking-timer-time {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1F1A17;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.cooking-timer-label {
+  font-size: 0.74rem;
+  color: #796D62;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+
+/* Bottom Controls */
+.cooking-ui-controls {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.btn-cooking-control {
+  padding: 12px 16px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  border: none;
+}
+
+.btn-cooking-back {
+  background-color: #FFFFFF;
+  border: 1px solid #DFD6C9;
+  color: #3D332D;
+}
+
+.btn-cooking-back:hover {
+  background-color: #F5EFEB;
+}
+
+.btn-cooking-next {
+  background-color: var(--color-orange);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(238, 110, 74, 0.35);
+}
+
+.btn-cooking-next:hover {
+  background-color: #f07f5e;
+  box-shadow: 0 6px 18px rgba(238, 110, 74, 0.45);
+}
+
+/* ==========================================================================
+   ATMOSPHERIC TRANSITION: Warm Cream Guided Cooking Canvas -> Dark Features Canvas
+   Controlled 96px bridge returning to dark canvas
+   ========================================================================== */
+.cooking-transition-bottom {
+  height: 96px;
+  width: 100%;
+  position: relative;
+  background: linear-gradient(180deg, 
+    #F6F2EC 0%, 
+    #b49a85 14%, 
+    #5f3b26 32%, 
+    #2a1b14 56%, 
+    #171210 80%, 
+    #0a0a0a 100%
+  );
+  margin-bottom: -1px;
 }
 
 /* ==========================================================================
@@ -3042,6 +3501,15 @@ button {
   .scan-recipes-pair {
     grid-template-columns: 1fr;
   }
+
+  .cooking-editorial-grid {
+    grid-template-columns: 1fr;
+    gap: 52px;
+  }
+
+  .cooking-mockup-wrapper {
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 768px) {
@@ -3120,7 +3588,8 @@ button {
   }
 
   .camera-section {
-    padding: 96px 0;
+    padding: 120px 0 80px;
+    scroll-margin-top: 80px;
   }
 
   .camera-phone-frame {
@@ -3131,6 +3600,36 @@ button {
 
   .camera-phone-screen {
     border-radius: 30px;
+  }
+
+  .cooking-section {
+    padding: 100px 0 80px;
+    scroll-margin-top: 80px;
+  }
+
+  .cooking-phone-frame {
+    width: 310px;
+    height: 610px;
+    border-radius: 38px;
+  }
+
+  .cooking-phone-screen {
+    border-radius: 30px;
+  }
+
+  .cooking-float-step {
+    left: -12px;
+    top: 20px;
+  }
+
+  .cooking-float-timer {
+    right: -12px;
+    top: 80px;
+  }
+
+  .cooking-float-remaining {
+    left: -12px;
+    bottom: 20px;
   }
 }
 
@@ -3182,6 +3681,20 @@ button {
     border-radius: 26px;
   }
 
+  .cooking-phone-frame {
+    width: 290px;
+    height: 570px;
+    border-radius: 34px;
+  }
+
+  .cooking-phone-screen {
+    border-radius: 26px;
+  }
+
+  .cooking-floating-pill {
+    display: none;
+  }
+
   .scan-detected-chips {
     gap: 8px;
   }
@@ -3221,7 +3734,12 @@ button {
   .cam-detect-label,
   .scan-detected-chip,
   .scan-ready-block,
-  .workflow-flow-arrow {
+  .workflow-flow-arrow,
+  .cooking-phone-frame,
+  .cooking-floating-pill,
+  .cooking-progress-fill,
+  .cooking-instruction-text,
+  .cooking-timer-circle path {
     animation: none !important;
     transition-duration: 0.01ms !important;
     transform: none !important;

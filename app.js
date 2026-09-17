@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPlayground();
   initScrollReveal();
   initCameraScan();
+  initGuidedCooking();
 });
 
 /* ==========================================================================
@@ -106,12 +107,21 @@ function initNavbarMotion() {
       }
     });
 
-    // Camera Scan Section continuity: map to interactive-demo
+    // Camera Scan & Guided Cooking Section continuity: map to interactive-demo
     const cameraSec = document.getElementById('camera-scan');
-    if (!currentSection && cameraSec) {
-      const cRect = cameraSec.getBoundingClientRect();
-      if (cRect.top <= scrollTriggerPoint && cRect.bottom >= scrollTriggerPoint) {
-        currentSection = 'interactive-demo';
+    const cookingSec = document.getElementById('cooking-mode');
+    if (!currentSection && (cameraSec || cookingSec)) {
+      if (cameraSec) {
+        const cRect = cameraSec.getBoundingClientRect();
+        if (cRect.top <= scrollTriggerPoint && cRect.bottom >= scrollTriggerPoint) {
+          currentSection = 'interactive-demo';
+        }
+      }
+      if (!currentSection && cookingSec) {
+        const kRect = cookingSec.getBoundingClientRect();
+        if (kRect.top <= scrollTriggerPoint && kRect.bottom >= scrollTriggerPoint) {
+          currentSection = 'interactive-demo';
+        }
       }
     }
 
@@ -838,6 +848,9 @@ function initPlayground() {
     if (modal && modal.classList.contains('open') && activeModalRecipe) {
       openRecipeModal(activeModalRecipe);
     }
+    if (typeof updateCookingLanguage === 'function') {
+      updateCookingLanguage();
+    }
   };
 }
 
@@ -1235,4 +1248,197 @@ function initCameraScan() {
       }
     });
   });
+}
+
+/* ==========================================================================
+   GUIDED COOKING SHOWCASE (Step transition demo, live timer & parallax)
+   ========================================================================== */
+let updateCookingLanguage = null;
+
+function initGuidedCooking() {
+  const cookingSection = document.getElementById('cooking-mode');
+  if (!cookingSection) return;
+
+  const phoneFrame = document.getElementById('cookingPhoneFrame');
+  const progressFill = document.getElementById('cookingProgressFill');
+  const stepCounter = document.getElementById('cookingStepCounter');
+  const instructionText = document.getElementById('cookingInstructionText');
+  const timerCircleProgress = document.getElementById('timerCircleProgress');
+  const timerTime = document.getElementById('cookingTimerTime');
+  const btnBack = document.getElementById('cookingBtnBack');
+  const btnNext = document.getElementById('cookingBtnNext');
+  const floatStep = document.getElementById('cookingFloatStep');
+  const floatStepText = document.getElementById('cookingFloatStepText');
+  const floatTimer = document.getElementById('cookingFloatTimer');
+  const floatTimerDigits = document.getElementById('cookingFloatTimerDigits');
+  const floatRemaining = document.getElementById('cookingFloatRemaining');
+
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let currentStep = 3;
+  let hasAutoTransitioned = false;
+  let timerSeconds = 342; // 05:42
+  let timerInterval = null;
+
+  function renderStep(step, animate = true) {
+    currentStep = step;
+    const isStep4 = step === 4;
+
+    const stepText = isStep4
+      ? i18nText('cooking.step4Text', {}, 'Додай яйця та накрий сковороду.')
+      : i18nText('cooking.step3Text', {}, 'Додай помідори та тушкуй 5–7 хвилин на середньому вогні.');
+
+    const stepNumText = isStep4
+      ? i18nText('cooking.step4Num', {}, 'Крок 4 з 7')
+      : i18nText('cooking.step3Num', {}, 'Крок 3 з 7');
+
+    const floatStepPillText = isStep4
+      ? i18nText('cooking.floatingStepNext', {}, 'Крок 4 / 7')
+      : i18nText('cooking.floatingStep', {}, 'Крок 3 / 7');
+
+    const progressWidth = isStep4 ? '57%' : '43%';
+
+    if (progressFill) {
+      progressFill.style.width = progressWidth;
+    }
+
+    if (floatStepText) {
+      floatStepText.textContent = floatStepPillText;
+    }
+
+    if (stepCounter) {
+      stepCounter.textContent = stepNumText;
+    }
+
+    if (btnBack) {
+      btnBack.style.opacity = isStep4 ? '1' : '0.85';
+    }
+
+    if (instructionText) {
+      if (animate && !prefersReduced) {
+        instructionText.style.transition = 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)';
+        instructionText.style.opacity = '0';
+        instructionText.style.transform = 'translateY(6px)';
+
+        setTimeout(() => {
+          instructionText.textContent = stepText;
+          instructionText.style.opacity = '1';
+          instructionText.style.transform = 'translateY(0)';
+        }, 220);
+      } else {
+        instructionText.textContent = stepText;
+      }
+    }
+  }
+
+  updateCookingLanguage = () => {
+    renderStep(currentStep, false);
+  };
+
+  function startTimer() {
+    if (timerInterval) return;
+    timerInterval = setInterval(() => {
+      if (timerSeconds > 0) {
+        timerSeconds--;
+        const mins = Math.floor(timerSeconds / 60);
+        const secs = timerSeconds % 60;
+        const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+        if (timerTime) timerTime.textContent = timeStr;
+        if (floatTimerDigits) floatTimerDigits.textContent = timeStr;
+
+        if (timerCircleProgress) {
+          const pct = Math.max(0, Math.round((timerSeconds / 342) * 72));
+          timerCircleProgress.setAttribute('stroke-dasharray', `${pct}, 100`);
+        }
+      } else {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }, 1000);
+  }
+
+  // Interactive manual controls
+  if (btnNext) {
+    btnNext.addEventListener('click', () => {
+      hasAutoTransitioned = true;
+      renderStep(4, true);
+    });
+  }
+
+  if (btnBack) {
+    btnBack.addEventListener('click', () => {
+      renderStep(3, true);
+    });
+  }
+
+  // Entrance Observer (runs countdown & single-time step crossfade)
+  if (typeof IntersectionObserver === 'undefined' || prefersReduced) {
+    startTimer();
+  } else {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startTimer();
+
+          // Single-run step transition demo after ~3s
+          if (!hasAutoTransitioned) {
+            setTimeout(() => {
+              if (!hasAutoTransitioned && currentStep === 3) {
+                hasAutoTransitioned = true;
+                renderStep(4, true);
+              }
+            }, 3000);
+          }
+
+          obs.unobserve(cookingSection);
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    observer.observe(cookingSection);
+  }
+
+  // Subtle Scroll Parallax (~15-20px depth)
+  if (!prefersReduced && window.innerWidth > 768) {
+    let ticking = false;
+
+    function onScrollParallax() {
+      if (ticking) return;
+      ticking = true;
+
+      window.requestAnimationFrame(() => {
+        const rect = cookingSection.getBoundingClientRect();
+        const winHeight = window.innerHeight;
+
+        if (rect.top < winHeight && rect.bottom > 0) {
+          const sectionCenter = rect.top + rect.height / 2;
+          const viewportCenter = winHeight / 2;
+          const diff = sectionCenter - viewportCenter;
+
+          const phoneShift = Math.max(-20, Math.min(20, diff * -0.035));
+          const pillShift = Math.max(-18, Math.min(18, diff * 0.045));
+
+          if (phoneFrame) {
+            phoneFrame.style.transform = `translate3d(0, ${phoneShift}px, 0)`;
+          }
+          if (floatStep) {
+            floatStep.style.transform = `translate3d(0, ${pillShift * 0.8}px, 0)`;
+          }
+          if (floatTimer) {
+            floatTimer.style.transform = `translate3d(0, ${-pillShift}px, 0)`;
+          }
+          if (floatRemaining) {
+            floatRemaining.style.transform = `translate3d(0, ${pillShift * 0.6}px, 0)`;
+          }
+        }
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScrollParallax, { passive: true });
+  }
 }

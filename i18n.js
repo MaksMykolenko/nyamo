@@ -110,6 +110,25 @@ const NyamoI18n = (() => {
         viewRecipe: "Переглянути рецепт",
         badgeReady: "✓ Є всі інгредієнти"
       },
+      cooking: {
+        tag: "Режим приготування",
+        title: "Далі просто готуй.<br>Nyamo проведе<br>крок за кроком.",
+        desc: "Один крок за раз, таймери під рукою та нічого зайвого перед очима.",
+        handsFree: "Руки зайняті? Наступний крок завжди перед тобою.",
+        recipeTitle: "Шакшука з томатами",
+        stepCountLabel: "Крок {n} з {total}",
+        step3Num: "Крок 3 з 7",
+        step3Text: "Додай помідори та тушкуй 5–7 хвилин на середньому вогні.",
+        step4Num: "Крок 4 з 7",
+        step4Text: "Додай яйця та накрий сковороду.",
+        timerRemaining: "Залишилось часу",
+        btnBack: "← Назад",
+        btnNext: "Далі →",
+        floatingStep: "Крок 3 / 7",
+        floatingStepNext: "Крок 4 / 7",
+        floatingTimer: "05:42",
+        floatingRemaining: "~18 хв залишилось"
+      },
       features: {
         badge: "💡 Сучасний підхід",
         title: "Чому готувати з Nyamo — суцільне задоволення",
@@ -379,6 +398,25 @@ const NyamoI18n = (() => {
         viewRecipe: "View recipe",
         badgeReady: "✓ All ingredients available"
       },
+      cooking: {
+        tag: "Guided Cooking",
+        title: "Now simply cook.<br>Nyamo guides you<br>step by step.",
+        desc: "One step at a time, timers at hand, and zero clutter in sight.",
+        handsFree: "Hands busy? The next step is always right before you.",
+        recipeTitle: "Shakshuka with Tomatoes",
+        stepCountLabel: "Step {n} of {total}",
+        step3Num: "Step 3 of 7",
+        step3Text: "Add tomatoes and simmer 5–7 minutes over medium heat.",
+        step4Num: "Step 4 of 7",
+        step4Text: "Crack in the eggs and cover the skillet.",
+        timerRemaining: "Time remaining",
+        btnBack: "← Back",
+        btnNext: "Next →",
+        floatingStep: "Step 3 / 7",
+        floatingStepNext: "Step 4 / 7",
+        floatingTimer: "05:42",
+        floatingRemaining: "~18 min remaining"
+      },
       features: {
         badge: "💡 Modern Culinary Assistant",
         title: "Why Cooking With Nyamo Is a Pure Delight",
@@ -647,6 +685,25 @@ const NyamoI18n = (() => {
         recipe2Meta: "⏱ 10 dk • 🍳 Tava",
         viewRecipe: "Tarifi gör",
         badgeReady: "✓ Tüm malzemeler var"
+      },
+      cooking: {
+        tag: "Rehberli Pişirme",
+        title: "Artık sadece pişir.<br>Nyamo adım adım<br>eşlik eder.",
+        desc: "Tek seferde tek adım, elinin altında zamanlayıcılar ve göz yormayan sadelik.",
+        handsFree: "Eller meşgul mü? Sıradaki adım her an karşında.",
+        recipeTitle: "Domatesli Şakşuka",
+        stepCountLabel: "Adım {n} / {total}",
+        step3Num: "Adım 3 / 7",
+        step3Text: "Domatesleri ekle ve orta ateşte 5–7 dakika soteleyin.",
+        step4Num: "Adım 4 / 7",
+        step4Text: "Yumurtaları kırın ve tavanın kapağını kapatın.",
+        timerRemaining: "Kalan süre",
+        btnBack: "← Geri",
+        btnNext: "İleri →",
+        floatingStep: "Adım 3 / 7",
+        floatingStepNext: "Adım 4 / 7",
+        floatingTimer: "05:42",
+        floatingRemaining: "~18 dk kaldı"
       },
       features: {
         badge: "💡 Modern Mutfak Asistanı",
