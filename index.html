@@ -35,30 +35,6 @@
 </head>
 <body class="theme-editorial">
 
-  <!-- Visual Direction Selector Bar (Prototype Feature) -->
-  <aside class="direction-banner" id="directionBanner" aria-label="Visual Style Direction">
-    <div class="direction-container">
-      <div class="direction-badge">
-        <span class="direction-icon">🎨</span>
-        <span class="direction-title" data-i18n="styleSwitcher.label">Стиль лендінгу:</span>
-      </div>
-      <div class="direction-options" id="styleSwitcher">
-        <button type="button" class="dir-pill active" data-theme="editorial" title="Теплий кулінарний журнал із великою антиквою (ReciMe style)">
-          <span class="dir-dot dot-editorial"></span>
-          <span data-i18n="styleSwitcher.editorial">A: Editorial Cookbook</span>
-        </button>
-        <button type="button" class="dir-pill" data-theme="kinetic" title="Динамічний і сміливий гротеск у стилі топ-інді додатків на X">
-          <span class="dir-dot dot-kinetic"></span>
-          <span data-i18n="styleSwitcher.kinetic">B: Kinetic Studio</span>
-        </button>
-        <button type="button" class="dir-pill" data-theme="minimalist" title="Спокійний скандинавський затишок і мінімалізм (Clove AI style)">
-          <span class="dir-dot dot-minimalist"></span>
-          <span data-i18n="styleSwitcher.minimalist">C: Sunlit Minimalist</span>
-        </button>
-      </div>
-    </div>
-  </aside>
-
   <!-- Navigation -->
   <header class="site-header" id="header">
     <div class="header-container">
@@ -119,23 +95,6 @@
     <!-- Mobile Navigation Drawer -->
     <div class="mobile-drawer" id="mobileDrawer">
       <nav class="mobile-nav" aria-label="Мобільне меню">
-        <div class="mobile-direction-row">
-          <span class="mobile-direction-label" data-i18n="styleSwitcher.label">Стиль лендінгу:</span>
-          <div class="mobile-direction-buttons" id="mobileStyleSwitcher">
-            <button type="button" class="dir-pill active" data-theme="editorial">
-              <span class="dir-dot dot-editorial"></span>
-              <span data-i18n="styleSwitcher.editorial">A: Editorial Cookbook</span>
-            </button>
-            <button type="button" class="dir-pill" data-theme="kinetic">
-              <span class="dir-dot dot-kinetic"></span>
-              <span data-i18n="styleSwitcher.kinetic">B: Kinetic Studio</span>
-            </button>
-            <button type="button" class="dir-pill" data-theme="minimalist">
-              <span class="dir-dot dot-minimalist"></span>
-              <span data-i18n="styleSwitcher.minimalist">C: Sunlit Minimalist</span>
-            </button>
-          </div>
-        </div>
         <div class="mobile-lang-row">
           <span class="mobile-lang-label">Мова / Language:</span>
           <div class="mobile-lang-buttons">
@@ -162,11 +121,6 @@
     <section class="hero-section" id="hero">
       <div class="container hero-grid">
         <div class="hero-content">
-          <div class="badge hero-badge">
-            <span class="badge-dot"></span>
-            <span data-i18n="hero.badgeMain">✨ Розумний кулінарний помічник</span>
-          </div>
-
           <h1 class="hero-title">
             <span data-i18n="hero.titlePre">Твій холодильник</span><br>
             <span class="text-highlight" data-i18n="hero.titleHighlight">вже знає, що на вечерю.</span>
