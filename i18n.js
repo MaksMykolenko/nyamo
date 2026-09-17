@@ -31,21 +31,35 @@ const NyamoI18n = (() => {
         faq: "FAQ",
         download: "Завантажити"
       },
+      styleSwitcher: {
+        label: "Стиль лендінгу:",
+        editorial: "A: Editorial Cookbook",
+        kinetic: "B: Kinetic Studio",
+        minimalist: "C: Sunlit Minimalist"
+      },
       hero: {
-        titlePre: "Смачне з того,",
-        titleHighlight: "що вже є на кухні",
-        subtitle: "Більше не потрібно ламати голову «Що приготувати?». Введи продукти або сфотографуй полицю холодильника — <strong>Nyamo</strong> миттєво підбере перевірені домашні рецепти та підкаже, чого саме бракує.",
+        badgeMain: "✨ Розумний кулінарний помічник",
+        titlePre: "Твій холодильник",
+        titleHighlight: "вже знає, що на вечерю.",
+        subtitle: "Додай або сфотографуй продукти та спеції, які є вдома. <strong>Nyamo</strong> миттєво підбере смачні домашні страви, покаже чого бракує, розрахує час і проведе за руку крок за кроком.",
         ctaDownload: "Завантажити для Android",
         ctaDemo: "Спробувати онлайн-демо",
         trustFree: "Безкоштовно назавжди",
         trustOffline: "Працює без зв'язку",
-        trustRecipes: "60+ автентичних рецептів",
+        trustRecipes: "60+ домашніх рецептів",
+        foodCardTitle: "Ароматна шакшука",
+        foodCardTime: "15 хв",
+        foodCardStatus: "✓ Всі продукти з холодильника",
+        foodCardMissing: "0 докуплено",
         badgeEggs: "Яйця курячі",
         badgeEggsSub: "3 шт. у наявності",
+        badgeTomatoes: "Стиглі томати",
+        badgeTomatoesSub: "2 шт. на полиці",
         badgeCanCook: "✓ Можна приготувати",
         badgeShakshuka: "Шакшука з томатами",
         badgeAi: "AI-розпізнавання",
-        badgeAiSub: "Google Gemini"
+        badgeAiSub: "Google Gemini",
+        badgeMissing: "Бракує: лише вершки"
       },
       playground: {
         badge: "✨ Інтерактивний симулятор",
@@ -263,21 +277,35 @@ const NyamoI18n = (() => {
         faq: "FAQ",
         download: "Download"
       },
+      styleSwitcher: {
+        label: "Visual Direction:",
+        editorial: "A: Editorial Cookbook",
+        kinetic: "B: Kinetic Studio",
+        minimalist: "C: Sunlit Minimalist"
+      },
       hero: {
-        titlePre: "Delicious meals from",
-        titleHighlight: "what's already in your kitchen",
-        subtitle: "No more wondering «What should I cook today?». Type what you have or snap a photo of your fridge shelf — <strong>Nyamo</strong> instantly finds tested home recipes and pinpoints exactly what you need.",
+        badgeMain: "✨ Smart Kitchen Companion",
+        titlePre: "Your fridge",
+        titleHighlight: "already knows what’s for dinner.",
+        subtitle: "Add or scan the ingredients and spices you have at home. <strong>Nyamo</strong> instantly pairs your pantry with 60+ tested meals, showing missing ingredients, cooking times, and step-by-step guided recipes.",
         ctaDownload: "Download for Android",
         ctaDemo: "Try Interactive Demo",
-        trustFree: "100% Free Access",
+        trustFree: "100% Free Forever",
         trustOffline: "Works Completely Offline",
         trustRecipes: "60+ Tested Home Recipes",
+        foodCardTitle: "Shakshuka with Toast",
+        foodCardTime: "15 min",
+        foodCardStatus: "✓ All items in your fridge",
+        foodCardMissing: "0 items to buy",
         badgeEggs: "Chicken eggs",
-        badgeEggsSub: "3 pcs available",
+        badgeEggsSub: "3 pcs in fridge",
+        badgeTomatoes: "Ripe tomatoes",
+        badgeTomatoesSub: "2 pcs on shelf",
         badgeCanCook: "✓ Ready to Cook",
         badgeShakshuka: "Shakshuka with tomatoes",
         badgeAi: "AI Recognition",
-        badgeAiSub: "Google Gemini"
+        badgeAiSub: "Google Gemini",
+        badgeMissing: "Missing: only heavy cream"
       },
       playground: {
         badge: "✨ Interactive Simulator",
@@ -495,21 +523,35 @@ const NyamoI18n = (() => {
         faq: "SSS",
         download: "İndir"
       },
+      styleSwitcher: {
+        label: "Tasarım Yönü:",
+        editorial: "A: Editorial Cookbook",
+        kinetic: "B: Kinetic Studio",
+        minimalist: "C: Sunlit Minimalist"
+      },
       hero: {
-        titlePre: "Mutfağınızda olanlarla",
-        titleHighlight: "lezzetli ev yemekleri",
-        subtitle: "Artık «Bugün ne pişirsem?» diye düşünmeye son. Malzemelerinizi girin ya da buzdolabınızın fotoğrafını çekin — <strong>Nyamo</strong> denenmiş ev tariflerini anında bulur ve neyin eksik olduğunu söyler.",
+        badgeMain: "✨ Akıllı Ev Mutfak Asistanı",
+        titlePre: "Buzdolabınız",
+        titleHighlight: "akşam yemeğinde ne olduğunu zaten biliyor.",
+        subtitle: "Evdeki malzemeleri ve baharatları ekleyin veya tarayın. <strong>Nyamo</strong> eksik malzemeleri, pişirme süresini ve adım adım rehberli tarifleri göstererek anında denenmiş ev yemekleri önerir.",
         ctaDownload: "Android İçin İndir",
         ctaDemo: "Simülatörü Dene",
-        trustFree: "Tamamen Ücretsiz",
+        trustFree: "Sonsuza Dek Ücretsiz",
         trustOffline: "%100 Çevrimdışı Çalışır",
         trustRecipes: "60+ Denenmiş Ev Tarifi",
+        foodCardTitle: "Domatesli Şakşuka",
+        foodCardTime: "15 dk",
+        foodCardStatus: "✓ Buzdolabındaki tüm ürünler",
+        foodCardMissing: "0 satın alınacak",
         badgeEggs: "Tavuk yumurtası",
         badgeEggsSub: "3 adet mevcut",
+        badgeTomatoes: "Olgun domates",
+        badgeTomatoesSub: "2 adet rafta",
         badgeCanCook: "✓ Pişirmeye Hazır",
         badgeShakshuka: "Domatesli Şakşuka",
         badgeAi: "Yapay Zeka Tarama",
-        badgeAiSub: "Google Gemini"
+        badgeAiSub: "Google Gemini",
+        badgeMissing: "Eksik: yalnızca krema"
       },
       playground: {
         badge: "✨ İnteraktif Simülatör",

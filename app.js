@@ -9,11 +9,50 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initDirectionSwitcher();
   initMobileNav();
   initFaqAccordion();
   initShowcaseTabs();
   initPlayground();
 });
+
+/* ==========================================================================
+   0. VISUAL DIRECTION SWITCHER (PROTOTYPE CONTROLLER)
+   ========================================================================== */
+function initDirectionSwitcher() {
+  const STORAGE_KEY = 'nyamo_visual_direction';
+  const validThemes = ['editorial', 'kinetic', 'minimalist'];
+  const savedTheme = localStorage.getItem(STORAGE_KEY) || 'editorial';
+
+  function applyTheme(theme) {
+    if (!validThemes.includes(theme)) theme = 'editorial';
+    
+    validThemes.forEach(t => document.body.classList.remove(`theme-${t}`));
+    document.body.classList.add(`theme-${theme}`);
+    localStorage.setItem(STORAGE_KEY, theme);
+
+    const allPills = document.querySelectorAll('.dir-pill');
+    allPills.forEach(pill => {
+      if (pill.getAttribute('data-theme') === theme) {
+        pill.classList.add('active');
+        pill.setAttribute('aria-pressed', 'true');
+      } else {
+        pill.classList.remove('active');
+        pill.setAttribute('aria-pressed', 'false');
+      }
+    });
+  }
+
+  const allPills = document.querySelectorAll('.dir-pill');
+  allPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const theme = pill.getAttribute('data-theme');
+      applyTheme(theme);
+    });
+  });
+
+  applyTheme(savedTheme);
+}
 
 /* ==========================================================================
    1. MOBILE NAVIGATION
