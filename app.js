@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
    0. DESIGN SYSTEM INITIALIZATION (EDITORIAL COOKBOOK)
    ========================================================================== */
 function initDirectionSwitcher() {
-  document.body.classList.remove('theme-kinetic', 'theme-minimalist');
-  document.body.classList.add('theme-editorial');
+  document.body.classList.remove('theme-kinetic', 'theme-minimalist', 'theme-editorial');
+  document.body.classList.add('theme-dimension');
 }
 
 /* ==========================================================================
@@ -906,16 +906,16 @@ function openRecipeModal(rawRecipe) {
 
   const portionsData = recipe.portions[currentPortions] || recipe.portions[2] || [];
   const ingredientsList = portionsData
-    .map(item => `<li><span style="color: var(--peach-action); font-weight: bold; margin-right: 8px;">•</span> ${item}</li>`)
+    .map(item => `<li><span style="color: var(--color-violet-solid); font-weight: 600; margin-right: 8px;">•</span> ${item}</li>`)
     .join('');
 
   const stepsList = recipe.steps
     .map((step, idx) => `
       <div style="display: flex; gap: 14px; margin-bottom: 16px;">
-        <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--peach-container); color: var(--peach-primary); font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.9rem;">
+        <div style="width: 26px; height: 26px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--color-hairline); color: var(--color-bone); font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; font-family: var(--font-mono);">
           ${idx + 1}
         </div>
-        <p style="margin: 0; font-size: 0.95rem; line-height: 1.55; color: var(--dark-text);">${step}</p>
+        <p style="margin: 0; font-size: 0.95rem; line-height: 1.55; color: var(--color-ash);">${step}</p>
       </div>
     `)
     .join('');
@@ -928,34 +928,34 @@ function openRecipeModal(rawRecipe) {
   const btnCookText = i18nText('modal.btnCook', {}, 'Готувати у додатку Nyamo');
 
   modalBody.innerHTML = `
-    <div style="border-radius: 16px; overflow: hidden; height: 180px; margin-bottom: 20px;">
+    <div style="border-radius: 16px; overflow: hidden; height: 180px; margin-bottom: 20px; border: 1px solid var(--color-hairline);">
       <img src="${recipe.image}" alt="${recipe.title}" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     
     <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px;">
       <div>
-        <h3 style="font-size: 1.5rem; margin-bottom: 4px;">${recipe.title}</h3>
-        <p style="font-size: 0.9rem; color: var(--dark-secondary); margin: 0;">⏱ ${recipe.prepTime} · 🍳 ${recipe.equipment}</p>
+        <h3 style="font-family: var(--font-heading); font-size: 1.45rem; font-weight: 500; margin-bottom: 4px; color: var(--color-bone);">${recipe.title}</h3>
+        <p style="font-family: var(--font-heading); font-size: 0.85rem; color: var(--color-ash); margin: 0;">⏱ ${recipe.prepTime} · 🍳 ${recipe.equipment}</p>
       </div>
       <span class="match-badge ${isReady ? 'status-badge-ready' : 'status-badge-missing'}" style="position: static;">
         ${isReady ? readyBadgeText : missingBadgeText}
       </span>
     </div>
 
-    <p style="font-size: 0.95rem; color: var(--dark-secondary); margin-bottom: 20px;">
+    <p style="font-size: 0.95rem; color: var(--color-ash); margin-bottom: 20px; line-height: 1.6;">
       ${recipe.description}
     </p>
 
-    <div style="background: var(--cream-surface-secondary); border: 1px solid var(--card-border); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--color-hairline); border-radius: 16px; padding: 18px; margin-bottom: 24px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <strong style="font-size: 1rem;">${portionsHeading}</strong>
+        <strong style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 500; color: var(--color-bone);">${portionsHeading}</strong>
       </div>
-      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem; color: var(--color-ash);">
         ${ingredientsList}
       </ul>
     </div>
 
-    <h4 style="font-size: 1.15rem; margin-bottom: 16px;">${stepsHeading}</h4>
+    <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 500; color: var(--color-bone); margin-bottom: 16px;">${stepsHeading}</h4>
     <div>
       ${stepsList}
     </div>
