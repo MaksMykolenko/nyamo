@@ -691,7 +691,17 @@ function renderChips() {
   const lang = getLang();
   container.innerHTML = '';
 
-  INGREDIENTS.forEach(ing => {
+  const mainIngs = INGREDIENTS.filter(i => i.category === 'main');
+  const spiceIngs = INGREDIENTS.filter(i => i.category === 'spice');
+
+  const groupLabels = {
+    uk: { main: '🛒 Продукти в наявності', spice: '🧂 Спеції та запаси (Комора)' },
+    en: { main: '🛒 Ingredients available', spice: '🧂 Spices & staples (Pantry)' },
+    tr: { main: '🛒 Mevcut malzemeler', spice: '🧂 Baharatlar ve kiler' }
+  };
+  const curLabels = groupLabels[lang] || groupLabels.uk;
+
+  function createChip(ing) {
     const chip = document.createElement('button');
     chip.className = `ingredient-chip ${selectedIngredients.has(ing.id) ? 'active' : ''}`;
     chip.setAttribute('data-id', ing.id);
@@ -713,8 +723,28 @@ function renderChips() {
       renderResults();
     });
 
-    container.appendChild(chip);
-  });
+    return chip;
+  }
+
+  // 1. Ingredients Available Group
+  const mainGroup = document.createElement('div');
+  mainGroup.className = 'chips-group';
+  mainGroup.innerHTML = `<span class="chips-group-heading">${curLabels.main}</span>`;
+  const mainSubgrid = document.createElement('div');
+  mainSubgrid.className = 'chips-subgrid';
+  mainIngs.forEach(ing => mainSubgrid.appendChild(createChip(ing)));
+  mainGroup.appendChild(mainSubgrid);
+  container.appendChild(mainGroup);
+
+  // 2. Spices & Staples Group
+  const spiceGroup = document.createElement('div');
+  spiceGroup.className = 'chips-group chips-group-spices';
+  spiceGroup.innerHTML = `<span class="chips-group-heading">${curLabels.spice}</span>`;
+  const spiceSubgrid = document.createElement('div');
+  spiceSubgrid.className = 'chips-subgrid';
+  spiceIngs.forEach(ing => spiceSubgrid.appendChild(createChip(ing)));
+  spiceGroup.appendChild(spiceSubgrid);
+  container.appendChild(spiceGroup);
 
   updateSelectedCount();
 }

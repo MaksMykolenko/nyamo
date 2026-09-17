@@ -29,7 +29,7 @@
   <!-- Fonts: Onest (Multilingual with full Ukrainian Cyrillic support) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400..700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -46,9 +46,7 @@
       <nav class="desktop-nav" aria-label="Головне меню">
         <a href="#interactive-demo" class="nav-link" data-i18n="nav.demo">Спробувати онлайн</a>
         <a href="#features" class="nav-link" data-i18n="nav.features">Можливості</a>
-        <a href="#showcase" class="nav-link" data-i18n="nav.showcase">Інтерфейс</a>
         <a href="#recipes" class="nav-link" data-i18n="nav.recipes">Рецепти</a>
-        <a href="#comparison" class="nav-link" data-i18n="nav.comparison">Чому Nyamo</a>
         <a href="#faq" class="nav-link" data-i18n="nav.faq">FAQ</a>
       </nav>
 
@@ -105,12 +103,10 @@
         </div>
         <a href="#interactive-demo" class="mobile-nav-link" data-i18n="nav.demo">Спробувати онлайн</a>
         <a href="#features" class="mobile-nav-link" data-i18n="nav.features">Можливості</a>
-        <a href="#showcase" class="mobile-nav-link" data-i18n="nav.showcase">Інтерфейс</a>
         <a href="#recipes" class="mobile-nav-link" data-i18n="nav.recipes">Рецепти</a>
-        <a href="#comparison" class="mobile-nav-link" data-i18n="nav.comparison">Чому Nyamo</a>
         <a href="#faq" class="mobile-nav-link" data-i18n="nav.faq">FAQ</a>
         <div class="mobile-nav-footer">
-          <a href="#download" class="btn btn-primary btn-block" data-i18n="hero.ctaDownload">Завантажити APK для Android</a>
+          <a href="#download" class="btn btn-primary btn-block" data-i18n="hero.ctaDownload">Завантажити Nyamo</a>
         </div>
       </nav>
     </div>
@@ -121,13 +117,14 @@
     <section class="hero-section" id="hero">
       <div class="container hero-grid">
         <div class="hero-content">
-          <h1 class="hero-title">
-            <span data-i18n="hero.titlePre">Твій холодильник</span><br>
-            <span class="text-highlight" data-i18n="hero.titleHighlight">вже знає, що на вечерю.</span>
+          <h1 class="hero-title" data-i18n="hero.title">
+            Твій холодильник<br>
+            вже знає, що<br>
+            <span class="text-highlight">на вечерю.</span>
           </h1>
 
           <p class="hero-subtitle" data-i18n="hero.subtitle">
-            Додай або відскануй продукти та спеції, які є вдома. <strong>Nyamo</strong> миттєво підбере смачні домашні страви, покаже чого бракує, підрахує час і проведе за руку крок за кроком.
+            Покажи Nyamo, що є вдома. Отримай страви, які можеш приготувати просто зараз.
           </p>
 
           <div class="hero-cta-group">
@@ -137,12 +134,11 @@
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
-              <span data-i18n="hero.ctaDownload">Завантажити для Android</span>
+              <span data-i18n="hero.ctaDownload">Завантажити Nyamo</span>
             </a>
 
             <a href="#interactive-demo" class="btn btn-secondary btn-lg">
-              <span class="btn-emoji">🍳</span>
-              <span data-i18n="hero.ctaDemo">Спробувати онлайн-демо</span>
+              <span data-i18n="hero.ctaDemo">Спробувати онлайн</span>
             </a>
           </div>
 
@@ -164,7 +160,7 @@
 
         <div class="hero-visual">
           <div class="phone-mockup-wrapper">
-            <!-- Floating Real Food Plate Showcase Card -->
+            <!-- Floating Element 1: Food Photography Plate Showcase Card -->
             <div class="hero-food-plate" id="heroFoodPlate">
               <div class="food-plate-img-wrapper">
                 <img src="assets/images/dishes/recipe_shakshuka.webp" alt="Гаряча домашня шакшука" class="food-plate-img" loading="eager">
@@ -178,30 +174,25 @@
                 <p class="food-plate-subtitle" data-i18n="hero.foodCardStatus">✓ Всі продукти з холодильника</p>
                 <div class="food-plate-meta">
                   <span class="badge-mini-green" data-i18n="hero.foodCardMissing">0 докуплено</span>
-                  <span class="badge-mini-servings">[-] 2 [+] порції</span>
+                  <span class="badge-mini-servings" data-i18n="hero.foodCardServings">2 порції</span>
                 </div>
               </div>
             </div>
 
-            <!-- Floating Decorative Ingredient Badges -->
-            <div class="floating-card floating-card-1">
+            <!-- Floating Element 2: Compact Supporting Pill -->
+            <div class="floating-card floating-pill-compact">
               <span class="floating-emoji">🥚</span>
-              <div>
-                <strong data-i18n="hero.badgeEggs">Яйця курячі</strong>
-                <p data-i18n="hero.badgeEggsSub">3 шт. у наявності</p>
+              <strong data-i18n="hero.badgeEggsPill">3 яйця у наявності</strong>
+            </div>
+
+            <!-- Floating Element 3: Recipe Status Card -->
+            <div class="floating-card floating-card-status">
+              <div class="floating-status-header">
+                <span class="floating-badge-status status-can-cook" data-i18n="hero.badgeCanCook">✓ Можна приготувати</span>
               </div>
-            </div>
-
-            <div class="floating-card floating-card-2">
-              <span class="floating-badge-status status-can-cook" data-i18n="hero.badgeCanCook">✓ Можна приготувати</span>
-              <p data-i18n="hero.badgeShakshuka">Шакшука з томатами</p>
-            </div>
-
-            <div class="floating-card floating-card-3">
-              <span class="floating-emoji">📸</span>
-              <div>
-                <strong data-i18n="hero.badgeAi">AI-розпізнавання</strong>
-                <p data-i18n="hero.badgeAiSub">Google Gemini</p>
+              <p class="floating-status-title" data-i18n="hero.badgeShakshuka">Шакшука з томатами</p>
+              <div class="floating-status-meta">
+                <span data-i18n="hero.foodCardMissing">0 докуплено</span> • <span data-i18n="hero.foodCardTime">15 хв</span>
               </div>
             </div>
 
@@ -217,15 +208,19 @@
       </div>
     </section>
 
-    <div class="dusk-violet-line" aria-hidden="true"></div>
+    <!-- Smooth Transition Bleed into Warm Cream Canvas -->
+    <div class="hero-transition-bleed" aria-hidden="true"></div>
 
-    <!-- Interactive Ingredient Playground Section -->
+    <!-- Interactive Ingredient Playground Section (Warm Cream Canvas) -->
     <section class="section playground-section" id="interactive-demo">
       <div class="container">
         <div class="section-header text-center">
-          <h2 class="section-title" data-i18n="playground.title">Спробуй прямо в браузері</h2>
+          <h2 class="section-title" data-i18n="playground.title">
+            Не шукай рецепт.<br>
+            Готуй з того, що вже є.
+          </h2>
           <p class="section-description" data-i18n="playground.desc">
-            Обери продукти, які зараз є у твоєму холодильнику. Алгоритм <strong>RecipeMatcher</strong> миттєво підрахує відповідність рецептів у реальному часі!
+            Обери продукти та спеції, які маєш під рукою. Nyamo покаже страви, які можна зготувати негайно, та точно попередить, якщо чогось бракує.
           </p>
         </div>
 
@@ -274,6 +269,9 @@
         </div>
       </div>
     </section>
+
+    <!-- Smooth Transition Bleed back to Dark Canvas -->
+    <div class="playground-transition-bottom" aria-hidden="true"></div>
 
     <!-- Bento Grid Features Section -->
     <section class="section features-section" id="features">
