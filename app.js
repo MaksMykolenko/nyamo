@@ -1271,6 +1271,7 @@ function initGuidedCooking() {
   const progressFill = document.getElementById('cookingProgressFill');
   const stepCounter = document.getElementById('cookingStepCounter');
   const instructionText = document.getElementById('cookingInstructionText');
+  const instructionSub = document.getElementById('cookingInstructionSub');
   const timerCircleProgress = document.getElementById('timerCircleProgress');
   const timerTime = document.getElementById('cookingTimerTime');
   const btnBack = document.getElementById('cookingBtnBack');
@@ -1284,7 +1285,7 @@ function initGuidedCooking() {
 
   let currentStep = 3;
   let hasAutoTransitioned = false;
-  let timerSeconds = 342; // 05:42
+  let timerSeconds = 336; // 05:36
   let timerInterval = null;
 
   function renderStep(step, animate = true) {
@@ -1293,7 +1294,11 @@ function initGuidedCooking() {
 
     const stepText = isStep4
       ? i18nText('cooking.step4Text', {}, 'Додай яйця та накрий сковороду.')
-      : i18nText('cooking.step3Text', {}, 'Додай помідори та тушкуй 5–7 хвилин на середньому вогні.');
+      : i18nText('cooking.step3Text', {}, 'Додай помідори та тушкуй на середньому вогні.');
+
+    const stepSub = isStep4
+      ? i18nText('cooking.step4Sub', {}, 'Готуй під кришкою 4–5 хвилин.')
+      : i18nText('cooking.step3Sub', {}, 'Готуй на середньому вогні 5–7 хвилин.');
 
     const stepNumText = isStep4
       ? i18nText('cooking.step4Num', {}, 'Крок 4 з 7')
@@ -1336,6 +1341,22 @@ function initGuidedCooking() {
         instructionText.textContent = stepText;
       }
     }
+
+    if (instructionSub) {
+      if (animate && !prefersReduced) {
+        instructionSub.style.transition = 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)';
+        instructionSub.style.opacity = '0';
+        instructionSub.style.transform = 'translateY(4px)';
+
+        setTimeout(() => {
+          instructionSub.textContent = stepSub;
+          instructionSub.style.opacity = '1';
+          instructionSub.style.transform = 'translateY(0)';
+        }, 220);
+      } else {
+        instructionSub.textContent = stepSub;
+      }
+    }
   }
 
   updateCookingLanguage = () => {
@@ -1355,7 +1376,7 @@ function initGuidedCooking() {
         if (floatTimerDigits) floatTimerDigits.textContent = timeStr;
 
         if (timerCircleProgress) {
-          const pct = Math.max(0, Math.round((timerSeconds / 342) * 72));
+          const pct = Math.max(0, Math.round((timerSeconds / 336) * 72));
           timerCircleProgress.setAttribute('stroke-dasharray', `${pct}, 100`);
         }
       } else {
@@ -1477,8 +1498,8 @@ function initFoodDiscovery() {
     });
   });
 
-  // 2. Short staggered scroll reveal (~65ms between cards)
-  const revealCards = discoverySection.querySelectorAll('.discovery-card.reveal-item, .discovery-quote-card.reveal-item');
+  // 2. Short staggered scroll reveal (~60ms between cards)
+  const revealCards = discoverySection.querySelectorAll('.discovery-card.reveal-item, .discovery-editorial-statement.reveal-item');
   if (!revealCards.length) return;
 
   if (typeof IntersectionObserver === 'undefined' || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {

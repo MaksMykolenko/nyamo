@@ -2214,18 +2214,20 @@ button {
 .cooking-handsfree-note {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 24px;
-  color: #6e645d;
+  gap: 10px;
+  margin-top: 28px;
+  color: #8C7E72;
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;
+  border-left: 2px solid #DCD2C4;
+  padding-left: 12px;
 }
 
 .handsfree-icon {
-  font-size: 1.15rem;
-  opacity: 0.85;
+  font-size: 1rem;
+  opacity: 0.65;
 }
 
 /* Right: Active Guided Cooking Phone Mockup */
@@ -2377,12 +2379,12 @@ button {
 
 /* Thin Progress Track */
 .cooking-progress-container {
-  margin: 14px 0 12px;
+  margin: 12px 0 16px;
 }
 
 .cooking-progress-bar {
   width: 100%;
-  height: 4px;
+  height: 2.5px;
   background-color: #EDE5D8;
   border-radius: 2px;
   overflow: hidden;
@@ -2392,7 +2394,7 @@ button {
   height: 100%;
   width: 43%;
   background-color: var(--color-orange);
-  box-shadow: 0 0 8px rgba(238, 110, 74, 0.4);
+  box-shadow: 0 0 6px rgba(238, 110, 74, 0.4);
   border-radius: 2px;
   transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -2407,11 +2409,15 @@ button {
 
 .cooking-step-badge {
   font-family: var(--font-heading);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: #8A5A36;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  background-color: #FAF5EE;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid #EFE6D9;
 }
 
 .cooking-step-subtext {
@@ -2420,46 +2426,55 @@ button {
   font-weight: 400;
 }
 
-/* Large Readable Instruction Card */
+/* Compact Step Card (~65-75% usable height, intentional & non-stretched) */
 .cooking-instruction-card {
   background-color: #FFFFFF;
   border: 1px solid #EBE3D6;
-  border-radius: 22px;
-  padding: 22px 20px 18px;
-  box-shadow: 0 6px 20px rgba(45, 35, 25, 0.04);
-  flex-grow: 1;
+  border-radius: 24px;
+  padding: 24px 20px 22px;
+  box-shadow: 0 6px 22px rgba(45, 35, 25, 0.04);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: auto;
+  min-height: 440px;
 }
 
 .cooking-instruction-text {
   font-family: var(--font-heading);
-  font-size: 1.34rem;
+  font-size: 1.52rem;
   font-weight: 600;
-  line-height: 1.28;
-  color: #1F1A17;
-  letter-spacing: -0.02em;
-  margin: 4px 0 16px;
+  line-height: 1.22;
+  color: #1c1815;
+  letter-spacing: -0.025em;
+  margin: 14px 0 10px;
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* Active Timer Box */
-.cooking-timer-box {
-  background-color: #FAF7F2;
-  border: 1px solid #E7DFD2;
-  border-radius: 16px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: auto;
+.cooking-instruction-sub {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #70645A;
+  line-height: 1.45;
+  margin: 0 0 20px;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.cooking-timer-circle {
-  width: 42px;
-  height: 42px;
+/* Compact Timer Action Block (connected directly below instruction) */
+.cooking-timer-compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #FAF7F2;
+  border: 1px solid #EAE2D5;
+  border-radius: 16px;
+  padding: 10px 16px;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.cooking-timer-compact-circle {
+  width: 36px;
+  height: 36px;
   position: relative;
   display: flex;
   align-items: center;
@@ -2467,19 +2482,19 @@ button {
   flex-shrink: 0;
 }
 
-.timer-svg {
+.cooking-timer-compact-circle .timer-svg {
   width: 100%;
   height: 100%;
   transform: rotate(-90deg);
 }
 
-.timer-circle-bg {
+.cooking-timer-compact-circle .timer-circle-bg {
   fill: none;
   stroke: #E4DCD0;
   stroke-width: 3.2;
 }
 
-.timer-circle-progress {
+.cooking-timer-compact-circle .timer-circle-progress {
   fill: none;
   stroke: var(--color-orange);
   stroke-width: 3.2;
@@ -2487,32 +2502,33 @@ button {
   transition: stroke-dasharray 1s linear;
 }
 
-.timer-play-icon {
+.cooking-timer-compact-circle .timer-play-icon {
   position: absolute;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  line-height: 1;
 }
 
-.cooking-timer-info {
+.cooking-timer-compact-info {
   display: flex;
   flex-direction: column;
 }
 
-.cooking-timer-time {
+.cooking-timer-compact-info .cooking-timer-time {
   font-family: var(--font-mono);
-  font-size: 1.3rem;
+  font-size: 1.28rem;
   font-weight: 600;
   color: #1F1A17;
   line-height: 1;
   letter-spacing: 0.02em;
 }
 
-.cooking-timer-label {
-  font-size: 0.74rem;
+.cooking-timer-compact-info .cooking-timer-label {
+  font-size: 0.72rem;
   color: #796D62;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 /* Bottom Controls */
@@ -2520,7 +2536,7 @@ button {
   display: grid;
   grid-template-columns: 1fr 1.35fr;
   gap: 12px;
-  margin-top: auto;
+  margin-top: 14px;
 }
 
 .btn-cooking-control {
@@ -2536,7 +2552,7 @@ button {
 .btn-cooking-back {
   background-color: transparent;
   border: 1px solid #DFD6C9;
-  color: #6e645d;
+  color: #6E645D;
   font-weight: 500;
 }
 
@@ -2604,20 +2620,34 @@ button {
   max-width: 540px;
 }
 
-/* Asymmetric Editorial Grid */
-.discovery-composition-grid {
+/* Asymmetric Magazine Gallery Layout */
+.discovery-gallery-layout {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 24px;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.discovery-col-left,
+.discovery-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.discovery-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 /* Card Base */
 .discovery-card {
   background-color: #FFFFFF;
-  border-radius: 24px;
+  border-radius: 26px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(45, 35, 25, 0.04);
-  border: 1px solid rgba(45, 35, 25, 0.06);
+  box-shadow: 0 4px 20px rgba(45, 35, 25, 0.03);
+  border: 1px solid rgba(45, 35, 25, 0.05);
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -2626,7 +2656,7 @@ button {
 }
 
 .discovery-card.reveal-item,
-.discovery-quote-card.reveal-item {
+.discovery-editorial-statement.reveal-item {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
@@ -2636,7 +2666,7 @@ button {
 }
 
 .discovery-card.reveal-item.is-revealed,
-.discovery-quote-card.reveal-item.is-revealed {
+.discovery-editorial-statement.reveal-item.is-revealed {
   opacity: 1;
   transform: translateY(0);
 }
@@ -2644,8 +2674,8 @@ button {
 .discovery-card:hover,
 .discovery-card.reveal-item.is-revealed:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 36px rgba(45, 35, 25, 0.10);
-  border-color: rgba(45, 35, 25, 0.12);
+  box-shadow: 0 16px 36px rgba(45, 35, 25, 0.09);
+  border-color: rgba(45, 35, 25, 0.09);
 }
 
 .discovery-img-wrapper {
@@ -2664,7 +2694,7 @@ button {
 }
 
 .discovery-card:hover .discovery-img {
-  transform: scale(1.03);
+  transform: scale(1.025);
 }
 
 .discovery-card-info {
@@ -2707,9 +2737,10 @@ button {
   opacity: 0.5;
 }
 
+/* Calm green ONLY on featured recipe status */
 .discovery-meta-status {
   color: #15803d;
-  font-weight: 500;
+  font-weight: 550;
 }
 
 .discovery-arrow-icon {
@@ -2727,100 +2758,47 @@ button {
   color: var(--color-orange);
 }
 
-/* Calm green badge exclusively on Feature Card */
-.discovery-badge-ready {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #15803d;
-  border: 1px solid rgba(34, 197, 94, 0.25);
-  border-radius: var(--radius-pill);
-  padding: 6px 14px;
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 550;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  z-index: 2;
+/* Varied Image Proportions */
+.discovery-card-vertical .discovery-img-wrapper {
+  height: 480px;
 }
 
-/* Asymmetric Dimensions in Grid */
-/* Feature Card (Shakshuka, Col 1-7, Row 1-2) */
-.discovery-feature-card {
-  grid-column: span 7;
-  grid-row: span 2;
-}
-
-.discovery-feature-card .discovery-img-wrapper {
-  height: 430px;
-}
-
-.discovery-feature-card .discovery-card-title {
+.discovery-card-vertical .discovery-card-title {
   font-size: 1.45rem;
 }
 
-/* Medium Cards (Pasta, Potatoes) */
-.discovery-medium-card:nth-of-type(2) {
-  grid-column: span 5;
-}
-.discovery-medium-card:nth-of-type(2) .discovery-img-wrapper {
-  height: 190px;
+.discovery-card-wide .discovery-img-wrapper {
+  height: 220px;
 }
 
-.discovery-medium-card:nth-of-type(3) {
-  grid-column: span 5;
-}
-.discovery-medium-card:nth-of-type(3) .discovery-img-wrapper {
-  height: 190px;
+.discovery-card-compact .discovery-img-wrapper {
+  height: 170px;
 }
 
-/* Row 3: Quote (span 4) + Syrnyky (span 3) + Chicken (span 3) + Omelette (span 2) */
-.discovery-quote-card {
-  grid-column: span 4;
-  background-color: transparent;
-  border: 1px dashed rgba(45, 35, 25, 0.18);
-  border-radius: 24px;
-  padding: 32px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.discovery-card-compact .discovery-card-info {
+  padding: 14px 18px 16px;
 }
 
-.discovery-quote-text {
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 2.3vw, 2.1rem);
-  font-weight: 600;
-  line-height: 1.18;
-  letter-spacing: -0.03em;
-  color: #2D241D;
-  margin: 0;
-  text-align: left;
-}
-
-.discovery-composition-grid .discovery-medium-card:nth-of-type(5) {
-  grid-column: span 3;
-}
-.discovery-composition-grid .discovery-medium-card:nth-of-type(5) .discovery-img-wrapper {
-  height: 200px;
-}
-
-.discovery-composition-grid .discovery-medium-card:nth-of-type(6) {
-  grid-column: span 3;
-}
-.discovery-composition-grid .discovery-medium-card:nth-of-type(6) .discovery-img-wrapper {
-  height: 200px;
-}
-
-.discovery-small-card {
-  grid-column: span 2;
-}
-.discovery-small-card .discovery-img-wrapper {
-  height: 200px;
-}
-.discovery-small-card .discovery-card-title {
+.discovery-card-compact .discovery-card-title {
   font-size: 1.05rem;
+  margin: 0 0 4px;
+}
+
+/* Oversized Editorial Typography Statement (Directly in whitespace, NOT inside a card) */
+.discovery-editorial-statement {
+  padding: 32px 8px 18px;
+  background: transparent;
+  border: none;
+}
+
+.discovery-statement-text {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: #1c1815;
+  margin: 0;
 }
 
 /* Mobile Carousel Hidden on Desktop */
@@ -3781,34 +3759,17 @@ button {
     margin: 0 auto;
   }
 
-  .discovery-composition-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  .discovery-gallery-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
-  .discovery-feature-card {
-    grid-column: span 2;
-    grid-row: auto;
+  .discovery-card-vertical .discovery-img-wrapper {
+    height: 380px;
   }
 
-  .discovery-feature-card .discovery-img-wrapper {
-    height: 320px;
-  }
-
-  .discovery-medium-card:nth-of-type(2),
-  .discovery-medium-card:nth-of-type(3),
-  .discovery-composition-grid .discovery-medium-card:nth-of-type(5),
-  .discovery-composition-grid .discovery-medium-card:nth-of-type(6) {
-    grid-column: span 1;
-  }
-
-  .discovery-quote-card {
-    grid-column: span 2;
-    padding: 24px;
-  }
-
-  .discovery-small-card {
-    grid-column: span 2;
+  .discovery-statement-text {
+    font-size: clamp(2rem, 3.6vw, 2.8rem);
   }
 }
 
@@ -3935,22 +3896,22 @@ button {
     margin-bottom: 32px;
   }
 
-  .discovery-composition-grid > :not(.discovery-feature-card) {
+  .discovery-gallery-layout {
+    display: block;
+  }
+
+  .discovery-col-left > *:not(.discovery-card-vertical),
+  .discovery-col-right {
     display: none;
   }
 
-  .discovery-feature-card {
-    grid-column: span 12;
-    border-radius: 20px;
-  }
-
-  .discovery-feature-card .discovery-img-wrapper {
-    height: 250px;
+  .discovery-card-vertical .discovery-img-wrapper {
+    height: 260px;
   }
 
   .discovery-mobile-carousel-wrapper {
     display: block;
-    margin-top: 20px;
+    margin-top: 22px;
     width: 100%;
     overflow: hidden;
   }
@@ -3961,7 +3922,7 @@ button {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
+    padding: 4px 4px 16px;
   }
 
   .discovery-mobile-carousel::-webkit-scrollbar {
@@ -3969,19 +3930,24 @@ button {
   }
 
   .discovery-mobile-card {
-    flex: 0 0 200px;
+    flex: 0 0 220px;
     scroll-snap-align: start;
     background: #FFFFFF;
-    border-radius: 18px;
+    border-radius: 20px;
     overflow: hidden;
-    border: 1px solid rgba(45, 35, 25, 0.06);
-    box-shadow: 0 4px 14px rgba(45, 35, 25, 0.04);
+    border: 1px solid rgba(45, 35, 25, 0.05);
+    box-shadow: 0 4px 16px rgba(45, 35, 25, 0.04);
     cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .discovery-mobile-card:active {
+    transform: scale(0.98);
   }
 
   .discovery-mobile-thumb {
     width: 100%;
-    height: 130px;
+    height: 135px;
   }
 
   .discovery-mobile-thumb img {
@@ -3991,12 +3957,12 @@ button {
   }
 
   .discovery-mobile-info {
-    padding: 12px 14px;
+    padding: 12px 14px 14px;
   }
 
   .discovery-mobile-info h4 {
     font-family: var(--font-heading);
-    font-size: 0.95rem;
+    font-size: 0.96rem;
     font-weight: 600;
     color: #1F1A17;
     margin: 0 0 4px;

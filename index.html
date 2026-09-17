@@ -512,7 +512,7 @@
               <!-- Floating Element 2: Active Timer Pill (top-right) -->
               <div class="cooking-floating-pill cooking-float-timer" id="cookingFloatTimer">
                 <span class="float-timer-icon">⏱</span>
-                <strong class="float-timer-digits" id="cookingFloatTimerDigits">05:42</strong>
+                <strong class="float-timer-digits" id="cookingFloatTimerDigits">05:36</strong>
               </div>
 
               <!-- Smartphone Device Frame -->
@@ -530,36 +530,39 @@
                       <div class="cooking-ui-sound" aria-label="Звук таймера">🔔</div>
                     </div>
 
-                    <!-- Progress Track -->
+                    <!-- Very Thin Nyamo-Orange Progress Line directly below recipe header -->
                     <div class="cooking-progress-container">
                       <div class="cooking-progress-bar">
                         <div class="cooking-progress-fill" id="cookingProgressFill"></div>
                       </div>
                     </div>
 
-                    <!-- Large Instruction Card with Clear Step Hierarchy -->
+                    <!-- Compact Step Card (~65-75% usable height, intentional & non-stretched) -->
                     <div class="cooking-instruction-card">
                       <div class="cooking-step-header">
                         <span class="cooking-step-badge" id="cookingStepCounter" data-i18n="cooking.step3Num">Крок 3 з 7</span>
-                        <span class="cooking-step-subtext" data-i18n="cooking.floatingRemaining">~18 хв залишилось</span>
                       </div>
 
                       <h3 class="cooking-instruction-text" id="cookingInstructionText" data-i18n="cooking.step3Text">
-                        Додай помідори та тушкуй 5–7 хвилин на середньому вогні.
+                        Додай помідори та тушкуй на середньому вогні.
                       </h3>
 
-                      <!-- Embedded Active Timer Box -->
-                      <div class="cooking-timer-box" id="cookingTimerBox">
-                        <div class="cooking-timer-circle">
+                      <p class="cooking-instruction-sub" id="cookingInstructionSub" data-i18n="cooking.step3Sub">
+                        Готуй на середньому вогні 5–7 хвилин.
+                      </p>
+
+                      <!-- Compact Timer Block (connected directly below instruction) -->
+                      <div class="cooking-timer-compact" id="cookingTimerBox">
+                        <div class="cooking-timer-compact-circle">
                           <svg class="timer-svg" viewBox="0 0 36 36">
                             <path class="timer-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                             <path class="timer-circle-progress" id="timerCircleProgress" stroke-dasharray="72, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                           </svg>
                           <span class="timer-play-icon">⏱</span>
                         </div>
-                        <div class="cooking-timer-info">
-                          <span class="cooking-timer-time" id="cookingTimerTime">05:42</span>
-                          <span class="cooking-timer-label" data-i18n="cooking.timerRemaining">Залишилось часу</span>
+                        <div class="cooking-timer-compact-info">
+                          <span class="cooking-timer-time" id="cookingTimerTime">05:36</span>
+                          <span class="cooking-timer-label" data-i18n="cooking.timerRemaining">залишилось</span>
                         </div>
                       </div>
                     </div>
@@ -597,100 +600,108 @@
         </div>
 
         <!-- Asymmetric Editorial Recipe Grid -->
-        <div class="discovery-composition-grid">
-          <!-- Card 1: Large Feature Card (Main visual anchor) -->
-          <div class="discovery-card discovery-feature-card reveal-item" data-open-recipe="shakshuka" role="button" tabindex="0">
-            <div class="discovery-img-wrapper">
-              <img src="assets/images/dishes/recipe_shakshuka.webp" alt="Шакшука з томатами" class="discovery-img" loading="lazy">
-              <span class="discovery-badge-ready" data-i18n="discovery.readyBadge">✓ Є всі продукти</span>
-            </div>
-            <div class="discovery-card-info">
-              <div class="discovery-card-text">
-                <h3 class="discovery-card-title" data-i18n="discovery.recipeShakshuka">Шакшука з томатами</h3>
-                <p class="discovery-card-meta">
-                  <span data-i18n="discovery.recipeShakshukaMeta">25 хв</span>
-                  <span class="discovery-meta-dot">•</span>
-                  <span class="discovery-meta-status" data-i18n="discovery.readyBadge">Є всі продукти</span>
-                </p>
+        <div class="discovery-gallery-layout">
+          <!-- Left Column: Large Vertical Featured Recipe + Oversized Editorial Statement + Wide Card -->
+          <div class="discovery-col-left">
+            <!-- Large Feature Card: Shakshuka (Large vertical image) -->
+            <div class="discovery-card discovery-card-vertical reveal-item" data-open-recipe="shakshuka" role="button" tabindex="0">
+              <div class="discovery-img-wrapper">
+                <img src="assets/images/dishes/recipe_shakshuka.webp" alt="Шакшука з томатами" class="discovery-img" loading="lazy">
               </div>
-              <span class="discovery-arrow-icon" aria-hidden="true">→</span>
+              <div class="discovery-card-info">
+                <div class="discovery-card-text">
+                  <h3 class="discovery-card-title" data-i18n="discovery.recipeShakshuka">Шакшука з томатами</h3>
+                  <p class="discovery-card-meta">
+                    <span data-i18n="discovery.recipeShakshukaMeta">25 хв</span>
+                    <span class="discovery-meta-dot">·</span>
+                    <span class="discovery-meta-status" data-i18n="discovery.readyBadge">Є всі продукти</span>
+                  </p>
+                </div>
+                <span class="discovery-arrow-icon" aria-hidden="true">→</span>
+              </div>
+            </div>
+
+            <!-- Oversized Editorial Typography Statement (Directly in whitespace, NOT inside a card) -->
+            <div class="discovery-editorial-statement reveal-item">
+              <p class="discovery-statement-text" data-i18n="discovery.quote">
+                Менше думати.<br>Більше готувати.
+              </p>
+            </div>
+
+            <!-- Wide Card: Crispy Potatoes -->
+            <div class="discovery-card discovery-card-wide reveal-item" data-open-recipe="baked_potatoes" role="button" tabindex="0">
+              <div class="discovery-img-wrapper">
+                <img src="assets/images/dishes/recipe_baked_potatoes_garlic.webp" alt="Хрустка картопля" class="discovery-img" loading="lazy">
+              </div>
+              <div class="discovery-card-info">
+                <div class="discovery-card-text">
+                  <h3 class="discovery-card-title" data-i18n="discovery.recipePotatoes">Хрустка картопля</h3>
+                  <p class="discovery-card-meta" data-i18n="discovery.recipePotatoesMeta">35 хв</p>
+                </div>
+                <span class="discovery-arrow-icon" aria-hidden="true">→</span>
+              </div>
             </div>
           </div>
 
-          <!-- Card 2: Medium Card (Top Right 1) -->
-          <div class="discovery-card discovery-medium-card reveal-item" data-open-recipe="pasta_cheese" role="button" tabindex="0">
-            <div class="discovery-img-wrapper">
-              <img src="assets/images/dishes/recipe_pasta_with_cheese.webp" alt="Вершкова паста" class="discovery-img" loading="lazy">
-            </div>
-            <div class="discovery-card-info">
-              <div class="discovery-card-text">
-                <h3 class="discovery-card-title" data-i18n="discovery.recipePasta">Вершкова паста</h3>
-                <p class="discovery-card-meta" data-i18n="discovery.recipePastaMeta">20 хв</p>
+          <!-- Right Column: Wide Card + Two Smaller Cards Side-by-Side + Wide Card -->
+          <div class="discovery-col-right">
+            <!-- Wide Card: Creamy Pasta -->
+            <div class="discovery-card discovery-card-wide reveal-item" data-open-recipe="pasta_cheese" role="button" tabindex="0">
+              <div class="discovery-img-wrapper">
+                <img src="assets/images/dishes/recipe_pasta_with_cheese.webp" alt="Вершкова паста" class="discovery-img" loading="lazy">
               </div>
-              <span class="discovery-arrow-icon" aria-hidden="true">→</span>
-            </div>
-          </div>
-
-          <!-- Card 3: Medium Card (Top Right 2) -->
-          <div class="discovery-card discovery-medium-card reveal-item" data-open-recipe="baked_potatoes" role="button" tabindex="0">
-            <div class="discovery-img-wrapper">
-              <img src="assets/images/dishes/recipe_baked_potatoes_garlic.webp" alt="Хрустка картопля" class="discovery-img" loading="lazy">
-            </div>
-            <div class="discovery-card-info">
-              <div class="discovery-card-text">
-                <h3 class="discovery-card-title" data-i18n="discovery.recipePotatoes">Хрустка картопля</h3>
-                <p class="discovery-card-meta" data-i18n="discovery.recipePotatoesMeta">35 хв</p>
+              <div class="discovery-card-info">
+                <div class="discovery-card-text">
+                  <h3 class="discovery-card-title" data-i18n="discovery.recipePasta">Вершкова паста</h3>
+                  <p class="discovery-card-meta" data-i18n="discovery.recipePastaMeta">20 хв</p>
+                </div>
+                <span class="discovery-arrow-icon" aria-hidden="true">→</span>
               </div>
-              <span class="discovery-arrow-icon" aria-hidden="true">→</span>
             </div>
-          </div>
 
-          <!-- Editorial Typography Statement (Integrated seamlessly in the composition) -->
-          <div class="discovery-quote-card reveal-item">
-            <p class="discovery-quote-text" data-i18n="discovery.quote">
-              Менше думати.<br>Більше готувати.
-            </p>
-          </div>
-
-          <!-- Card 4: Medium Card (Bottom Left) -->
-          <div class="discovery-card discovery-medium-card reveal-item" data-open-recipe="syrnyky" role="button" tabindex="0">
-            <div class="discovery-img-wrapper">
-              <img src="assets/images/dishes/recipe_cottage_cheese_pancakes.webp" alt="Сирники" class="discovery-img" loading="lazy">
-            </div>
-            <div class="discovery-card-info">
-              <div class="discovery-card-text">
-                <h3 class="discovery-card-title" data-i18n="discovery.recipeSyrnyky">Сирники</h3>
-                <p class="discovery-card-meta" data-i18n="discovery.recipeSyrnykyMeta">25 хв</p>
+            <!-- Two Smaller Cards Row -->
+            <div class="discovery-sub-grid">
+              <!-- Smaller Card 1: Homemade Syrnyky -->
+              <div class="discovery-card discovery-card-compact reveal-item" data-open-recipe="syrnyky" role="button" tabindex="0">
+                <div class="discovery-img-wrapper">
+                  <img src="assets/images/dishes/recipe_cottage_cheese_pancakes.webp" alt="Домашні сирники" class="discovery-img" loading="lazy">
+                </div>
+                <div class="discovery-card-info">
+                  <div class="discovery-card-text">
+                    <h3 class="discovery-card-title" data-i18n="discovery.recipeSyrnyky">Домашні сирники</h3>
+                    <p class="discovery-card-meta" data-i18n="discovery.recipeSyrnykyMeta">25 хв</p>
+                  </div>
+                  <span class="discovery-arrow-icon" aria-hidden="true">→</span>
+                </div>
               </div>
-              <span class="discovery-arrow-icon" aria-hidden="true">→</span>
-            </div>
-          </div>
 
-          <!-- Card 5: Medium Card (Bottom Center) -->
-          <div class="discovery-card discovery-medium-card reveal-item" data-open-recipe="chicken_fillet" role="button" tabindex="0">
-            <div class="discovery-img-wrapper">
-              <img src="assets/images/dishes/recipe_pan_seared_chicken_fillet.webp" alt="Курка з травами" class="discovery-img" loading="lazy">
-            </div>
-            <div class="discovery-card-info">
-              <div class="discovery-card-text">
-                <h3 class="discovery-card-title" data-i18n="discovery.recipeChicken">Курка з травами</h3>
-                <p class="discovery-card-meta" data-i18n="discovery.recipeChickenMeta">30 хв</p>
+              <!-- Smaller Card 2: Fluffy Omelette -->
+              <div class="discovery-card discovery-card-compact reveal-item" data-open-recipe="omelette" role="button" tabindex="0">
+                <div class="discovery-img-wrapper">
+                  <img src="assets/images/dishes/recipe_fluffy_milk_omelette.webp" alt="Пишний омлет" class="discovery-img" loading="lazy">
+                </div>
+                <div class="discovery-card-info">
+                  <div class="discovery-card-text">
+                    <h3 class="discovery-card-title" data-i18n="discovery.recipeOmelette">Пишний омлет</h3>
+                    <p class="discovery-card-meta" data-i18n="discovery.recipeOmeletteMeta">10 хв</p>
+                  </div>
+                  <span class="discovery-arrow-icon" aria-hidden="true">→</span>
+                </div>
               </div>
-              <span class="discovery-arrow-icon" aria-hidden="true">→</span>
             </div>
-          </div>
 
-          <!-- Card 6: Smaller Card (Bottom Right) -->
-          <div class="discovery-card discovery-small-card reveal-item" data-open-recipe="omelette" role="button" tabindex="0">
-            <div class="discovery-img-wrapper">
-              <img src="assets/images/dishes/recipe_fluffy_milk_omelette.webp" alt="Омлет на молоці" class="discovery-img" loading="lazy">
-            </div>
-            <div class="discovery-card-info">
-              <div class="discovery-card-text">
-                <h3 class="discovery-card-title" data-i18n="discovery.recipeOmelette">Омлет на молоці</h3>
-                <p class="discovery-card-meta" data-i18n="discovery.recipeOmeletteMeta">10 хв</p>
+            <!-- Wide Card: Herb Roasted Chicken -->
+            <div class="discovery-card discovery-card-wide reveal-item" data-open-recipe="chicken_fillet" role="button" tabindex="0">
+              <div class="discovery-img-wrapper">
+                <img src="assets/images/dishes/recipe_pan_seared_chicken_fillet.webp" alt="Курка з травами" class="discovery-img" loading="lazy">
               </div>
-              <span class="discovery-arrow-icon" aria-hidden="true">→</span>
+              <div class="discovery-card-info">
+                <div class="discovery-card-text">
+                  <h3 class="discovery-card-title" data-i18n="discovery.recipeChicken">Курка з травами</h3>
+                  <p class="discovery-card-meta" data-i18n="discovery.recipeChickenMeta">30 хв</p>
+                </div>
+                <span class="discovery-arrow-icon" aria-hidden="true">→</span>
+              </div>
             </div>
           </div>
         </div>
@@ -707,21 +718,12 @@
                 <p data-i18n="discovery.recipePastaMeta">20 хв</p>
               </div>
             </div>
-            <div class="discovery-mobile-card" data-open-recipe="baked_potatoes" role="button" tabindex="0">
-              <div class="discovery-mobile-thumb">
-                <img src="assets/images/dishes/recipe_baked_potatoes_garlic.webp" alt="Хрустка картопля" loading="lazy">
-              </div>
-              <div class="discovery-mobile-info">
-                <h4 data-i18n="discovery.recipePotatoes">Хрустка картопля</h4>
-                <p data-i18n="discovery.recipePotatoesMeta">35 хв</p>
-              </div>
-            </div>
             <div class="discovery-mobile-card" data-open-recipe="syrnyky" role="button" tabindex="0">
               <div class="discovery-mobile-thumb">
-                <img src="assets/images/dishes/recipe_cottage_cheese_pancakes.webp" alt="Сирники" loading="lazy">
+                <img src="assets/images/dishes/recipe_cottage_cheese_pancakes.webp" alt="Домашні сирники" loading="lazy">
               </div>
               <div class="discovery-mobile-info">
-                <h4 data-i18n="discovery.recipeSyrnyky">Сирники</h4>
+                <h4 data-i18n="discovery.recipeSyrnyky">Домашні сирники</h4>
                 <p data-i18n="discovery.recipeSyrnykyMeta">25 хв</p>
               </div>
             </div>
@@ -734,12 +736,21 @@
                 <p data-i18n="discovery.recipeChickenMeta">30 хв</p>
               </div>
             </div>
-            <div class="discovery-mobile-card" data-open-recipe="omelette" role="button" tabindex="0">
+            <div class="discovery-mobile-card" data-open-recipe="baked_potatoes" role="button" tabindex="0">
               <div class="discovery-mobile-thumb">
-                <img src="assets/images/dishes/recipe_fluffy_milk_omelette.webp" alt="Омлет на молоці" loading="lazy">
+                <img src="assets/images/dishes/recipe_baked_potatoes_garlic.webp" alt="Хрустка картопля" loading="lazy">
               </div>
               <div class="discovery-mobile-info">
-                <h4 data-i18n="discovery.recipeOmelette">Омлет на молоці</h4>
+                <h4 data-i18n="discovery.recipePotatoes">Хрустка картопля</h4>
+                <p data-i18n="discovery.recipePotatoesMeta">35 хв</p>
+              </div>
+            </div>
+            <div class="discovery-mobile-card" data-open-recipe="omelette" role="button" tabindex="0">
+              <div class="discovery-mobile-thumb">
+                <img src="assets/images/dishes/recipe_fluffy_milk_omelette.webp" alt="Пишний омлет" loading="lazy">
+              </div>
+              <div class="discovery-mobile-info">
+                <h4 data-i18n="discovery.recipeOmelette">Пишний омлет</h4>
                 <p data-i18n="discovery.recipeOmeletteMeta">10 хв</p>
               </div>
             </div>
