@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initShowcaseTabs();
   initPlayground();
   initScrollReveal();
+  initCameraScan();
 });
 
 /* ==========================================================================
@@ -104,6 +105,15 @@ function initNavbarMotion() {
         currentSection = sec.id;
       }
     });
+
+    // Camera Scan Section continuity: map to interactive-demo
+    const cameraSec = document.getElementById('camera-scan');
+    if (!currentSection && cameraSec) {
+      const cRect = cameraSec.getBoundingClientRect();
+      if (cRect.top <= scrollTriggerPoint && cRect.bottom >= scrollTriggerPoint) {
+        currentSection = 'interactive-demo';
+      }
+    }
 
     // End-of-page fallback (FAQ)
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 80) {
@@ -1175,4 +1185,54 @@ function initScrollReveal() {
   });
 
   revealElements.forEach(el => observer.observe(el));
+}
+
+/* ==========================================================================
+   CAMERA SCAN SHOWCASE (One-time scan sweep & recipe modal wiring)
+   ========================================================================== */
+function initCameraScan() {
+  const cameraSection = document.getElementById('camera-scan');
+  if (!cameraSection) return;
+
+  // 1. Scroll-driven one-time scan sweep
+  if (typeof IntersectionObserver === 'undefined') {
+    cameraSection.classList.add('is-scanned');
+  } else {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cameraSection.classList.add('is-scanned');
+          obs.unobserve(cameraSection);
+        }
+      });
+    }, {
+      threshold: 0.18,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    observer.observe(cameraSection);
+  }
+
+  // 2. Wire recipe modal preview cards
+  const recipeCards = cameraSection.querySelectorAll('[data-open-recipe]');
+  recipeCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const recipeId = card.getAttribute('data-open-recipe');
+      const recipe = RECIPES.find(r => r.id === recipeId);
+      if (recipe) {
+        openRecipeModal(recipe);
+      }
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const recipeId = card.getAttribute('data-open-recipe');
+        const recipe = RECIPES.find(r => r.id === recipeId);
+        if (recipe) {
+          openRecipeModal(recipe);
+        }
+      }
+    });
+  });
 }

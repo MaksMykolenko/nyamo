@@ -1537,6 +1537,588 @@ button {
 }
 
 /* ==========================================================================
+   CAMERA SCANNING SHOWCASE SECTION
+   Near-black canvas with subtle warm orange and blue-black ambient lighting
+   ========================================================================== */
+.camera-section {
+  background-color: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+  padding: 160px 0;
+  color: var(--color-bone);
+}
+
+.camera-section::before {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: -10%;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(238, 110, 74, 0.12) 0%, rgba(238, 110, 74, 0.02) 55%, transparent 75%);
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(40px);
+  z-index: 1;
+}
+
+.camera-section::after {
+  content: '';
+  position: absolute;
+  bottom: 12%;
+  right: -6%;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, rgba(22, 36, 56, 0.32) 0%, rgba(16, 24, 38, 0.06) 55%, transparent 75%);
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: 1;
+}
+
+.camera-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.camera-section .section-header {
+  margin-bottom: 72px;
+}
+
+.camera-composition-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 400px) 1fr;
+  gap: 72px;
+  align-items: center;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+/* Left: Phone Mockup with Nyamo Camera */
+.camera-mockup-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.camera-phone-frame {
+  width: 350px;
+  height: 690px;
+  background-color: #151515;
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.85), 
+              0 0 0 1px rgba(255, 255, 255, 0.10);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(28px);
+  opacity: 0;
+}
+
+.camera-section.is-scanned .camera-phone-frame {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.camera-phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 34px;
+  overflow: hidden;
+  background-color: #0d0d0d;
+  position: relative;
+}
+
+.camera-viewfinder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #0d0d0d;
+}
+
+.camera-top-bar {
+  height: 52px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  color: #FFFFFF;
+}
+
+.cam-tool-btn {
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  cursor: pointer;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: opacity 0.2s;
+}
+
+.cam-tool-btn:hover {
+  opacity: 1;
+}
+
+.cam-brand-badge {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.camera-preview-area {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.camera-photo-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Single-Sweep Soft Scan Light Beam */
+.camera-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(238, 110, 74, 0.3) 15%, 
+    rgba(255, 255, 255, 0.95) 50%, 
+    rgba(238, 110, 74, 0.3) 85%, 
+    transparent 100%
+  );
+  box-shadow: 0 0 14px 2px rgba(238, 110, 74, 0.65), 0 0 32px 4px rgba(238, 110, 74, 0.25);
+  top: -10px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.camera-section.is-scanned .camera-scan-line {
+  animation: scanSweepOnce 1.1s cubic-bezier(0.4, 0, 0.2, 1) 0.25s forwards;
+}
+
+@keyframes scanSweepOnce {
+  0% {
+    top: 40px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    top: calc(100% - 90px);
+    opacity: 0;
+  }
+}
+
+/* Native Floating Recognition Badges */
+.cam-detect-label {
+  position: absolute;
+  background: rgba(18, 16, 15, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 550;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0;
+  transform: scale(0.8) translateY(6px);
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.camera-section.is-scanned .cam-detect-label {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition-delay: var(--delay, 0.5s);
+}
+
+.cam-label-check {
+  color: #4ade80;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.cam-label-milk {
+  top: 24%;
+  right: 18%;
+}
+
+.cam-label-onion {
+  top: 36%;
+  left: 36%;
+}
+
+.cam-label-herbs {
+  top: 45%;
+  left: 10%;
+}
+
+.cam-label-eggs {
+  top: 55%;
+  left: 42%;
+}
+
+.cam-label-cheese {
+  top: 58%;
+  right: 12%;
+}
+
+.cam-label-tomatoes {
+  bottom: 18%;
+  left: 14%;
+}
+
+/* Camera Bottom Bar */
+.camera-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+  z-index: 10;
+}
+
+.cam-thumb-preview {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.cam-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cam-shutter-ring {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cam-shutter-ring:hover {
+  transform: scale(1.05);
+}
+
+.cam-shutter-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(238, 110, 74, 0.4);
+}
+
+.cam-flip-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #FFFFFF;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cam-flip-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Right: Workflow Transformation Panel */
+.camera-workflow-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.workflow-flow-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.workflow-source-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 550;
+  color: var(--color-ash);
+}
+
+.workflow-flow-arrow {
+  color: var(--color-orange);
+  display: flex;
+  align-items: center;
+  animation: arrowPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% { transform: translateX(0); opacity: 0.8; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+.workflow-result-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(74, 222, 128, 0.12);
+  border: 1px solid rgba(74, 222, 128, 0.30);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #4ade80;
+}
+
+.workflow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+}
+
+/* 6 Detected Chips */
+.scan-detected-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.scan-detected-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background: rgba(26, 23, 21, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: translateY(12px) scale(0.95);
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.camera-section.is-scanned .scan-detected-chip {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: var(--chip-delay, 0.8s);
+}
+
+.scan-detected-chip .chip-status-check {
+  color: #4ade80;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+/* Ready Dishes Container */
+.scan-ready-block {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.25s,
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.25s;
+}
+
+.camera-section.is-scanned .scan-ready-block {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scan-ready-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scan-ready-badge-icon {
+  font-size: 1.2rem;
+}
+
+.scan-ready-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-bone);
+  margin: 0;
+}
+
+.scan-recipes-pair {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.scan-recipe-card {
+  background: rgba(22, 22, 22, 0.75);
+  border: 1px solid var(--color-hairline);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.28s ease,
+              box-shadow 0.28s ease;
+}
+
+.scan-recipe-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-hairline-strong);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+.scan-card-thumb {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+}
+
+.scan-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.scan-recipe-card:hover .scan-card-img {
+  transform: scale(1.06);
+}
+
+.scan-badge-ready {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 10px;
+  background: #166534;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.scan-card-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 6px;
+}
+
+.scan-recipe-name {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-bone);
+  margin: 0;
+}
+
+.scan-recipe-meta {
+  font-size: 0.8rem;
+  color: var(--color-ash);
+  margin: 0 0 4px;
+}
+
+.scan-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-orange);
+  font-size: 0.84rem;
+  font-weight: 500;
+  margin-top: auto;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.scan-recipe-card:hover .scan-card-link {
+  color: #f28564;
+  gap: 9px;
+}
+
+.scan-card-link .link-arrow {
+  transition: transform 0.2s ease;
+}
+
+.scan-recipe-card:hover .scan-card-link .link-arrow {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
    BENTO GRID FEATURES SECTION (600 headings, 500 labels, 400 body)
    ========================================================================== */
 .bento-grid {
@@ -2447,6 +3029,21 @@ button {
   }
 }
 
+@media (max-width: 960px) {
+  .camera-composition-grid {
+    grid-template-columns: 1fr;
+    gap: 52px;
+  }
+
+  .camera-mockup-wrapper {
+    margin: 0 auto;
+  }
+
+  .scan-recipes-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .site-header {
     top: 10px;
@@ -2521,6 +3118,20 @@ button {
     padding: 26px 20px;
     border-radius: 24px;
   }
+
+  .camera-section {
+    padding: 96px 0;
+  }
+
+  .camera-phone-frame {
+    width: 310px;
+    height: 610px;
+    border-radius: 38px;
+  }
+
+  .camera-phone-screen {
+    border-radius: 30px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2561,6 +3172,25 @@ button {
     border-radius: 20px;
   }
 
+  .camera-phone-frame {
+    width: 290px;
+    height: 570px;
+    border-radius: 34px;
+  }
+
+  .camera-phone-screen {
+    border-radius: 26px;
+  }
+
+  .scan-detected-chips {
+    gap: 8px;
+  }
+
+  .scan-detected-chip {
+    padding: 8px 14px;
+    font-size: 0.88rem;
+  }
+
   .showcase-content-box {
     padding: 24px;
   }
@@ -2586,10 +3216,19 @@ button {
   .reveal-item,
   .playground-card.reveal-item,
   .match-card,
-  .ingredient-chip {
+  .ingredient-chip,
+  .camera-phone-frame,
+  .cam-detect-label,
+  .scan-detected-chip,
+  .scan-ready-block,
+  .workflow-flow-arrow {
     animation: none !important;
     transition-duration: 0.01ms !important;
     transform: none !important;
     opacity: 1 !important;
+  }
+
+  .camera-scan-line {
+    display: none !important;
   }
 }
