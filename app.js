@@ -1475,21 +1475,26 @@ function initFoodDiscovery() {
   const discoverySection = document.getElementById('food-discovery');
   if (!discoverySection) return;
 
-  // 1. Wire recipe modals for cards
-  const discoveryCards = discoverySection.querySelectorAll('[data-open-recipe]');
-  discoveryCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const recipeId = card.getAttribute('data-open-recipe');
+  const header = discoverySection.querySelector('.discovery-header');
+  const tiles = Array.from(discoverySection.querySelectorAll('.discovery-tile.reveal-item'));
+  const statements = Array.from(discoverySection.querySelectorAll('.discovery-editorial-statement.reveal-item'));
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 1. Wire recipe modals for clickable tiles and cards
+  const clickableItems = discoverySection.querySelectorAll('[data-open-recipe]');
+  clickableItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const recipeId = item.getAttribute('data-open-recipe');
       const recipe = RECIPES.find(r => r.id === recipeId);
       if (recipe) {
         openRecipeModal(recipe);
       }
     });
 
-    card.addEventListener('keydown', (e) => {
+    item.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        const recipeId = card.getAttribute('data-open-recipe');
+        const recipeId = item.getAttribute('data-open-recipe');
         const recipe = RECIPES.find(r => r.id === recipeId);
         if (recipe) {
           openRecipeModal(recipe);
@@ -1498,30 +1503,64 @@ function initFoodDiscovery() {
     });
   });
 
-  // 2. Short staggered scroll reveal (~60ms between cards)
-  const revealCards = discoverySection.querySelectorAll('.discovery-card.reveal-item, .discovery-editorial-statement.reveal-item');
-  if (!revealCards.length) return;
+  // 2. Scroll Reveal Sequence (Header -> Tiles 60ms stagger -> Statement last)
+  if (typeof IntersectionObserver === 'undefined' || prefersReduced) {
+    if (header) header.classList.add('is-revealed');
+    tiles.forEach(t => t.classList.add('is-revealed'));
+    statements.forEach(s => s.classList.add('is-revealed'));
+  } else {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // 1 & 2. Headline and supporting copy
+          if (header) header.classList.add('is-revealed');
 
-  if (typeof IntersectionObserver === 'undefined' || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
-    revealCards.forEach(c => c.classList.add('is-revealed'));
-    return;
+          // 3. Recipe photography appears with subtle stagger (60ms)
+          tiles.forEach((tile, idx) => {
+            setTimeout(() => {
+              tile.classList.add('is-revealed');
+            }, 120 + idx * 60);
+          });
+
+          // 4. Editorial statement appears last
+          const statementDelay = 120 + tiles.length * 60 + 60;
+          statements.forEach(statement => {
+            setTimeout(() => {
+              statement.classList.add('is-revealed');
+            }, statementDelay);
+          });
+
+          obs.unobserve(discoverySection);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    observer.observe(discoverySection);
   }
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        revealCards.forEach((card, idx) => {
-          setTimeout(() => {
-            card.classList.add('is-revealed');
-          }, idx * 65);
-        });
-        obs.unobserve(discoverySection);
-      }
-    });
-  }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -30px 0px'
-  });
-
-  observer.observe(discoverySection);
+  // 3. Subtle Parallax on Shakshuka Hero image (15-20px across scroll range)
+  const heroImg = document.getElementById('discoveryParallaxHero');
+  if (heroImg && !prefersReduced && window.innerWidth > 768) {
+    let ticking = false;
+    function onDiscoveryParallax() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const rect = discoverySection.getBoundingClientRect();
+        const winHeight = window.innerHeight;
+        if (rect.top < winHeight && rect.bottom > 0) {
+          const sectionCenter = rect.top + rect.height / 2;
+          const viewportCenter = winHeight / 2;
+          const diff = sectionCenter - viewportCenter;
+          const shift = Math.max(-18, Math.min(18, diff * -0.032));
+          heroImg.style.transform = `scale(1.035) translate3d(0, ${shift}px, 0)`;
+        }
+        ticking = false;
+      });
+    }
+    window.addEventListener('scroll', onDiscoveryParallax, { passive: true });
+  }
 }

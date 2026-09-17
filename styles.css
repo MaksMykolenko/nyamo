@@ -2583,13 +2583,13 @@ button {
    ========================================================================== */
 .food-discovery-section {
   background-color: #F6F2EC;
-  padding: 100px 0 140px;
+  padding: 160px 0 140px;
   position: relative;
 }
 
 .discovery-header {
   max-width: 640px;
-  margin-bottom: 56px;
+  margin-bottom: 60px;
 }
 
 .discovery-tag {
@@ -2622,62 +2622,34 @@ button {
   max-width: 540px;
 }
 
-/* Asymmetric Magazine Gallery Layout */
+/* Asymmetric Magazine Gallery (3 Asymmetric Columns) */
 .discovery-gallery-layout {
   display: grid;
-  grid-template-columns: 1.12fr 0.88fr;
-  gap: 32px;
+  grid-template-columns: 1.15fr 1.35fr 0.95fr;
+  gap: 36px;
   align-items: start;
 }
 
 .discovery-col-left,
+.discovery-col-center,
 .discovery-col-right {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 32px;
 }
 
-.discovery-sub-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-/* Card Base */
-.discovery-card {
-  background-color: #FFFFFF;
-  border-radius: 26px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(45, 35, 25, 0.03);
-  border: 1px solid rgba(45, 35, 25, 0.05);
+/* Recipe Tile Base (Pure image + text on cream canvas) */
+.discovery-tile {
+  background: transparent;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
   position: relative;
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.discovery-card.reveal-item,
-.discovery-editorial-statement.reveal-item {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s ease;
-}
-
-.discovery-card.reveal-item.is-revealed,
-.discovery-editorial-statement.reveal-item.is-revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.discovery-card:hover,
-.discovery-card.reveal-item.is-revealed:hover {
+.discovery-tile:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 36px rgba(45, 35, 25, 0.09);
-  border-color: rgba(45, 35, 25, 0.09);
 }
 
 .discovery-img-wrapper {
@@ -2685,6 +2657,15 @@ button {
   width: 100%;
   overflow: hidden;
   background-color: #EDE5D8;
+  border-radius: 26px;
+  border: 1px solid rgba(45, 35, 25, 0.04);
+  box-shadow: 0 8px 24px rgba(45, 35, 25, 0.04);
+  transition: box-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1), border-color 400ms ease;
+}
+
+.discovery-tile:hover .discovery-img-wrapper {
+  box-shadow: 0 16px 36px rgba(45, 35, 25, 0.09);
+  border-color: rgba(45, 35, 25, 0.08);
 }
 
 .discovery-img {
@@ -2692,40 +2673,40 @@ button {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.discovery-card:hover .discovery-img {
+.discovery-tile:hover .discovery-img {
   transform: scale(1.025);
 }
 
-.discovery-card-info {
-  padding: 18px 22px 20px;
+.discovery-tile-info {
+  padding: 14px 4px 4px;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   gap: 12px;
 }
 
-.discovery-card-text {
+.discovery-tile-text {
   flex: 1;
 }
 
-.discovery-card-title {
+.discovery-tile-title {
   font-family: var(--font-heading);
-  font-size: 1.22rem;
+  font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: -0.015em;
   color: #1F1A17;
-  margin: 0 0 6px;
-  transition: transform 0.3s ease;
+  margin: 0 0 4px;
+  transition: color 0.3s ease;
 }
 
-.discovery-card:hover .discovery-card-title {
-  transform: translateX(2px);
+.discovery-tile:hover .discovery-tile-title {
+  color: #0E0D0C;
 }
 
-.discovery-card-meta {
+.discovery-tile-meta {
   font-family: var(--font-body);
   font-size: 0.88rem;
   color: #7A6E63;
@@ -2739,68 +2720,108 @@ button {
   opacity: 0.5;
 }
 
-/* Calm green ONLY on featured recipe status */
+/* Green ONLY on featured recipe status */
 .discovery-meta-status {
   color: #15803d;
   font-weight: 550;
 }
 
-.discovery-arrow-icon {
+.discovery-arrow {
   font-size: 1.15rem;
-  color: #9C8E82;
+  color: var(--color-orange);
   opacity: 0;
-  transform: translateX(-6px);
-  transition: all 0.3s ease;
+  transform: translateX(-4px);
+  transition: opacity 350ms cubic-bezier(0.22, 1, 0.36, 1), transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
   flex-shrink: 0;
 }
 
-.discovery-card:hover .discovery-arrow-icon {
+.discovery-tile:hover .discovery-arrow {
   opacity: 1;
   transform: translateX(0);
-  color: var(--color-orange);
 }
 
 /* Varied Image Proportions */
-.discovery-card-vertical .discovery-img-wrapper {
-  height: 480px;
+.discovery-tile-vertical .discovery-img-wrapper {
+  height: 540px;
 }
 
-.discovery-card-vertical .discovery-card-title {
+.discovery-tile-vertical .discovery-tile-title {
   font-size: 1.45rem;
 }
 
-.discovery-card-wide .discovery-img-wrapper {
-  height: 220px;
+.discovery-tile-wide .discovery-img-wrapper {
+  height: 225px;
 }
 
-.discovery-card-compact .discovery-img-wrapper {
-  height: 170px;
+.discovery-tile-compact .discovery-img-wrapper {
+  height: 185px;
 }
 
-.discovery-card-compact .discovery-card-info {
-  padding: 14px 18px 16px;
-}
-
-.discovery-card-compact .discovery-card-title {
-  font-size: 1.05rem;
-  margin: 0 0 4px;
+.discovery-tile-compact .discovery-tile-title {
+  font-size: 1.08rem;
 }
 
 /* Oversized Editorial Typography Statement (Directly in whitespace, NOT inside a card) */
 .discovery-editorial-statement {
-  padding: 32px 8px 18px;
   background: transparent;
   border: none;
+  padding: 24px 4px 16px;
 }
 
 .discovery-statement-text {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-size: clamp(2.3rem, 3.4vw, 3.2rem);
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.04em;
   color: #1c1815;
   margin: 0;
+}
+
+.discovery-statement-mobile {
+  display: none;
+}
+
+/* Scroll Reveal States */
+.discovery-header .discovery-tag,
+.discovery-header .discovery-title,
+.discovery-header .discovery-subtitle {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.discovery-header.is-revealed .discovery-tag {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+
+.discovery-header.is-revealed .discovery-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 70ms;
+}
+
+.discovery-header.is-revealed .discovery-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 140ms;
+}
+
+.discovery-tile.reveal-item,
+.discovery-editorial-statement.reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.discovery-tile.reveal-item.is-revealed,
+.discovery-editorial-statement.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Mobile Carousel Hidden on Desktop */
@@ -3762,12 +3783,16 @@ button {
   }
 
   .discovery-gallery-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 28px;
   }
 
-  .discovery-card-vertical .discovery-img-wrapper {
-    height: 380px;
+  .discovery-col-left {
+    grid-column: span 2;
+  }
+
+  .discovery-tile-vertical .discovery-img-wrapper {
+    height: 400px;
   }
 
   .discovery-statement-text {
@@ -3891,7 +3916,7 @@ button {
   }
 
   .food-discovery-section {
-    padding: 70px 0 90px;
+    padding: 80px 0 90px;
   }
 
   .discovery-header {
@@ -3902,43 +3927,57 @@ button {
     display: block;
   }
 
-  .discovery-col-left > *:not(.discovery-card-vertical),
+  .discovery-col-center,
   .discovery-col-right {
     display: none;
   }
 
-  .discovery-card-vertical .discovery-img-wrapper {
-    height: 260px;
+  .discovery-tile-vertical .discovery-img-wrapper {
+    height: 320px;
+  }
+
+  .discovery-statement-desktop {
+    display: none;
+  }
+
+  .discovery-statement-mobile {
+    display: block;
+    padding: 36px 0 20px;
+  }
+
+  .discovery-statement-mobile .discovery-statement-text {
+    font-size: clamp(2.1rem, 7vw, 2.6rem);
+    line-height: 1.1;
   }
 
   .discovery-mobile-carousel-wrapper {
     display: block;
-    margin-top: 22px;
-    width: 100%;
+    margin-top: 8px;
+    width: 100vw;
+    margin-left: -24px;
+    margin-right: -24px;
     overflow: hidden;
   }
 
   .discovery-mobile-carousel {
     display: flex;
-    gap: 14px;
+    gap: 16px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding: 4px 4px 16px;
+    padding: 4px 24px 20px;
   }
 
   .discovery-mobile-carousel::-webkit-scrollbar {
     display: none;
   }
 
+  /* Show 85% of current card and 15% of next card */
   .discovery-mobile-card {
-    flex: 0 0 220px;
+    flex: 0 0 82vw;
+    max-width: 320px;
     scroll-snap-align: start;
-    background: #FFFFFF;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(45, 35, 25, 0.05);
-    box-shadow: 0 4px 16px rgba(45, 35, 25, 0.04);
+    background: transparent;
     cursor: pointer;
     transition: transform 0.2s ease;
   }
@@ -3949,7 +3988,11 @@ button {
 
   .discovery-mobile-thumb {
     width: 100%;
-    height: 135px;
+    height: 200px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(45, 35, 25, 0.05);
+    border: 1px solid rgba(45, 35, 25, 0.04);
   }
 
   .discovery-mobile-thumb img {
@@ -3959,19 +4002,20 @@ button {
   }
 
   .discovery-mobile-info {
-    padding: 12px 14px 14px;
+    padding: 12px 4px 4px;
   }
 
   .discovery-mobile-info h4 {
     font-family: var(--font-heading);
-    font-size: 0.96rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: #1F1A17;
     margin: 0 0 4px;
   }
 
   .discovery-mobile-info p {
-    font-size: 0.82rem;
+    font-family: var(--font-body);
+    font-size: 0.86rem;
     color: #7A6E63;
     margin: 0;
   }
