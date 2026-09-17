@@ -34,6 +34,7 @@
 
   /* Chromatic Brand Accent: Nyamo Warm Orange */
   --color-brand-orange: #EE6E4A;
+  --color-orange: #EE6E4A;
   --color-brand-orange-glow: rgba(238, 110, 74, 0.25);
   
   /* Hero Horizon Gradient (Warm Amber -> Dark Void -> Cobalt Blue) */
@@ -2562,9 +2563,9 @@ button {
 }
 
 .btn-cooking-next {
-  background-color: var(--color-orange);
+  background-color: #EE6E4A;
   color: #FFFFFF;
-  border: 1px solid var(--color-orange);
+  border: 1px solid #EE6E4A;
   font-weight: 600;
   box-shadow: 0 4px 14px rgba(238, 110, 74, 0.4);
 }
@@ -2572,6 +2573,7 @@ button {
 .btn-cooking-next:hover {
   background-color: #f07f5e;
   border-color: #f07f5e;
+  color: #FFFFFF;
   box-shadow: 0 6px 18px rgba(238, 110, 74, 0.5);
 }
 
