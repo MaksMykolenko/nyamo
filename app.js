@@ -10,6 +10,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initDirectionSwitcher();
+  initNavbarMotion();
   initMobileNav();
   initFaqAccordion();
   initShowcaseTabs();
@@ -17,11 +18,156 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   0. DESIGN SYSTEM INITIALIZATION (EDITORIAL COOKBOOK)
+   0. DESIGN SYSTEM INITIALIZATION
    ========================================================================== */
 function initDirectionSwitcher() {
   document.body.classList.remove('theme-kinetic', 'theme-minimalist', 'theme-editorial');
   document.body.classList.add('theme-dimension');
+}
+
+/* ==========================================================================
+   0b. NAVBAR PREMIUM MOTION & ACTIVE PILL MORPH
+   ========================================================================== */
+function initNavbarMotion() {
+  const header = document.getElementById('header');
+  const desktopNav = document.getElementById('desktopNav');
+  const pill = document.getElementById('navActivePill');
+  if (!header || !desktopNav || !pill) return;
+
+  const navLinks = Array.from(desktopNav.querySelectorAll('.nav-link'));
+  const sectionIds = ['interactive-demo', 'features', 'recipes', 'faq'];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+  let activeSectionId = null;
+  let hoveredLink = null;
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  // Measure and position the active pill smoothly
+  function movePillTo(link, animate = true) {
+    if (!link) {
+      pill.style.opacity = '0';
+      return;
+    }
+
+    const navRect = desktopNav.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+
+    const left = linkRect.left - navRect.left;
+    const top = linkRect.top - navRect.top;
+    const width = linkRect.width;
+    const height = linkRect.height;
+
+    if (!animate) {
+      pill.style.transition = 'none';
+    } else {
+      pill.style.transition = '';
+    }
+
+    pill.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+    pill.style.width = `${width}px`;
+    pill.style.height = `${height}px`;
+    pill.style.opacity = '1';
+  }
+
+  // Update navbar morph, scroll direction, and active section
+  function updateScrollState() {
+    const currentScrollY = window.scrollY;
+
+    // 1. Scroll Morph (tightens navbar padding, adjusts distance & blur)
+    if (currentScrollY > 24) {
+      header.classList.add('is-scrolled');
+    } else {
+      header.classList.remove('is-scrolled');
+    }
+
+    // 2. Scroll Direction Nudge (subtle 8px shift up when scrolling down past hero, restore on scroll up)
+    if (currentScrollY > 200) {
+      if (currentScrollY > lastScrollY + 8) {
+        header.classList.add('nav-scrolling-down');
+      } else if (currentScrollY < lastScrollY - 4) {
+        header.classList.remove('nav-scrolling-down');
+      }
+    } else {
+      header.classList.remove('nav-scrolling-down');
+    }
+    lastScrollY = currentScrollY;
+
+    // 3. Active Section Detection (Scroll spy)
+    let currentSection = null;
+    const scrollTriggerPoint = window.innerHeight * 0.35;
+
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= scrollTriggerPoint && rect.bottom >= scrollTriggerPoint) {
+        currentSection = sec.id;
+      }
+    });
+
+    // End-of-page fallback (FAQ)
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 80) {
+      currentSection = 'faq';
+    }
+
+    if (currentSection !== activeSectionId) {
+      activeSectionId = currentSection;
+
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href').replace('#', '');
+        link.classList.toggle('active', href === activeSectionId);
+      });
+
+      if (!hoveredLink) {
+        const activeLink = navLinks.find(link => link.getAttribute('href') === `#${activeSectionId}`);
+        movePillTo(activeLink);
+      }
+    } else if (!activeSectionId && !hoveredLink) {
+      pill.style.opacity = '0';
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateScrollState);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Hover Interactions on Nav Links
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      hoveredLink = link;
+      movePillTo(link);
+    });
+
+    link.addEventListener('click', () => {
+      const href = link.getAttribute('href').replace('#', '');
+      activeSectionId = href;
+      navLinks.forEach(l => l.classList.toggle('active', l === link));
+      movePillTo(link);
+    });
+  });
+
+  desktopNav.addEventListener('mouseleave', () => {
+    hoveredLink = null;
+    const activeLink = navLinks.find(link => link.getAttribute('href') === `#${activeSectionId}`);
+    movePillTo(activeLink);
+  });
+
+  // Re-align pill on window resize / orientation change
+  window.addEventListener('resize', () => {
+    const targetLink = hoveredLink || navLinks.find(link => link.getAttribute('href') === `#${activeSectionId}`);
+    if (targetLink) {
+      movePillTo(targetLink, false);
+    }
+  }, { passive: true });
+
+  // Initial layout calculation after fonts/DOM settle
+  setTimeout(() => {
+    updateScrollState();
+  }, 100);
 }
 
 /* ==========================================================================
