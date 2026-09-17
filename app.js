@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initCameraScan();
   initGuidedCooking();
+  initFoodDiscovery();
 });
 
 /* ==========================================================================
@@ -107,10 +108,11 @@ function initNavbarMotion() {
       }
     });
 
-    // Camera Scan & Guided Cooking Section continuity: map to interactive-demo
+    // Camera Scan, Guided Cooking & Food Discovery Section continuity: map to interactive-demo
     const cameraSec = document.getElementById('camera-scan');
     const cookingSec = document.getElementById('cooking-mode');
-    if (!currentSection && (cameraSec || cookingSec)) {
+    const discoverySec = document.getElementById('food-discovery');
+    if (!currentSection && (cameraSec || cookingSec || discoverySec)) {
       if (cameraSec) {
         const cRect = cameraSec.getBoundingClientRect();
         if (cRect.top <= scrollTriggerPoint && cRect.bottom >= scrollTriggerPoint) {
@@ -120,6 +122,12 @@ function initNavbarMotion() {
       if (!currentSection && cookingSec) {
         const kRect = cookingSec.getBoundingClientRect();
         if (kRect.top <= scrollTriggerPoint && kRect.bottom >= scrollTriggerPoint) {
+          currentSection = 'interactive-demo';
+        }
+      }
+      if (!currentSection && discoverySec) {
+        const dRect = discoverySec.getBoundingClientRect();
+        if (dRect.top <= scrollTriggerPoint && dRect.bottom >= scrollTriggerPoint) {
           currentSection = 'interactive-demo';
         }
       }
@@ -1271,7 +1279,6 @@ function initGuidedCooking() {
   const floatStepText = document.getElementById('cookingFloatStepText');
   const floatTimer = document.getElementById('cookingFloatTimer');
   const floatTimerDigits = document.getElementById('cookingFloatTimerDigits');
-  const floatRemaining = document.getElementById('cookingFloatRemaining');
 
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1431,9 +1438,6 @@ function initGuidedCooking() {
           if (floatTimer) {
             floatTimer.style.transform = `translate3d(0, ${-pillShift}px, 0)`;
           }
-          if (floatRemaining) {
-            floatRemaining.style.transform = `translate3d(0, ${pillShift * 0.6}px, 0)`;
-          }
         }
         ticking = false;
       });
@@ -1441,4 +1445,62 @@ function initGuidedCooking() {
 
     window.addEventListener('scroll', onScrollParallax, { passive: true });
   }
+}
+
+/* ==========================================================================
+   RECIPE DISCOVERY / FOOD MOMENT (Staggered scroll reveal & modal wiring)
+   ========================================================================== */
+function initFoodDiscovery() {
+  const discoverySection = document.getElementById('food-discovery');
+  if (!discoverySection) return;
+
+  // 1. Wire recipe modals for cards
+  const discoveryCards = discoverySection.querySelectorAll('[data-open-recipe]');
+  discoveryCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const recipeId = card.getAttribute('data-open-recipe');
+      const recipe = RECIPES.find(r => r.id === recipeId);
+      if (recipe) {
+        openRecipeModal(recipe);
+      }
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const recipeId = card.getAttribute('data-open-recipe');
+        const recipe = RECIPES.find(r => r.id === recipeId);
+        if (recipe) {
+          openRecipeModal(recipe);
+        }
+      }
+    });
+  });
+
+  // 2. Short staggered scroll reveal (~65ms between cards)
+  const revealCards = discoverySection.querySelectorAll('.discovery-card.reveal-item, .discovery-quote-card.reveal-item');
+  if (!revealCards.length) return;
+
+  if (typeof IntersectionObserver === 'undefined' || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    revealCards.forEach(c => c.classList.add('is-revealed'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        revealCards.forEach((card, idx) => {
+          setTimeout(() => {
+            card.classList.add('is-revealed');
+          }, idx * 65);
+        });
+        obs.unobserve(discoverySection);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  observer.observe(discoverySection);
 }

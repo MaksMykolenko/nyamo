@@ -129,6 +129,25 @@ const NyamoI18n = (() => {
         floatingTimer: "05:42",
         floatingRemaining: "~18 хв залишилось"
       },
+      discovery: {
+        tag: "Що приготувати",
+        title: "На сьогодні точно<br>є що приготувати.",
+        subtitle: "Від швидкого сніданку до вечері з того, що вже лежить у холодильнику.",
+        quote: "Менше думати.<br>Більше готувати.",
+        readyBadge: "✓ Є всі продукти",
+        recipeShakshuka: "Шакшука з томатами",
+        recipeShakshukaMeta: "25 хв",
+        recipePasta: "Вершкова паста",
+        recipePastaMeta: "20 хв",
+        recipePotatoes: "Хрустка картопля",
+        recipePotatoesMeta: "35 хв",
+        recipeSyrnyky: "Сирники",
+        recipeSyrnykyMeta: "25 хв",
+        recipeChicken: "Курка з травами",
+        recipeChickenMeta: "30 хв",
+        recipeOmelette: "Омлет на молоці",
+        recipeOmeletteMeta: "10 хв"
+      },
       features: {
         badge: "💡 Сучасний підхід",
         title: "Чому готувати з Nyamo — суцільне задоволення",
@@ -417,6 +436,25 @@ const NyamoI18n = (() => {
         floatingTimer: "05:42",
         floatingRemaining: "~18 min remaining"
       },
+      discovery: {
+        tag: "What to cook",
+        title: "There’s definitely something<br>to cook today.",
+        subtitle: "From a quick breakfast to dinner made with what’s already in your fridge.",
+        quote: "Less thinking.<br>More cooking.",
+        readyBadge: "✓ All ingredients ready",
+        recipeShakshuka: "Shakshuka with Tomatoes",
+        recipeShakshukaMeta: "25 min",
+        recipePasta: "Creamy Pasta",
+        recipePastaMeta: "20 min",
+        recipePotatoes: "Crispy Potatoes",
+        recipePotatoesMeta: "35 min",
+        recipeSyrnyky: "Syrnyky Pancakes",
+        recipeSyrnykyMeta: "25 min",
+        recipeChicken: "Herb Roasted Chicken",
+        recipeChickenMeta: "30 min",
+        recipeOmelette: "Fluffy Milk Omelette",
+        recipeOmeletteMeta: "10 min"
+      },
       features: {
         badge: "💡 Modern Culinary Assistant",
         title: "Why Cooking With Nyamo Is a Pure Delight",
@@ -704,6 +742,25 @@ const NyamoI18n = (() => {
         floatingStepNext: "Adım 4 / 7",
         floatingTimer: "05:42",
         floatingRemaining: "~18 dk kaldı"
+      },
+      discovery: {
+        tag: "Ne pişirsem",
+        title: "Bugün kesinlikle<br>pişirecek bir şey var.",
+        subtitle: "Hızlı bir kahvaltıdan buzdolabında olanlarla sıcacık bir akşam yemeğine.",
+        quote: "Daha az düşünce.<br>Daha çok yemek.",
+        readyBadge: "✓ Tüm malzemeler var",
+        recipeShakshuka: "Domatesli Şakşuka",
+        recipeShakshukaMeta: "25 dk",
+        recipePasta: "Kremalı Makarna",
+        recipePastaMeta: "20 dk",
+        recipePotatoes: "Kıtır Patates",
+        recipePotatoesMeta: "35 dk",
+        recipeSyrnyky: "Syrnyky (Lorlu Pankek)",
+        recipeSyrnykyMeta: "25 dk",
+        recipeChicken: "Otlu Tavuk",
+        recipeChickenMeta: "30 dk",
+        recipeOmelette: "Sütlü Omlet",
+        recipeOmeletteMeta: "10 dk"
       },
       features: {
         badge: "💡 Modern Mutfak Asistanı",
