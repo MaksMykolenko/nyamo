@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaqAccordion();
   initShowcaseTabs();
   initPlayground();
+  initScrollReveal();
 });
 
 /* ==========================================================================
@@ -948,23 +949,24 @@ function renderResults() {
   }
 
   const andMoreText = lang === 'uk' ? ' та ще...' : (lang === 'tr' ? ' ve diğer...' : ' and more...');
-  const cardReadyBadge = i18nText('playground.cardReady', {}, '🟢 Можна приготувати');
+  const cardReadyBadge = i18nText('playground.cardReady', {}, 'Є всі інгредієнти');
   const cardReadyDesc = i18nText('playground.cardReadyText', {}, '✓ Усі необхідні продукти є в наявності');
-  const btnActionText = i18nText('playground.cardViewRecipe', {}, 'Переглянути рецепт & порції →');
+  const btnActionText = i18nText('playground.cardViewRecipe', {}, 'Переглянути рецепт');
 
-  evaluatedRecipes.forEach(({ rawRecipe, recipe, canCook, missingCount, missingNames }) => {
+  evaluatedRecipes.forEach(({ rawRecipe, recipe, canCook, missingCount, missingNames }, index) => {
     const card = document.createElement('div');
     card.className = 'match-card';
+    card.style.animationDelay = `${index * 45}ms`;
 
     let badgeHtml = '';
     let statusTextHtml = '';
 
     if (canCook) {
-      badgeHtml = `<span class="match-badge status-badge-ready">${cardReadyBadge}</span>`;
+      badgeHtml = `<span class="match-badge status-badge-ready"><span class="badge-check-icon">✓</span> ${cardReadyBadge}</span>`;
       statusTextHtml = `<div class="match-card-ready-text">${cardReadyDesc}</div>`;
     } else {
       const missingList = missingNames.slice(0, 2).join(', ') + (missingNames.length > 2 ? andMoreText : '');
-      const missingBadge = i18nText('playground.cardMissing', { n: missingCount }, `🔴 Бракує: ${missingCount}`);
+      const missingBadge = i18nText('playground.cardMissing', { n: missingCount }, `Бракує: ${missingCount}`);
       const missingDesc = i18nText('playground.cardMissingText', { items: missingList }, `Бракує: ${missingList}`);
       badgeHtml = `<span class="match-badge status-badge-missing">${missingBadge}</span>`;
       statusTextHtml = `<div class="match-card-missing-text">${missingDesc}</div>`;
@@ -985,7 +987,8 @@ function renderResults() {
         ${statusTextHtml}
         <div class="match-card-action">
           <button class="btn-card-action" data-recipe-id="${rawRecipe.id}">
-            ${btnActionText}
+            <span>${btnActionText}</span>
+            <span class="card-action-arrow" aria-hidden="true">→</span>
           </button>
         </div>
       </div>
@@ -1145,4 +1148,31 @@ function openRecipeModal(rawRecipe) {
 
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
+}
+
+/* ==========================================================================
+   SCROLL REVEAL MOTION (Observer for staggered entrance)
+   ========================================================================== */
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.reveal-item');
+  if (!revealElements.length) return;
+
+  if (typeof IntersectionObserver === 'undefined') {
+    revealElements.forEach(el => el.classList.add('is-revealed'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  revealElements.forEach(el => observer.observe(el));
 }
