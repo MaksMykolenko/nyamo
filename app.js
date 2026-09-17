@@ -764,7 +764,7 @@ function renderResults() {
     if (readyCount > 0) {
       const plural = getPluralWord(readyCount, lang);
       const readyMsg = i18nText('playground.resultsReady', { n: readyCount, plural }, `🟢 Готово до приготування: ${readyCount} ${plural}`);
-      summaryEl.innerHTML = `<span style="color: var(--status-green-text); font-weight: 700;">${readyMsg}</span>`;
+      summaryEl.innerHTML = `<span style="color: var(--status-green-text); font-weight: 500;">${readyMsg}</span>`;
     } else {
       const emptyMsg = i18nText('playground.resultsEmpty', {}, 'Оберіть інгредієнти вище, щоб побачити відповідні страви');
       summaryEl.textContent = emptyMsg;
