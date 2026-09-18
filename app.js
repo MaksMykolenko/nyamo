@@ -786,11 +786,20 @@ function getLocalizedRecipe(recipe, lang) {
   };
 }
 
+// State for expandable demo controls
+let isAllIngredientsExpanded = false;
+let isMoreRecipesExpanded = false;
+let isPantryExpanded = true;
+
+const PRIMARY_MAIN_IDS = ['egg', 'tomato', 'potato', 'onion', 'cottage_cheese', 'hard_cheese', 'pasta', 'chicken_fillet'];
+const EXTRA_MAIN_IDS = ['wheat_flour', 'bell_pepper', 'sour_cream', 'milk'];
+const PANTRY_IDS = ['sunflower_oil', 'salt', 'garlic'];
+
 function initPlayground() {
   renderChips();
   renderResults();
   setupPresets();
-  setupPortionsToggle();
+  setupExpandableToggles();
   setupModal();
 
   // Listen for language changes from i18n switcher
@@ -807,83 +816,137 @@ function initPlayground() {
   };
 }
 
-function renderChips() {
-  const container = document.getElementById('chipsContainer');
-  if (!container) return;
+function createChipElement(ing, lang) {
+  const chip = document.createElement('button');
+  chip.type = 'button';
+  chip.className = `ingredient-chip ${selectedIngredients.has(ing.id) ? 'active' : ''}`;
+  chip.setAttribute('data-id', ing.id);
+  chip.setAttribute('aria-pressed', selectedIngredients.has(ing.id) ? 'true' : 'false');
+  const ingName = getIngredientName(ing, lang);
+  chip.innerHTML = `
+    <span class="chip-emoji">${ing.emoji}</span>
+    <span class="chip-name">${ingName}</span>
+    <span class="chip-check" aria-hidden="true">✓</span>
+  `;
 
-  const lang = getLang();
-  container.innerHTML = '';
+  chip.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (selectedIngredients.has(ing.id)) {
+      selectedIngredients.delete(ing.id);
+    } else {
+      selectedIngredients.add(ing.id);
+    }
+    renderChips();
+    renderResults();
+  });
 
-  const mainIngs = INGREDIENTS.filter(i => i.category === 'main');
-  const spiceIngs = INGREDIENTS.filter(i => i.category === 'spice');
-
-  const groupLabels = {
-    uk: { main: '🛒 Продукти в наявності', spice: '🧂 Спеції та базові запаси' },
-    pl: { main: '🛒 Dostępne składniki', spice: '🧂 Przyprawy i podstawowe zapasy' },
-    en: { main: '🛒 Available ingredients', spice: '🧂 Spices & staples' }
-  };
-  const curLabels = groupLabels[lang] || groupLabels.uk;
-
-  function createChip(ing) {
-    const chip = document.createElement('button');
-    chip.className = `ingredient-chip ${selectedIngredients.has(ing.id) ? 'active' : ''}`;
-    chip.setAttribute('data-id', ing.id);
-    const ingName = getIngredientName(ing, lang);
-    chip.innerHTML = `
-      <span class="chip-emoji">${ing.emoji}</span>
-      <span class="chip-name">${ingName}</span>
-      <span class="chip-check">✓</span>
-    `;
-
-    chip.addEventListener('click', () => {
-      if (selectedIngredients.has(ing.id)) {
-        selectedIngredients.delete(ing.id);
-      } else {
-        selectedIngredients.add(ing.id);
-      }
-      renderChips();
-      renderResults();
-    });
-
-    return chip;
-  }
-
-  // Render Main Ingredients
-  const mainHeader = document.createElement('div');
-  mainHeader.className = 'chips-group-title';
-  mainHeader.textContent = curLabels.main;
-  container.appendChild(mainHeader);
-
-  const mainGroup = document.createElement('div');
-  mainGroup.className = 'chips-group';
-  mainIngs.forEach(ing => mainGroup.appendChild(createChip(ing)));
-  container.appendChild(mainGroup);
-
-  // Render Spices & Staples
-  const spiceHeader = document.createElement('div');
-  spiceHeader.className = 'chips-group-title';
-  spiceHeader.textContent = curLabels.spice;
-  container.appendChild(spiceHeader);
-
-  const spiceGroup = document.createElement('div');
-  spiceGroup.className = 'chips-group';
-  spiceIngs.forEach(ing => spiceGroup.appendChild(createChip(ing)));
-  container.appendChild(spiceGroup);
+  return chip;
 }
 
-function renderResults() {
-  const container = document.getElementById('matchingRecipesGrid');
+function renderChips() {
+  const mainContainer = document.getElementById('chipsContainerMain');
+  const extraContainer = document.getElementById('chipsContainerExtra');
+  const pantryContainer = document.getElementById('chipsContainerPantry');
   const countEl = document.getElementById('selectedCount');
-  const summaryEl = document.getElementById('resultsSummary');
-  if (!container) return;
-  container.innerHTML = '';
+  const toggleAllBtn = document.getElementById('toggleAllIngredients');
+  const toggleAllText = document.getElementById('toggleAllIngredientsText');
+  const pantryStatus = document.getElementById('pantryStatus');
+
+  if (!mainContainer || !extraContainer || !pantryContainer) return;
 
   const lang = getLang();
+
+  // 1. Counter update
   if (countEl) {
     countEl.textContent = i18nText('playground.selectedCount', { n: selectedIngredients.size }, `Вибрано: ${selectedIngredients.size}`);
   }
 
-  // Calculate matching for all recipes
+  // 2. Primary 8 ingredients
+  mainContainer.innerHTML = '';
+  PRIMARY_MAIN_IDS.forEach(id => {
+    const ing = INGREDIENTS.find(i => i.id === id);
+    if (ing) mainContainer.appendChild(createChipElement(ing, lang));
+  });
+
+  // 3. Extra 4 ingredients
+  extraContainer.innerHTML = '';
+  EXTRA_MAIN_IDS.forEach(id => {
+    const ing = INGREDIENTS.find(i => i.id === id);
+    if (ing) extraContainer.appendChild(createChipElement(ing, lang));
+  });
+
+  extraContainer.hidden = !isAllIngredientsExpanded;
+  if (toggleAllBtn) {
+    toggleAllBtn.setAttribute('aria-expanded', isAllIngredientsExpanded ? 'true' : 'false');
+    const extraSelectedCount = EXTRA_MAIN_IDS.filter(id => selectedIngredients.has(id)).length;
+    if (isAllIngredientsExpanded) {
+      if (toggleAllText) toggleAllText.textContent = i18nText('playground.showLess', {}, 'Згорнути');
+    } else if (extraSelectedCount > 0) {
+      if (toggleAllText) toggleAllText.textContent = i18nText('playground.allProductsWithSelected', { n: EXTRA_MAIN_IDS.length, sel: extraSelectedCount }, `Усі продукти (+${EXTRA_MAIN_IDS.length} · ${extraSelectedCount} вибрано)`);
+    } else {
+      if (toggleAllText) toggleAllText.textContent = i18nText('playground.allProducts', { n: EXTRA_MAIN_IDS.length }, `Усі продукти (+${EXTRA_MAIN_IDS.length})`);
+    }
+  }
+
+  // 4. Pantry Essentials
+  pantryContainer.innerHTML = '';
+  PANTRY_IDS.forEach(id => {
+    const ing = INGREDIENTS.find(i => i.id === id);
+    if (ing) pantryContainer.appendChild(createChipElement(ing, lang));
+  });
+
+  if (pantryStatus) {
+    const pantrySelectedCount = PANTRY_IDS.filter(id => selectedIngredients.has(id)).length;
+    pantryStatus.textContent = pantrySelectedCount > 0 
+      ? i18nText('playground.pantrySelected', { n: pantrySelectedCount }, `${pantrySelectedCount} вибрано`)
+      : '';
+  }
+}
+
+function setupExpandableToggles() {
+  const toggleAllBtn = document.getElementById('toggleAllIngredients');
+  const toggleMoreBtn = document.getElementById('toggleMoreRecipes');
+  const togglePantryBtn = document.getElementById('togglePantryBtn');
+  const pantryContainer = document.getElementById('chipsContainerPantry');
+
+  if (toggleAllBtn) {
+    toggleAllBtn.addEventListener('click', () => {
+      isAllIngredientsExpanded = !isAllIngredientsExpanded;
+      renderChips();
+    });
+  }
+
+  if (toggleMoreBtn) {
+    toggleMoreBtn.addEventListener('click', () => {
+      isMoreRecipesExpanded = !isMoreRecipesExpanded;
+      renderResults();
+    });
+  }
+
+  if (togglePantryBtn && pantryContainer) {
+    togglePantryBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 640) {
+        isPantryExpanded = !isPantryExpanded;
+        pantryContainer.style.display = isPantryExpanded ? 'flex' : 'none';
+        togglePantryBtn.setAttribute('aria-expanded', isPantryExpanded ? 'true' : 'false');
+      }
+    });
+  }
+}
+
+function renderResults() {
+  const primaryContainer = document.getElementById('primaryRecommendation');
+  const secondaryContainer = document.getElementById('secondaryRecommendations');
+  const moreContainer = document.getElementById('moreRecommendations');
+  const toggleMoreBtn = document.getElementById('toggleMoreRecipes');
+  const toggleMoreText = document.getElementById('toggleMoreRecipesText');
+  const summaryEl = document.getElementById('resultsSummary');
+
+  if (!primaryContainer || !secondaryContainer || !moreContainer) return;
+
+  const lang = getLang();
+
+  // Evaluate recipes matching
   const evaluatedRecipes = RECIPES.map(rawRecipe => {
     const recipe = getLocalizedRecipe(rawRecipe, lang);
     const scaledReq = rawRecipe.required;
@@ -911,69 +974,166 @@ function renderResults() {
   });
 
   const readyCount = evaluatedRecipes.filter(r => r.canCook).length;
+
+  // 1. Factual results summary
   if (summaryEl) {
-    if (readyCount > 0) {
+    if (selectedIngredients.size === 0) {
+      summaryEl.textContent = i18nText('playground.resultsEmpty', {}, 'Оберіть продукти ліворуч або скористайтеся готовим набором');
+    } else if (readyCount > 0) {
       const plural = getPluralWord(readyCount, lang);
       const readyMsg = i18nText('playground.resultsReady', { n: readyCount, plural }, `🟢 Готово до приготування: ${readyCount} ${plural}`);
-      summaryEl.innerHTML = `<span style="color: var(--status-green-text); font-weight: 500;">${readyMsg}</span>`;
+      summaryEl.innerHTML = `<span style="color: #15803d; font-weight: 550;">${readyMsg}</span>`;
     } else {
-      const emptyMsg = i18nText('playground.resultsEmpty', {}, 'Оберіть інгредієнти вище, щоб побачити відповідні страви');
-      summaryEl.textContent = emptyMsg;
+      const plural = getPluralWord(evaluatedRecipes.length, lang);
+      const partialMsg = i18nText('playground.resultsPartial', { n: evaluatedRecipes.length, plural }, `🟡 Підібрано ${evaluatedRecipes.length} ${plural} (бракує кількох продуктів)`);
+      summaryEl.innerHTML = `<span style="color: #9a3412; font-weight: 550;">${partialMsg}</span>`;
     }
   }
 
-  const andMoreText = lang === 'uk' ? ' та ще...' : (lang === 'pl' ? ' i jeszcze...' : ' and more...');
-  const cardReadyBadge = i18nText('playground.cardReady', {}, 'Є всі інгредієнти');
-  const cardReadyDesc = i18nText('playground.cardReadyText', {}, '✓ Усі необхідні продукти є в наявності');
-  const btnActionText = i18nText('playground.cardViewRecipe', {}, 'Переглянути рецепт');
-
-  evaluatedRecipes.forEach(({ rawRecipe, recipe, canCook, missingCount, missingNames }, index) => {
-    const card = document.createElement('div');
-    card.className = 'match-card';
-    card.style.animationDelay = `${index * 45}ms`;
-
-    let badgeHtml = '';
-    let statusTextHtml = '';
-
-    if (canCook) {
-      badgeHtml = `<span class="match-badge status-badge-ready"><span class="badge-check-icon">✓</span> ${cardReadyBadge}</span>`;
-      statusTextHtml = `<div class="match-card-ready-text">${cardReadyDesc}</div>`;
+  // 2. Primary recommendation (Index 0)
+  primaryContainer.innerHTML = '';
+  const primary = evaluatedRecipes[0];
+  if (primary) {
+    let statusBadgeHtml = '';
+    if (primary.canCook) {
+      statusBadgeHtml = `<span class="rec-status-badge rec-status-ready">${i18nText('playground.cardReadyStatus', {}, '✓ Усі інгредієнти вибрано')}</span>`;
+    } else if (primary.missingCount === 1) {
+      statusBadgeHtml = `<span class="rec-status-badge rec-status-missing">${i18nText('playground.cardMissingSingle', { item: primary.missingNames[0] }, `Бракує: ${primary.missingNames[0]}`)}</span>`;
     } else {
-      const missingList = missingNames.slice(0, 2).join(', ') + (missingNames.length > 2 ? andMoreText : '');
-      const missingBadge = i18nText('playground.cardMissing', { n: missingCount }, `Бракує: ${missingCount}`);
-      const missingDesc = i18nText('playground.cardMissingText', { items: missingList }, `Бракує: ${missingList}`);
-      badgeHtml = `<span class="match-badge status-badge-missing">${missingBadge}</span>`;
-      statusTextHtml = `<div class="match-card-missing-text">${missingDesc}</div>`;
+      statusBadgeHtml = `<span class="rec-status-badge rec-status-missing">${i18nText('playground.cardMissingMultiple', { n: primary.missingCount }, `Потрібно ще ${primary.missingCount} продукти`)}</span>`;
     }
 
+    const card = document.createElement('div');
+    card.className = 'primary-rec-card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('data-recipe-id', primary.rawRecipe.id);
     card.innerHTML = `
-      <div class="match-card-top">
-        <img src="${recipe.image}" alt="${recipe.title}" class="match-card-img" loading="lazy">
-        ${badgeHtml}
+      <div class="primary-rec-img-wrap">
+        <img src="${primary.recipe.image}" alt="${primary.recipe.title}" class="primary-rec-img" loading="lazy">
       </div>
-      <div class="match-card-body">
-        <h4 class="match-card-title">${recipe.title}</h4>
-        <div class="match-card-meta">
-          <span>⏱ ${recipe.prepTime}</span>
+      <div class="primary-rec-content">
+        <h4 class="primary-rec-title">${primary.recipe.title}</h4>
+        <div class="primary-rec-meta">
+          <span>⏱ ${primary.recipe.prepTime}</span>
           <span>•</span>
-          <span>🍳 ${recipe.equipment}</span>
+          <span>🍳 ${primary.recipe.equipment}</span>
         </div>
-        ${statusTextHtml}
-        <div class="match-card-action">
-          <button class="btn-card-action" data-recipe-id="${rawRecipe.id}">
-            <span>${btnActionText}</span>
-            <span class="card-action-arrow" aria-hidden="true">→</span>
-          </button>
+        <div>${statusBadgeHtml}</div>
+        <div class="primary-rec-action">
+          <span>${i18nText('playground.cardOpenRecipe', {}, 'Відкрити рецепт →')}</span>
         </div>
       </div>
     `;
 
-    card.querySelector('.btn-card-action').addEventListener('click', () => {
-      openRecipeModal(rawRecipe);
+    card.addEventListener('click', () => openRecipeModal(primary.rawRecipe));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openRecipeModal(primary.rawRecipe);
+      }
     });
 
-    container.appendChild(card);
+    primaryContainer.appendChild(card);
+  }
+
+  // 3. Secondary recommendations (Index 1 and 2)
+  secondaryContainer.innerHTML = '';
+  const secondaryRecipes = evaluatedRecipes.slice(1, 3);
+  secondaryRecipes.forEach(item => {
+    let secStatusHtml = '';
+    if (item.canCook) {
+      secStatusHtml = `<span class="secondary-rec-status rec-status-ready">${i18nText('playground.cardReadyStatus', {}, '✓ Усі інгредієнти вибрано')}</span>`;
+    } else if (item.missingCount === 1) {
+      secStatusHtml = `<span class="secondary-rec-status rec-status-missing">${i18nText('playground.cardMissingSingle', { item: item.missingNames[0] }, `Бракує: ${item.missingNames[0]}`)}</span>`;
+    } else {
+      secStatusHtml = `<span class="secondary-rec-status rec-status-missing">${i18nText('playground.cardMissingMultiple', { n: item.missingCount }, `Потрібно ще ${item.missingCount} продукти`)}</span>`;
+    }
+
+    const row = document.createElement('div');
+    row.className = 'secondary-rec-card';
+    row.setAttribute('role', 'button');
+    row.setAttribute('tabindex', '0');
+    row.setAttribute('data-recipe-id', item.rawRecipe.id);
+    row.innerHTML = `
+      <img src="${item.recipe.image}" alt="${item.recipe.title}" class="secondary-rec-img" loading="lazy">
+      <div class="secondary-rec-info">
+        <h5 class="secondary-rec-title">${item.recipe.title}</h5>
+        <div class="secondary-rec-meta-row">
+          <span class="secondary-rec-meta">⏱ ${item.recipe.prepTime}</span>
+          ${secStatusHtml}
+        </div>
+      </div>
+      <span class="secondary-rec-arrow" aria-hidden="true">→</span>
+    `;
+
+    row.addEventListener('click', () => openRecipeModal(item.rawRecipe));
+    row.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openRecipeModal(item.rawRecipe);
+      }
+    });
+
+    secondaryContainer.appendChild(row);
   });
+
+  // 4. Remaining recipes (Index 3+)
+  moreContainer.innerHTML = '';
+  const remainingRecipes = evaluatedRecipes.slice(3);
+  if (remainingRecipes.length > 0) {
+    remainingRecipes.forEach(item => {
+      let remStatusHtml = '';
+      if (item.canCook) {
+        remStatusHtml = `<span class="secondary-rec-status rec-status-ready">${i18nText('playground.cardReadyStatus', {}, '✓ Усі інгредієнти вибрано')}</span>`;
+      } else if (item.missingCount === 1) {
+        remStatusHtml = `<span class="secondary-rec-status rec-status-missing">${i18nText('playground.cardMissingSingle', { item: item.missingNames[0] }, `Бракує: ${item.missingNames[0]}`)}</span>`;
+      } else {
+        remStatusHtml = `<span class="secondary-rec-status rec-status-missing">${i18nText('playground.cardMissingMultiple', { n: item.missingCount }, `Потрібно ще ${item.missingCount} продукти`)}</span>`;
+      }
+
+      const row = document.createElement('div');
+      row.className = 'secondary-rec-card';
+      row.setAttribute('role', 'button');
+      row.setAttribute('tabindex', '0');
+      row.setAttribute('data-recipe-id', item.rawRecipe.id);
+      row.innerHTML = `
+        <img src="${item.recipe.image}" alt="${item.recipe.title}" class="secondary-rec-img" loading="lazy">
+        <div class="secondary-rec-info">
+          <h5 class="secondary-rec-title">${item.recipe.title}</h5>
+          <div class="secondary-rec-meta-row">
+            <span class="secondary-rec-meta">⏱ ${item.recipe.prepTime}</span>
+            ${remStatusHtml}
+          </div>
+        </div>
+        <span class="secondary-rec-arrow" aria-hidden="true">→</span>
+      `;
+
+      row.addEventListener('click', () => openRecipeModal(item.rawRecipe));
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openRecipeModal(item.rawRecipe);
+        }
+      });
+
+      moreContainer.appendChild(row);
+    });
+
+    if (toggleMoreBtn) {
+      toggleMoreBtn.hidden = false;
+      toggleMoreBtn.setAttribute('aria-expanded', isMoreRecipesExpanded ? 'true' : 'false');
+      moreContainer.hidden = !isMoreRecipesExpanded;
+      if (toggleMoreText) {
+        toggleMoreText.textContent = isMoreRecipesExpanded
+          ? i18nText('playground.showLess', {}, 'Згорнути')
+          : i18nText('playground.showMoreRecipes', { n: remainingRecipes.length }, `Показати ще ${remainingRecipes.length}`);
+      }
+    }
+  } else if (toggleMoreBtn) {
+    toggleMoreBtn.hidden = true;
+    moreContainer.hidden = true;
+  }
 }
 
 function setupPresets() {
@@ -981,7 +1141,8 @@ function setupPresets() {
   const resetBtn = document.getElementById('resetIngredients');
 
   presetButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       const preset = btn.getAttribute('data-preset');
       if (preset === 'breakfast') {
         selectedIngredients = new Set(['egg', 'tomato', 'milk', 'sunflower_oil', 'salt']);
@@ -996,28 +1157,13 @@ function setupPresets() {
   });
 
   if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
+    resetBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       selectedIngredients.clear();
       renderChips();
       renderResults();
     });
   }
-}
-
-function setupPortionsToggle() {
-  const portionButtons = document.querySelectorAll('.portion-btn');
-  portionButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      portionButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentPortions = parseInt(btn.getAttribute('data-portions'), 10) || 2;
-      // If modal is open, re-render with new portion size
-      const modal = document.getElementById('recipeModal');
-      if (modal && modal.classList.contains('open') && activeModalRecipe) {
-        openRecipeModal(activeModalRecipe);
-      }
-    });
-  });
 }
 
 /* ==========================================================================
@@ -1100,8 +1246,12 @@ function openRecipeModal(rawRecipe) {
     </p>
 
     <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--color-hairline); border-radius: 16px; padding: 18px; margin-bottom: 24px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
         <strong style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 500; color: var(--color-bone);">${portionsHeading}</strong>
+        <div class="modal-portions-toggle">
+          <button type="button" class="modal-portion-btn ${currentPortions === 2 ? 'active' : ''}" data-modal-portions="2">2 ${i18nText('playground.portion2', {}, '2 порції').split(' ')[1] || 'порції'}</button>
+          <button type="button" class="modal-portion-btn ${currentPortions === 4 ? 'active' : ''}" data-modal-portions="4">4 ${i18nText('playground.portion4', {}, '4 порції').split(' ')[1] || 'порції'}</button>
+        </div>
       </div>
       <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem; color: var(--color-ash);">
         ${ingredientsList}
@@ -1119,6 +1269,15 @@ function openRecipeModal(rawRecipe) {
       </a>
     </div>
   `;
+
+  // Wire portions buttons inside modal
+  modalBody.querySelectorAll('.modal-portion-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentPortions = parseInt(btn.getAttribute('data-modal-portions'), 10) || 2;
+      openRecipeModal(rawRecipe);
+    });
+  });
 
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
