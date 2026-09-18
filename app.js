@@ -876,6 +876,7 @@ function renderResults() {
   const countEl = document.getElementById('selectedCount');
   const summaryEl = document.getElementById('resultsSummary');
   if (!container) return;
+  container.innerHTML = '';
 
   const lang = getLang();
   if (countEl) {
@@ -971,7 +972,7 @@ function renderResults() {
       openRecipeModal(rawRecipe);
     });
 
-    grid.appendChild(card);
+    container.appendChild(card);
   });
 }
 
