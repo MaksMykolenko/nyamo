@@ -118,15 +118,18 @@
     <div class="hero-pinned-wrapper" id="heroPinnedWrapper">
       <!-- Hero Section (Sticky during transition) -->
       <section class="hero-section" id="hero">
-        <!-- Local Background Stage Layers (Dark Base + Cream Transition Layer) -->
+        <!-- Local Background Stage Canvas (Continuously scrolling from dark to cream) -->
         <div class="hero-stage-bg" aria-hidden="true">
-          <div class="hero-bg-dark">
-            <div class="scene-glow-layer hero-glow-layer">
-              <div class="glow-orb glow-orb--warm"></div>
-              <div class="glow-orb glow-orb--cool"></div>
+          <div class="hero-scroll-canvas" id="heroScrollCanvas">
+            <div class="canvas-segment canvas-segment--dark" id="heroBgDark">
+              <div class="scene-glow-layer hero-glow-layer">
+                <div class="glow-orb glow-orb--warm"></div>
+                <div class="glow-orb glow-orb--cool"></div>
+              </div>
             </div>
+            <div class="canvas-segment canvas-segment--transition"></div>
+            <div class="canvas-segment canvas-segment--cream" id="heroBgCream"></div>
           </div>
-          <div class="hero-bg-cream" id="heroBgCream"></div>
         </div>
 
         <div class="container hero-grid">

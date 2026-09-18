@@ -1086,7 +1086,7 @@ div[id].section,
   }
 }
 
-/* Local Background Canvas Layers inside #hero */
+/* Local Background Canvas Layers inside #hero (Continuous vertical scrolling canvas) */
 .hero-stage-bg {
   position: absolute;
   inset: 0;
@@ -1097,20 +1097,58 @@ div[id].section,
   z-index: 1;
 }
 
-.hero-bg-dark {
+.hero-scroll-canvas {
   position: absolute;
-  inset: 0;
-  background-color: #0a0a0a;
-  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transform: translate3d(0, var(--hero-bg-scroll-y, 0px), 0);
+  will-change: transform;
+  pointer-events: none;
 }
 
-.hero-bg-cream {
-  position: absolute;
-  inset: 0;
+.canvas-segment--dark {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  flex-shrink: 0;
+  background-color: #0a0a0a;
+}
+
+.canvas-segment--transition {
+  width: 100%;
+  height: 50vh;
+  height: 50dvh;
+  flex-shrink: 0;
+  background: linear-gradient(
+    to bottom,
+    #0a0a0a 0%,
+    #0d0c0b 10%,
+    #171513 22%,
+    #2d2723 36%,
+    #564d45 50%,
+    #8f8275 64%,
+    #c7beb4 78%,
+    #ebe4dc 90%,
+    #F6F2EC 100%
+  );
+}
+
+.canvas-segment--cream {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  flex-shrink: 0;
   background-color: #F6F2EC;
-  z-index: 2;
-  opacity: var(--hero-cream-opacity, 0);
-  will-change: opacity;
+}
+
+.hero-glow-layer {
+  transition: opacity 0.3s ease;
+  opacity: calc(1 - var(--hero-theme-progress, 0));
 }
 
 /* Pause floating animation in Hero during pinning experiment so content is 100% stationary */
@@ -4172,6 +4210,12 @@ main,
     height: 100vh !important;
   }
 
+  .hero-scroll-canvas {
+    transform: none !important;
+  }
+
+  .canvas-segment--transition,
+  .canvas-segment--cream,
   .hero-bg-cream {
     display: none !important;
   }

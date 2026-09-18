@@ -1783,6 +1783,8 @@ function initHeroPinnedTransition() {
 
   if (!wrapper || !heroSec || !creamBg) return;
 
+  const canvas = document.getElementById('heroScrollCanvas');
+
   function checkEligible() {
     const winW = window.innerWidth;
     const winH = window.innerHeight;
@@ -1800,7 +1802,8 @@ function initHeroPinnedTransition() {
     if (!isEligible) {
       heroSec.classList.remove('theme-light');
       heroSec.style.removeProperty('--hero-theme-progress');
-      heroSec.style.removeProperty('--hero-cream-opacity');
+      heroSec.style.removeProperty('--hero-bg-scroll-y');
+      if (canvas) canvas.style.transform = '';
       ticking = false;
       return;
     }
@@ -1819,12 +1822,19 @@ function initHeroPinnedTransition() {
     const rawProgress = scrolled / travelDistance;
     const progress = Math.max(0, Math.min(1, rawProgress));
 
-    // High-contrast text/button flip at 38% cream opacity for crisp readability at midpoint
-    heroSec.classList.toggle('theme-light', progress >= 0.38);
+    // Calculate vertical travel for the continuous background canvas (dark 100vh + transition 50vh = 150vh)
+    const canvasTravelDistance = 1.5 * winH;
+    const bgShift = progress * canvasTravelDistance;
 
-    // Set CSS variables on hero element
+    // High-contrast text/button flip when cream transition passes midpoint (42%)
+    heroSec.classList.toggle('theme-light', progress >= 0.42);
+
+    // Apply hardware-accelerated translation to background canvas
     heroSec.style.setProperty('--hero-theme-progress', progress.toFixed(3));
-    heroSec.style.setProperty('--hero-cream-opacity', progress.toFixed(3));
+    heroSec.style.setProperty('--hero-bg-scroll-y', `${(-bgShift).toFixed(1)}px`);
+    if (canvas) {
+      canvas.style.transform = `translate3d(0, ${(-bgShift).toFixed(1)}px, 0)`;
+    }
 
     ticking = false;
   }
