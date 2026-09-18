@@ -706,8 +706,8 @@ div[id].section,
    ========================================================================== */
 #hero.hero-section,
 .hero-section {
-  min-height: calc(100vh - 80px);
-  min-height: calc(100dvh - 80px);
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -716,18 +716,14 @@ div[id].section,
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
-  background:
-    radial-gradient(ellipse 65% 55% at 20% 0%, rgba(238, 110, 74, 0.18) 0%, rgba(30, 26, 23, 0) 65%),
-    radial-gradient(ellipse 60% 45% at 85% 35%, rgba(37, 99, 235, 0.14) 0%, rgba(10, 10, 10, 0) 65%),
-    linear-gradient(135deg, rgba(238, 110, 74, 0.08) 0%, rgba(10, 10, 10, 0) 45%, rgba(37, 99, 235, 0.08) 100%),
-    var(--color-void-canvas);
+  background-color: var(--color-void-canvas);
 }
 
 @media (min-width: 1025px) {
   #hero.hero-section,
   .hero-section {
-    height: calc(100vh - 80px);
-    height: calc(100dvh - 80px);
+    height: 100vh;
+    height: 100dvh;
   }
 }
 
@@ -736,6 +732,8 @@ div[id].section,
   grid-template-columns: 1.1fr 0.9fr;
   gap: 32px;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 /* Hero Title: Editorial & Premium Onest Headline */
@@ -1062,37 +1060,124 @@ div[id].section,
 }
 
 /* ==========================================================================
-   ATMOSPHERIC TRANSITION BLEED: Hero -> Warm Cream (#F6F2EC)
-   Controlled 100px bridge with subtle warm orange glow
+   SCENE ATMOSPHERIC GLOW LAYERS & PARALLAX
+   Dedicated GPU-composited decorative layers with zero layout footprint
    ========================================================================== */
-.hero-transition-bleed {
-  height: 80px;
-  width: 100%;
-  position: relative;
-  background: linear-gradient(180deg, 
-    #0a0a0a 0%, 
-    #14100e 20%, 
-    #241711 40%, 
-    #4a2e1d 60%, 
-    #8c6b54 78%, 
-    #d8cac0 90%, 
-    #F6F2EC 98%, 
-    #F6F2EC 100%
-  );
-  margin-top: -1px;
+.scene-glow-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+  will-change: transform;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.88;
+  filter: blur(50px);
+}
+
+/* Hero Glow */
+.hero-glow-layer .glow-orb--warm {
+  top: -10%;
+  left: 15%;
+  width: min(850px, 70vw);
+  height: min(650px, 60vh);
+  background: radial-gradient(ellipse 65% 55% at 45% 45%, rgba(238, 110, 74, 0.16) 0%, rgba(238, 110, 74, 0.03) 50%, transparent 70%);
+}
+
+.hero-glow-layer .glow-orb--cool {
+  top: 20%;
+  right: -5%;
+  width: min(750px, 60vw);
+  height: min(580px, 50vh);
+  background: radial-gradient(ellipse 60% 50% at 55% 50%, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.015) 45%, transparent 70%);
+  filter: blur(60px);
+}
+
+/* Camera Scan Glow */
+.camera-glow-layer .glow-orb--warm {
+  top: 15%;
+  left: -8%;
+  width: min(680px, 60vw);
+  height: min(680px, 60vh);
+  background: radial-gradient(circle at 45% 45%, rgba(238, 110, 74, 0.12) 0%, rgba(238, 110, 74, 0.02) 55%, transparent 75%);
+}
+
+.camera-glow-layer .glow-orb--cool {
+  bottom: 10%;
+  right: -5%;
+  width: min(640px, 55vw);
+  height: min(640px, 55vh);
+  background: radial-gradient(circle at 55% 55%, rgba(22, 36, 56, 0.28) 0%, rgba(16, 24, 38, 0.05) 55%, transparent 75%);
+  filter: blur(55px);
+}
+
+/* Features Glow */
+.features-glow-layer .glow-orb--warm {
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, 80vw);
+  height: min(500px, 50vh);
+  background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(238, 110, 74, 0.08) 0%, rgba(238, 110, 74, 0.01) 50%, transparent 75%);
+}
+
+/* ==========================================================================
+   ATMOSPHERIC TRANSITION APRONS
+   Soft dissolves in natural inter-section negative space (no brown bands)
+   ========================================================================== */
+.scene-transition-apron {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 1;
   overflow: hidden;
 }
 
-.hero-transition-bleed::before {
+/* Dark -> Light transition (Hero -> Demo, Camera -> Cooking) */
+.apron--to-light {
+  height: clamp(110px, 15vh, 170px);
+  background: linear-gradient(180deg, 
+    #0a0a0a 0%, 
+    rgba(10, 10, 10, 0.65) 28%, 
+    rgba(10, 10, 10, 0.22) 58%, 
+    rgba(10, 10, 10, 0.04) 82%, 
+    transparent 100%
+  );
+  opacity: var(--apron-opacity, 1);
+  will-change: opacity;
+}
+
+.apron--to-light::after {
   content: '';
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: min(100%, 1100px);
+  width: min(100%, 1200px);
   height: 100%;
-  background: radial-gradient(ellipse 65% 70% at 50% 30%, rgba(238, 110, 74, 0.15) 0%, rgba(238, 110, 74, 0.03) 55%, transparent 80%);
+  background: radial-gradient(ellipse 65% 70% at 35% 0%, rgba(238, 110, 74, 0.08) 0%, transparent 65%);
   pointer-events: none;
+}
+
+/* Light -> Dark transition (Demo -> Camera, Discovery -> Features) */
+.apron--to-dark {
+  height: clamp(110px, 15vh, 170px);
+  background: linear-gradient(180deg, 
+    #F6F2EC 0%, 
+    rgba(246, 242, 236, 0.70) 28%, 
+    rgba(246, 242, 236, 0.25) 58%, 
+    rgba(246, 242, 236, 0.04) 82%, 
+    transparent 100%
+  );
+  opacity: var(--apron-opacity, 1);
+  will-change: opacity;
 }
 
 /* ==========================================================================
@@ -1718,21 +1803,7 @@ div[id].section,
   font-weight: 600;
 }
 
-/* Atmospheric Transition: Warm Cream (#F6F2EC) -> Dark Bento Features */
-.playground-transition-bottom {
-  height: 96px;
-  width: 100%;
-  position: relative;
-  background: linear-gradient(180deg, 
-    #F6F2EC 0%, 
-    #b49a85 12%, 
-    #5f3b26 26%, 
-    #2a1b14 48%, 
-    #171210 76%, 
-    #0a0a0a 100%
-  );
-  margin-bottom: -1px;
-}
+
 
 /* ==========================================================================
    SCROLL REVEAL MOTION
@@ -1782,33 +1853,7 @@ div[id].section,
   color: var(--color-bone);
 }
 
-.camera-section::before {
-  content: '';
-  position: absolute;
-  top: 18%;
-  left: -10%;
-  width: 650px;
-  height: 650px;
-  background: radial-gradient(circle, rgba(238, 110, 74, 0.12) 0%, rgba(238, 110, 74, 0.02) 55%, transparent 75%);
-  pointer-events: none;
-  border-radius: 50%;
-  filter: blur(40px);
-  z-index: 1;
-}
 
-.camera-section::after {
-  content: '';
-  position: absolute;
-  bottom: 12%;
-  right: -6%;
-  width: 620px;
-  height: 620px;
-  background: radial-gradient(circle, rgba(22, 36, 56, 0.32) 0%, rgba(16, 24, 38, 0.06) 55%, transparent 75%);
-  pointer-events: none;
-  border-radius: 50%;
-  filter: blur(50px);
-  z-index: 1;
-}
 
 .camera-section .container {
   position: relative;
@@ -2347,37 +2392,7 @@ div[id].section,
   transform: translateX(3px);
 }
 
-/* ==========================================================================
-   ATMOSPHERIC TRANSITION: Dark Camera Canvas -> Warm Cream Guided Cooking Canvas
-   Controlled 96px bridge with warm amber glow
-   ========================================================================== */
-.camera-transition-bottom {
-  height: 96px;
-  width: 100%;
-  position: relative;
-  background: linear-gradient(180deg, 
-    #0a0a0a 0%, 
-    #171210 18%, 
-    #2a1b14 42%, 
-    #5f3b26 68%, 
-    #b49a85 86%, 
-    #F6F2EC 100%
-  );
-  margin-top: -1px;
-  overflow: hidden;
-}
 
-.camera-transition-bottom::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(100%, 1100px);
-  height: 100%;
-  background: radial-gradient(ellipse 65% 70% at 50% 30%, rgba(238, 110, 74, 0.12) 0%, rgba(238, 110, 74, 0.02) 55%, transparent 80%);
-  pointer-events: none;
-}
 
 /* ==========================================================================
    GUIDED COOKING SECTION (Warm Cream Canvas)
@@ -3061,24 +3076,7 @@ div[id].section,
   display: none;
 }
 
-/* ==========================================================================
-   ATMOSPHERIC TRANSITION: Warm Cream Recipe Discovery Canvas -> Dark Features Canvas
-   Controlled 96px bridge returning to dark canvas
-   ========================================================================== */
-.discovery-transition-bottom {
-  height: 96px;
-  width: 100%;
-  position: relative;
-  background: linear-gradient(180deg, 
-    #F6F2EC 0%, 
-    #b49a85 14%, 
-    #5f3b26 32%, 
-    #2a1b14 56%, 
-    #171210 80%, 
-    #0a0a0a 100%
-  );
-  margin-bottom: -1px;
-}
+
 
 /* ==========================================================================
    FEATURES SECTION — 3 CALM EDITORIAL BENEFITS
@@ -3715,13 +3713,7 @@ div[id].section,
     grid-template-columns: 1fr;
   }
 
-  .hero-transition-bleed {
-    height: 72px;
-  }
 
-  .playground-transition-bottom {
-    height: 72px;
-  }
 
   .playground-section {
     padding: 80px 0 64px;
@@ -3898,9 +3890,6 @@ div[id].section,
     margin: 0;
   }
 
-  .discovery-transition-bottom {
-    height: 72px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -4028,11 +4017,18 @@ div[id].section,
   .discovery-card,
   .discovery-img,
   .discovery-card-title,
-  .discovery-arrow-icon {
+  .discovery-arrow-icon,
+  .scene-glow-layer,
+  .glow-orb {
     animation: none !important;
     transition-duration: 0.01ms !important;
     transform: none !important;
     opacity: 1 !important;
+  }
+
+  .scene-transition-apron {
+    opacity: 1 !important;
+    will-change: auto !important;
   }
 
   .camera-scan-line {

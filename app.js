@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCameraScan();
   initGuidedCooking();
   initFoodDiscovery();
+  initSceneAtmosphere();
 });
 
 /* ==========================================================================
@@ -1664,5 +1665,119 @@ function initFoodDiscovery() {
       });
     }
     window.addEventListener('scroll', onDiscoveryParallax, { passive: true });
+  }
+}
+
+/* ==========================================================================
+   SCENE ATMOSPHERE: DELICATE PARALLAX & CONTINUOUS THEME TRANSITIONS
+   - GPU-composited transform: translate3d for ambient glow layers (40-50px desktop)
+   - Smooth normalized scroll progress (0..1) tied to real viewport boundaries
+   - Zero layout thrashing, respects prefers-reduced-motion, dynamic resize observer
+   ========================================================================== */
+function initSceneAtmosphere() {
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const heroSec = document.getElementById('hero');
+  const cameraSec = document.getElementById('camera-scan');
+  const featuresSec = document.getElementById('features');
+
+  const heroGlowWarm = heroSec ? heroSec.querySelector('.hero-glow-layer .glow-orb--warm') : null;
+  const heroGlowCool = heroSec ? heroSec.querySelector('.hero-glow-layer .glow-orb--cool') : null;
+
+  const cameraGlowWarm = cameraSec ? cameraSec.querySelector('.camera-glow-layer .glow-orb--warm') : null;
+  const cameraGlowCool = cameraSec ? cameraSec.querySelector('.camera-glow-layer .glow-orb--cool') : null;
+
+  const featuresGlowWarm = featuresSec ? featuresSec.querySelector('.features-glow-layer .glow-orb--warm') : null;
+
+  // Transition aprons
+  const aprons = Array.from(document.querySelectorAll('.scene-transition-apron'));
+
+  let ticking = false;
+  let isMobile = window.innerWidth <= 768;
+
+  function updateAtmosphere() {
+    const winH = window.innerHeight;
+    const maxShift = isMobile ? 16 : 48;
+    const secShift = isMobile ? 8 : 22;
+
+    // 1. Hero Parallax
+    if (heroSec && (heroGlowWarm || heroGlowCool)) {
+      const hRect = heroSec.getBoundingClientRect();
+      if (hRect.bottom > 0 && hRect.top < winH) {
+        const t = Math.max(0, Math.min(1, (winH - hRect.top) / (winH + hRect.height)));
+        const warmY = (t - 0.5) * maxShift;
+        const coolY = (t - 0.5) * secShift;
+        if (heroGlowWarm) heroGlowWarm.style.transform = `translate3d(0, ${warmY.toFixed(1)}px, 0)`;
+        if (heroGlowCool) heroGlowCool.style.transform = `translate3d(0, ${coolY.toFixed(1)}px, 0)`;
+      }
+    }
+
+    // 2. Camera Scan Parallax
+    if (cameraSec && (cameraGlowWarm || cameraGlowCool)) {
+      const cRect = cameraSec.getBoundingClientRect();
+      if (cRect.bottom > 0 && cRect.top < winH) {
+        const t = Math.max(0, Math.min(1, (winH - cRect.top) / (winH + cRect.height)));
+        const warmY = (t - 0.5) * maxShift;
+        const coolY = (t - 0.5) * secShift;
+        if (cameraGlowWarm) cameraGlowWarm.style.transform = `translate3d(0, ${warmY.toFixed(1)}px, 0)`;
+        if (cameraGlowCool) cameraGlowCool.style.transform = `translate3d(0, ${coolY.toFixed(1)}px, 0)`;
+      }
+    }
+
+    // 3. Features Parallax
+    if (featuresSec && featuresGlowWarm) {
+      const fRect = featuresSec.getBoundingClientRect();
+      if (fRect.bottom > 0 && fRect.top < winH) {
+        const t = Math.max(0, Math.min(1, (winH - fRect.top) / (winH + fRect.height)));
+        const warmY = (t - 0.5) * (maxShift * 0.75);
+        featuresGlowWarm.style.transform = `translate3d(-50%, ${warmY.toFixed(1)}px, 0)`;
+      }
+    }
+
+    // 4. Subtle Apron Opacity Modulation across the viewport transition zone
+    aprons.forEach(apron => {
+      const parentSec = apron.parentElement;
+      if (!parentSec) return;
+      const pRect = parentSec.getBoundingClientRect();
+      if (pRect.top <= winH && pRect.top >= winH * 0.2) {
+        const progress = Math.max(0, Math.min(1, (winH - pRect.top) / (winH * 0.8)));
+        const opacity = 0.85 + 0.15 * progress;
+        apron.style.opacity = opacity.toFixed(2);
+      } else if (pRect.top < winH * 0.2) {
+        apron.style.opacity = '1';
+      }
+    });
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(updateAtmosphere);
+    }
+  }
+
+  function onResize() {
+    isMobile = window.innerWidth <= 768;
+    onScroll();
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onResize, { passive: true });
+
+  // Initial calculation on load
+  updateAtmosphere();
+
+  // ResizeObserver for dynamic height mutations (chip selection, recipe expands, FAQ toggles, i18n change)
+  if (typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(() => {
+      onScroll();
+    });
+    const demoCard = document.querySelector('.playground-card');
+    const faqList = document.getElementById('faqAccordion');
+    if (demoCard) ro.observe(demoCard);
+    if (faqList) ro.observe(faqList);
   }
 }

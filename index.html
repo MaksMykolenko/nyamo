@@ -116,6 +116,12 @@
   <main>
     <!-- Hero Section -->
     <section class="hero-section" id="hero">
+      <!-- Atmospheric Background Glow Layer (Parallax target) -->
+      <div class="scene-glow-layer hero-glow-layer" aria-hidden="true">
+        <div class="glow-orb glow-orb--warm"></div>
+        <div class="glow-orb glow-orb--cool"></div>
+      </div>
+
       <div class="container hero-grid">
         <div class="hero-content">
           <h1 class="hero-title" data-i18n="hero.title">
@@ -208,11 +214,11 @@
       </div>
     </section>
 
-    <!-- Smooth Transition Bleed into Warm Cream Canvas -->
-    <div class="hero-transition-bleed" aria-hidden="true"></div>
-
     <!-- Interactive Ingredient Playground Section (Warm Cream Canvas) -->
     <section class="section playground-section" id="interactive-demo">
+      <!-- Atmospheric Transition Apron (Dark Hero -> Warm Cream Canvas) -->
+      <div class="scene-transition-apron apron--to-light" aria-hidden="true"></div>
+
       <div class="container">
         <div class="section-header text-center">
           <h2 class="section-title reveal-item" data-i18n="playground.title">
@@ -322,11 +328,17 @@
       </div>
     </section>
 
-    <!-- Smooth Transition Bleed back to Dark Canvas -->
-    <div class="playground-transition-bottom" aria-hidden="true"></div>
-
     <!-- Camera Scanning Section (Dark Cinematic Canvas) -->
     <section class="section camera-section" id="camera-scan">
+      <!-- Atmospheric Transition Apron (Warm Cream -> Dark Cinematic Canvas) -->
+      <div class="scene-transition-apron apron--to-dark" aria-hidden="true"></div>
+
+      <!-- Atmospheric Background Glow Layer (Parallax target) -->
+      <div class="scene-glow-layer camera-glow-layer" aria-hidden="true">
+        <div class="glow-orb glow-orb--warm"></div>
+        <div class="glow-orb glow-orb--cool"></div>
+      </div>
+
       <div class="container">
         <!-- Section Header -->
         <div class="section-header text-center">
@@ -525,11 +537,11 @@
       </div>
     </section>
 
-    <!-- Atmospheric Transition: Dark Camera Canvas -> Warm Cream Guided Cooking Canvas -->
-    <div class="camera-transition-bottom" aria-hidden="true"></div>
-
     <!-- Guided Cooking Section (Warm Cream Canvas) -->
     <section class="section cooking-section" id="cooking-mode">
+      <!-- Atmospheric Transition Apron (Dark Camera -> Warm Cream Canvas) -->
+      <div class="scene-transition-apron apron--to-light" aria-hidden="true"></div>
+
       <div class="container">
         <div class="cooking-editorial-grid">
           <!-- LEFT: Editorial Storytelling Content (45%) -->
@@ -815,11 +827,16 @@
       </div>
     </section>
 
-    <!-- Atmospheric Transition: Warm Cream Recipe Discovery Canvas -> Dark Features Canvas -->
-    <div class="discovery-transition-bottom" aria-hidden="true"></div>
-
-    <!-- Features Benefits Section -->
+    <!-- Features Benefits Section (Dark Canvas) -->
     <section class="section features-section" id="features">
+      <!-- Atmospheric Transition Apron (Warm Cream -> Dark Features Canvas) -->
+      <div class="scene-transition-apron apron--to-dark" aria-hidden="true"></div>
+
+      <!-- Atmospheric Background Glow Layer (Parallax target) -->
+      <div class="scene-glow-layer features-glow-layer" aria-hidden="true">
+        <div class="glow-orb glow-orb--warm"></div>
+      </div>
+
       <div class="container">
         <div class="section-header text-center">
           <span class="section-badge" data-i18n="features.badge">💡 Чому Nyamo</span>
