@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCameraScan();
   initGuidedCooking();
   initFoodDiscovery();
+  initHeroDemoBackgroundReveal();
   initSceneAtmosphere();
 });
 
@@ -1678,19 +1679,15 @@ function initSceneAtmosphere() {
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
-  const heroSec = document.getElementById('hero');
   const cameraSec = document.getElementById('camera-scan');
   const featuresSec = document.getElementById('features');
-
-  const heroGlowWarm = heroSec ? heroSec.querySelector('.hero-glow-layer .glow-orb--warm') : null;
-  const heroGlowCool = heroSec ? heroSec.querySelector('.hero-glow-layer .glow-orb--cool') : null;
 
   const cameraGlowWarm = cameraSec ? cameraSec.querySelector('.camera-glow-layer .glow-orb--warm') : null;
   const cameraGlowCool = cameraSec ? cameraSec.querySelector('.camera-glow-layer .glow-orb--cool') : null;
 
   const featuresGlowWarm = featuresSec ? featuresSec.querySelector('.features-glow-layer .glow-orb--warm') : null;
 
-  // Transition aprons
+  // Transition aprons (camera & features)
   const aprons = Array.from(document.querySelectorAll('.scene-transition-apron'));
 
   let ticking = false;
@@ -1701,19 +1698,7 @@ function initSceneAtmosphere() {
     const maxShift = isMobile ? 16 : 48;
     const secShift = isMobile ? 8 : 22;
 
-    // 1. Hero Parallax
-    if (heroSec && (heroGlowWarm || heroGlowCool)) {
-      const hRect = heroSec.getBoundingClientRect();
-      if (hRect.bottom > 0 && hRect.top < winH) {
-        const t = Math.max(0, Math.min(1, (winH - hRect.top) / (winH + hRect.height)));
-        const warmY = (t - 0.5) * maxShift;
-        const coolY = (t - 0.5) * secShift;
-        if (heroGlowWarm) heroGlowWarm.style.transform = `translate3d(0, ${warmY.toFixed(1)}px, 0)`;
-        if (heroGlowCool) heroGlowCool.style.transform = `translate3d(0, ${coolY.toFixed(1)}px, 0)`;
-      }
-    }
-
-    // 2. Camera Scan Parallax
+    // 1. Camera Scan Parallax
     if (cameraSec && (cameraGlowWarm || cameraGlowCool)) {
       const cRect = cameraSec.getBoundingClientRect();
       if (cRect.bottom > 0 && cRect.top < winH) {
@@ -1725,7 +1710,7 @@ function initSceneAtmosphere() {
       }
     }
 
-    // 3. Features Parallax
+    // 2. Features Parallax
     if (featuresSec && featuresGlowWarm) {
       const fRect = featuresSec.getBoundingClientRect();
       if (fRect.bottom > 0 && fRect.top < winH) {
@@ -1735,7 +1720,7 @@ function initSceneAtmosphere() {
       }
     }
 
-    // 4. Subtle Apron Opacity Modulation across the viewport transition zone
+    // 3. Subtle Apron Opacity Modulation across the viewport transition zone
     aprons.forEach(apron => {
       const parentSec = apron.parentElement;
       if (!parentSec) return;
@@ -1770,14 +1755,90 @@ function initSceneAtmosphere() {
   // Initial calculation on load
   updateAtmosphere();
 
-  // ResizeObserver for dynamic height mutations (chip selection, recipe expands, FAQ toggles, i18n change)
+  // ResizeObserver for dynamic height mutations
   if (typeof ResizeObserver !== 'undefined') {
     const ro = new ResizeObserver(() => {
       onScroll();
     });
-    const demoCard = document.querySelector('.playground-card');
     const faqList = document.getElementById('faqAccordion');
-    if (demoCard) ro.observe(demoCard);
     if (faqList) ro.observe(faqList);
+  }
+}
+
+/* ==========================================================================
+   BACKGROUND-ONLY SCROLL REVEAL: HERO -> INTERACTIVE DEMO
+   - Dedicated viewport-fixed stage backdrop decoupled from normal content scrolling
+   - Dark base plane with static ambient glow
+   - Cream plane (#F6F2EC) reveals from below based on live section geometry
+   - 0: dark background; 0.5: bottom half cream; 1: 100% stable cream
+   - Zero scroll-jacking, zero content pinning, no-JS / reduced-motion safe
+   ========================================================================== */
+function initHeroDemoBackgroundReveal() {
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const stageBackdrop = document.getElementById('heroDemoStage');
+  const creamPlane = document.getElementById('stageCreamPlane');
+  const heroSec = document.getElementById('hero');
+  const demoSec = document.getElementById('interactive-demo');
+
+  if (!stageBackdrop || !creamPlane || !heroSec || !demoSec) return;
+
+  // Activate dynamic stage mode (switches hero & demo section backgrounds to transparent)
+  document.documentElement.classList.add('js-stage-active');
+
+  let ticking = false;
+
+  function updateStageReveal() {
+    const winH = window.innerHeight;
+    const demoRect = demoSec.getBoundingClientRect();
+
+    // If completely scrolled past demo section, hide fixed backdrop to save GPU & prevent bleed
+    if (demoRect.bottom <= 0) {
+      stageBackdrop.style.visibility = 'hidden';
+      ticking = false;
+      return;
+    }
+    stageBackdrop.style.visibility = 'visible';
+
+    // Transition progress:
+    // Starts when demo section top reaches bottom of viewport (winH)
+    // Finishes when demo header is established in upper viewport (winH * 0.12)
+    const startThreshold = winH;
+    const endThreshold = winH * 0.12;
+    const rawProgress = (startThreshold - demoRect.top) / (startThreshold - endThreshold);
+    const progress = Math.max(0, Math.min(1, rawProgress));
+
+    // Translation: from (winH + 40px) [hidden below] down to 0px [fully covering viewport]
+    // 40px accounts for the soft feather edge on top of the cream plane
+    const translateY = ((1 - progress) * (winH + 40)).toFixed(1);
+    creamPlane.style.transform = `translate3d(0, ${translateY}px, 0)`;
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(updateStageReveal);
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('hashchange', onScroll, { passive: true });
+
+  // Initial calculation immediately on load / anchor navigation
+  updateStageReveal();
+
+  // Watch dynamic size changes (language switch, recipes expand, etc.)
+  if (typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(() => {
+      onScroll();
+    });
+    ro.observe(heroSec);
+    ro.observe(demoSec);
+    const demoCard = document.querySelector('.playground-card');
+    if (demoCard) ro.observe(demoCard);
   }
 }

@@ -113,6 +113,15 @@
     </div>
   </header>
 
+  <!-- Dedicated Viewport-Fixed Background Stage Layer (Hero -> Demo Scroll Reveal) -->
+  <div class="fixed-stage-backdrop" id="heroDemoStage" aria-hidden="true">
+    <div class="stage-plane stage-plane--dark">
+      <div class="stage-glow-orb stage-glow-orb--warm"></div>
+      <div class="stage-glow-orb stage-glow-orb--cool"></div>
+    </div>
+    <div class="stage-plane stage-plane--cream" id="stageCreamPlane"></div>
+  </div>
+
   <main>
     <!-- Hero Section -->
     <section class="hero-section" id="hero">
@@ -216,9 +225,6 @@
 
     <!-- Interactive Ingredient Playground Section (Warm Cream Canvas) -->
     <section class="section playground-section" id="interactive-demo">
-      <!-- Atmospheric Transition Apron (Dark Hero -> Warm Cream Canvas) -->
-      <div class="scene-transition-apron apron--to-light" aria-hidden="true"></div>
-
       <div class="container">
         <div class="section-header text-center">
           <h2 class="section-title reveal-item" data-i18n="playground.title">
