@@ -113,25 +113,23 @@
     </div>
   </header>
 
-  <!-- Dedicated Viewport-Fixed Background Stage Layer (Hero -> Demo Scroll Reveal) -->
-  <div class="fixed-stage-backdrop" id="heroDemoStage" aria-hidden="true">
-    <div class="stage-plane stage-plane--dark">
-      <div class="stage-glow-orb stage-glow-orb--warm"></div>
-      <div class="stage-glow-orb stage-glow-orb--cool"></div>
-    </div>
-    <div class="stage-plane stage-plane--cream" id="stageCreamPlane"></div>
-  </div>
-
   <main>
-    <!-- Hero Section -->
-    <section class="hero-section" id="hero">
-      <!-- Atmospheric Background Glow Layer (Parallax target) -->
-      <div class="scene-glow-layer hero-glow-layer" aria-hidden="true">
-        <div class="glow-orb glow-orb--warm"></div>
-        <div class="glow-orb glow-orb--cool"></div>
-      </div>
+    <!-- Hero Pinned Wrapper (Controlled scroll distance for background transition) -->
+    <div class="hero-pinned-wrapper" id="heroPinnedWrapper">
+      <!-- Hero Section (Sticky during transition) -->
+      <section class="hero-section" id="hero">
+        <!-- Local Background Stage Layers (Dark Base + Cream Transition Layer) -->
+        <div class="hero-stage-bg" aria-hidden="true">
+          <div class="hero-bg-dark">
+            <div class="scene-glow-layer hero-glow-layer">
+              <div class="glow-orb glow-orb--warm"></div>
+              <div class="glow-orb glow-orb--cool"></div>
+            </div>
+          </div>
+          <div class="hero-bg-cream" id="heroBgCream"></div>
+        </div>
 
-      <div class="container hero-grid">
+        <div class="container hero-grid">
         <div class="hero-content">
           <h1 class="hero-title" data-i18n="hero.title">
             Є продукти, але не знаєш,<br>
@@ -222,6 +220,7 @@
         </div>
       </div>
     </section>
+  </div>
 
     <!-- Interactive Ingredient Playground Section (Warm Cream Canvas) -->
     <section class="section playground-section" id="interactive-demo">

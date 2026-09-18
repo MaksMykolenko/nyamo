@@ -1060,99 +1060,123 @@ div[id].section,
 }
 
 /* ==========================================================================
-   VIEWPORT-FIXED STAGE BACKDROP (HERO -> DEMO SCROLL REVEAL)
-   Separate background layer: dark base plane + independently rising cream plane
+   VARIANT 2: HERO PINNED WRAPPER & BACKGROUND COLOR REVEAL
+   Controlled scroll travel distance (~70vh) with stationary pinned hero content
    ========================================================================== */
-.fixed-stage-backdrop {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-  display: none;
+.hero-pinned-wrapper {
+  position: relative;
+  width: 100%;
 }
 
-.js-stage-active .fixed-stage-backdrop {
-  display: block;
+@media (min-width: 769px) {
+  .js-pinned-active .hero-pinned-wrapper {
+    /* 100vh visible scene + 70vh pinning travel distance */
+    height: calc(100vh + 70vh);
+    height: calc(100dvh + 70dvh);
+  }
+
+  .js-pinned-active #hero.hero-section {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+  }
 }
 
-.stage-plane {
+/* Local Background Canvas Layers inside #hero */
+.hero-stage-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.stage-plane--dark {
+.hero-bg-dark {
+  position: absolute;
+  inset: 0;
   background-color: #0a0a0a;
   z-index: 1;
 }
 
-.stage-glow-orb {
+.hero-bg-cream {
   position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.88;
-  filter: blur(55px);
-}
-
-.stage-glow-orb--warm {
-  top: -10%;
-  left: 15%;
-  width: min(850px, 70vw);
-  height: min(650px, 60vh);
-  background: radial-gradient(ellipse 65% 55% at 45% 45%, rgba(238, 110, 74, 0.16) 0%, rgba(238, 110, 74, 0.03) 50%, transparent 70%);
-}
-
-.stage-glow-orb--cool {
-  top: 20%;
-  right: -5%;
-  width: min(750px, 60vw);
-  height: min(580px, 50vh);
-  background: radial-gradient(ellipse 60% 50% at 55% 50%, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.015) 45%, transparent 70%);
-  filter: blur(60px);
-}
-
-.stage-plane--cream {
+  inset: 0;
   background-color: #F6F2EC;
   z-index: 2;
-  will-change: transform;
-  transform: translate3d(0, calc(100% + 40px), 0);
+  opacity: var(--hero-cream-opacity, 0);
+  will-change: opacity;
 }
 
-.stage-plane--cream::before {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  height: 40px;
-  background: linear-gradient(180deg, 
-    transparent 0%, 
-    rgba(246, 242, 236, 0.15) 25%, 
-    rgba(246, 242, 236, 0.55) 65%, 
-    rgba(246, 242, 236, 0.90) 90%, 
-    #F6F2EC 100%
-  );
-  pointer-events: none;
+/* Pause floating animation in Hero during pinning experiment so content is 100% stationary */
+.js-pinned-active .hero-food-plate,
+.js-pinned-active .floating-pill-compact,
+.js-pinned-active .floating-card-status {
+  animation: none !important;
 }
 
-/* When stage reveal is active: Hero and Demo become transparent to reveal the stage */
-.js-stage-active #hero.hero-section,
-.js-stage-active .hero-section {
-  background-color: transparent;
+/* ==========================================================================
+   DYNAMIC CONTRAST ADAPTATION DURING HERO BACKGROUND TRANSITION
+   High-contrast flip when P >= 0.45, preserving 100% legibility
+   ========================================================================== */
+.js-pinned-active #hero .hero-title,
+.js-pinned-active #hero .hero-title .text-highlight,
+.js-pinned-active #hero .hero-subtitle,
+.js-pinned-active #hero .hero-trust-row .trust-pill,
+.js-pinned-active #hero .hero-cta-group .btn-primary,
+.js-pinned-active #hero .hero-cta-group .btn-secondary {
+  transition: color 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.js-stage-active .hero-glow-layer {
-  display: none;
+.js-pinned-active #hero.theme-light .hero-title,
+.js-pinned-active #hero.theme-light .hero-title .text-highlight {
+  color: #1F1A17 !important;
 }
 
-.js-stage-active .playground-section {
-  background-color: transparent;
+.js-pinned-active #hero.theme-light .hero-subtitle {
+  color: #5F544B !important;
+}
+
+.js-pinned-active #hero.theme-light .hero-trust-row .trust-pill {
+  background-color: rgba(31, 26, 23, 0.06) !important;
+  border-color: rgba(31, 26, 23, 0.14) !important;
+  color: #1F1A17 !important;
+  box-shadow: 0 2px 8px rgba(45, 35, 25, 0.04) !important;
+}
+
+.js-pinned-active #hero.theme-light .hero-cta-group .btn-primary {
+  background-color: #1F1A17 !important;
+  color: #FFFFFF !important;
+  border-color: #1F1A17 !important;
+  box-shadow: 0 4px 16px rgba(31, 26, 23, 0.22) !important;
+}
+
+.js-pinned-active #hero.theme-light .hero-cta-group .btn-primary:hover {
+  background-color: #38302B !important;
+  border-color: #38302B !important;
+}
+
+.js-pinned-active #hero.theme-light .hero-cta-group .btn-secondary {
+  color: #1F1A17 !important;
+  border-color: rgba(31, 26, 23, 0.32) !important;
+  background-color: transparent !important;
+}
+
+.js-pinned-active #hero.theme-light .hero-cta-group .btn-secondary:hover {
+  background-color: rgba(31, 26, 23, 0.06) !important;
+  border-color: rgba(31, 26, 23, 0.50) !important;
+}
+
+.js-pinned-active #hero.theme-light .hero-glow-layer {
+  opacity: 0 !important;
 }
 
 main,
@@ -4139,17 +4163,17 @@ main,
     will-change: auto !important;
   }
 
-  .fixed-stage-backdrop {
+  .hero-pinned-wrapper {
+    height: auto !important;
+  }
+
+  .js-pinned-active #hero.hero-section {
+    position: static !important;
+    height: 100vh !important;
+  }
+
+  .hero-bg-cream {
     display: none !important;
-  }
-
-  .js-stage-active #hero.hero-section,
-  .js-stage-active .hero-section {
-    background-color: #0a0a0a !important;
-  }
-
-  .js-stage-active .playground-section {
-    background-color: #F6F2EC !important;
   }
 
   .camera-scan-line {

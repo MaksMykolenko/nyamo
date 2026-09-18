@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCameraScan();
   initGuidedCooking();
   initFoodDiscovery();
-  initHeroDemoBackgroundReveal();
+  initHeroPinnedTransition();
   initSceneAtmosphere();
 });
 
@@ -1766,53 +1766,65 @@ function initSceneAtmosphere() {
 }
 
 /* ==========================================================================
-   BACKGROUND-ONLY SCROLL REVEAL: HERO -> INTERACTIVE DEMO
-   - Dedicated viewport-fixed stage backdrop decoupled from normal content scrolling
-   - Dark base plane with static ambient glow
-   - Cream plane (#F6F2EC) reveals from below based on live section geometry
-   - 0: dark background; 0.5: bottom half cream; 1: 100% stable cream
-   - Zero scroll-jacking, zero content pinning, no-JS / reduced-motion safe
+   VARIANT 2: HERO CONTENT PINNING & BACKGROUND COLOR REVEAL
+   - Controlled scroll travel distance (~70vh) while Hero content remains pinned
+   - Background transitions from dark (#0a0a0a) to cream (#F6F2EC)
+   - Dynamic contrast adaptation for headline, subtitle, buttons, trust pills
+   - Once P = 1.0, hero unpins and smoothly exits into the interactive demo
+   - Zero scroll-jacking, respects mobile eligibility and prefers-reduced-motion
    ========================================================================== */
-function initHeroDemoBackgroundReveal() {
+function initHeroPinnedTransition() {
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
-  const stageBackdrop = document.getElementById('heroDemoStage');
-  const creamPlane = document.getElementById('stageCreamPlane');
+  const wrapper = document.getElementById('heroPinnedWrapper');
   const heroSec = document.getElementById('hero');
-  const demoSec = document.getElementById('interactive-demo');
+  const creamBg = document.getElementById('heroBgCream');
 
-  if (!stageBackdrop || !creamPlane || !heroSec || !demoSec) return;
+  if (!wrapper || !heroSec || !creamBg) return;
 
-  // Activate dynamic stage mode (switches hero & demo section backgrounds to transparent)
-  document.documentElement.classList.add('js-stage-active');
+  function checkEligible() {
+    const winW = window.innerWidth;
+    const winH = window.innerHeight;
+    return winW > 768 && winH >= 600;
+  }
+
+  let isEligible = checkEligible();
+  if (isEligible) {
+    document.documentElement.classList.add('js-pinned-active');
+  }
 
   let ticking = false;
 
-  function updateStageReveal() {
-    const winH = window.innerHeight;
-    const demoRect = demoSec.getBoundingClientRect();
-
-    // If completely scrolled past demo section, hide fixed backdrop to save GPU & prevent bleed
-    if (demoRect.bottom <= 0) {
-      stageBackdrop.style.visibility = 'hidden';
+  function updatePinnedProgress() {
+    if (!isEligible) {
+      heroSec.classList.remove('theme-light');
+      heroSec.style.removeProperty('--hero-theme-progress');
+      heroSec.style.removeProperty('--hero-cream-opacity');
       ticking = false;
       return;
     }
-    stageBackdrop.style.visibility = 'visible';
 
-    // Transition progress:
-    // Starts when demo section top reaches bottom of viewport (winH)
-    // Finishes when demo header is established in upper viewport (winH * 0.12)
-    const startThreshold = winH;
-    const endThreshold = winH * 0.12;
-    const rawProgress = (startThreshold - demoRect.top) / (startThreshold - endThreshold);
+    const winH = window.innerHeight;
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const travelDistance = wrapper.offsetHeight - winH;
+
+    if (travelDistance <= 0) {
+      ticking = false;
+      return;
+    }
+
+    // Scrolled distance inside the pinned wrapper
+    const scrolled = -wrapperRect.top;
+    const rawProgress = scrolled / travelDistance;
     const progress = Math.max(0, Math.min(1, rawProgress));
 
-    // Translation: from (winH + 40px) [hidden below] down to 0px [fully covering viewport]
-    // 40px accounts for the soft feather edge on top of the cream plane
-    const translateY = ((1 - progress) * (winH + 40)).toFixed(1);
-    creamPlane.style.transform = `translate3d(0, ${translateY}px, 0)`;
+    // High-contrast text/button flip at 38% cream opacity for crisp readability at midpoint
+    heroSec.classList.toggle('theme-light', progress >= 0.38);
+
+    // Set CSS variables on hero element
+    heroSec.style.setProperty('--hero-theme-progress', progress.toFixed(3));
+    heroSec.style.setProperty('--hero-cream-opacity', progress.toFixed(3));
 
     ticking = false;
   }
@@ -1820,25 +1832,34 @@ function initHeroDemoBackgroundReveal() {
   function onScroll() {
     if (!ticking) {
       ticking = true;
-      window.requestAnimationFrame(updateStageReveal);
+      window.requestAnimationFrame(updatePinnedProgress);
     }
   }
 
+  function onResize() {
+    const wasEligible = isEligible;
+    isEligible = checkEligible();
+    if (isEligible !== wasEligible) {
+      if (isEligible) {
+        document.documentElement.classList.add('js-pinned-active');
+      } else {
+        document.documentElement.classList.remove('js-pinned-active');
+      }
+    }
+    onScroll();
+  }
+
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('resize', onResize, { passive: true });
   window.addEventListener('hashchange', onScroll, { passive: true });
 
-  // Initial calculation immediately on load / anchor navigation
-  updateStageReveal();
+  // Initial calculation immediately on load
+  updatePinnedProgress();
 
-  // Watch dynamic size changes (language switch, recipes expand, etc.)
   if (typeof ResizeObserver !== 'undefined') {
     const ro = new ResizeObserver(() => {
       onScroll();
     });
-    ro.observe(heroSec);
-    ro.observe(demoSec);
-    const demoCard = document.querySelector('.playground-card');
-    if (demoCard) ro.observe(demoCard);
+    ro.observe(wrapper);
   }
 }
