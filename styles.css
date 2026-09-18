@@ -706,8 +706,14 @@ div[id].section,
    ========================================================================== */
 #hero.hero-section,
 .hero-section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding-top: 116px;
-  padding-bottom: 56px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
   overflow: hidden;
   position: relative;
   background:
