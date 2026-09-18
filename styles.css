@@ -711,8 +711,8 @@ div[id].section,
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 108px;
-  padding-bottom: 24px;
+  padding-top: clamp(68px, 8.5vh, 88px);
+  padding-bottom: clamp(10px, 1.5vh, 20px);
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
@@ -721,6 +721,14 @@ div[id].section,
     radial-gradient(ellipse 60% 45% at 85% 35%, rgba(37, 99, 235, 0.14) 0%, rgba(10, 10, 10, 0) 65%),
     linear-gradient(135deg, rgba(238, 110, 74, 0.08) 0%, rgba(10, 10, 10, 0) 45%, rgba(37, 99, 235, 0.08) 100%),
     var(--color-void-canvas);
+}
+
+@media (min-width: 1025px) {
+  #hero.hero-section,
+  .hero-section {
+    height: calc(100vh - 80px);
+    height: calc(100dvh - 80px);
+  }
 }
 
 .hero-grid {
@@ -813,14 +821,16 @@ div[id].section,
 
 .phone-mockup-wrapper {
   position: relative;
-  width: 350px;
+  width: min(350px, calc((100vh - 180px) * 0.507));
+  max-width: 350px;
 }
 
 .phone-frame {
-  width: 350px;
-  height: 690px;
+  width: 100%;
+  height: min(690px, calc(100vh - 180px));
+  max-height: 690px;
   background-color: #161616;
-  border-radius: 44px;
+  border-radius: clamp(32px, 4.2vh, 44px);
   padding: 10px;
   box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--color-hairline-strong);
   position: relative;
@@ -1061,10 +1071,12 @@ div[id].section,
   position: relative;
   background: linear-gradient(180deg, 
     #0a0a0a 0%, 
-    #171210 24%, 
-    #2a1b14 52%, 
-    #5f3b26 74%, 
-    #b49a85 88%, 
+    #14100e 20%, 
+    #241711 40%, 
+    #4a2e1d 60%, 
+    #8c6b54 78%, 
+    #d8cac0 90%, 
+    #F6F2EC 98%, 
     #F6F2EC 100%
   );
   margin-top: -1px;
