@@ -47,7 +47,7 @@
         <span class="nav-active-pill" id="navActivePill" aria-hidden="true"></span>
         <a href="#interactive-demo" class="nav-link" data-i18n="nav.demo">Спробувати онлайн</a>
         <a href="#features" class="nav-link" data-i18n="nav.features">Можливості</a>
-        <a href="#recipes" class="nav-link" data-i18n="nav.recipes">Рецепти</a>
+        <a href="#food-discovery" class="nav-link" data-i18n="nav.recipes">Рецепти</a>
         <a href="#faq" class="nav-link" data-i18n="nav.faq">FAQ</a>
       </nav>
 
@@ -104,7 +104,7 @@
         </div>
         <a href="#interactive-demo" class="mobile-nav-link" data-i18n="nav.demo">Спробувати онлайн</a>
         <a href="#features" class="mobile-nav-link" data-i18n="nav.features">Можливості</a>
-        <a href="#recipes" class="mobile-nav-link" data-i18n="nav.recipes">Рецепти</a>
+        <a href="#food-discovery" class="mobile-nav-link" data-i18n="nav.recipes">Рецепти</a>
         <a href="#faq" class="mobile-nav-link" data-i18n="nav.faq">FAQ</a>
         <div class="mobile-nav-footer">
           <a href="#download" class="btn btn-primary btn-block" data-i18n="hero.ctaDownload">Завантажити Nyamo</a>
@@ -595,7 +595,7 @@
             На сьогодні точно<br>є що приготувати.
           </h2>
           <p class="discovery-subtitle" data-i18n="discovery.subtitle">
-            Від швидкого сніданку до вечері з того, що вже лежить у холодильнику.
+            Від швидкого сніданку до вечері з того, що вже лежить у холодильнику. 60+ домашніх рецептів — і каталог постійно росте.
           </p>
         </div>
 
@@ -768,451 +768,68 @@
     <!-- Atmospheric Transition: Warm Cream Recipe Discovery Canvas -> Dark Features Canvas -->
     <div class="discovery-transition-bottom" aria-hidden="true"></div>
 
-    <!-- Bento Grid Features Section -->
+    <!-- Features Benefits Section -->
     <section class="section features-section" id="features">
       <div class="container">
         <div class="section-header text-center">
-          <h2 class="section-title" data-i18n="features.title">Чому готувати з Nyamo — суцільне задоволення</h2>
+          <span class="section-badge" data-i18n="features.badge">💡 Переваги Nyamo</span>
+          <h2 class="section-title" data-i18n="features.title">Продумано для спокійного готування</h2>
           <p class="section-description" data-i18n="features.desc">
-            Ми продумали кожну деталь кулінарного досвіду: від точних алгоритмів до дбайливого ставлення до вашого часу та приватності.
+            Без зайвого шуму, складних налаштувань та перевантажених інтерфейсів.
           </p>
         </div>
 
-        <div class="bento-grid">
-          <!-- Bento 1: RecipeMatcher (Large) -->
-          <div class="bento-item bento-large">
-            <div class="bento-content">
-              <div class="bento-tag" data-i18n="features.bento1Tag">Ядро системи</div>
-              <h3 class="bento-title" data-i18n="features.bento1Title">Точний алгоритм RecipeMatcher</h3>
-              <p class="bento-text" data-i18n="features.bento1Text">
-                Більшість кулінарних додатків шукають рецепти за випадковими збігами слів. Nyamo розрізняє обов'язкові та опціональні інгредієнти, перевіряє одиниці виміру та дає 3 чіткі статуси:
-              </p>
-              <div class="status-examples">
-                <div class="status-pill-item status-green">
-                  <strong data-i18n="features.bento1Status1Title">Можна приготувати</strong>
-                  <span data-i18n="features.bento1Status1Sub">Усі обов'язкові продукти є</span>
-                </div>
-                <div class="status-pill-item status-amber">
-                  <strong data-i18n="features.bento1Status2Title">Уточни кількість</strong>
-                  <span data-i18n="features.bento1Status2Sub">Потрібно перевірити грами чи шт.</span>
-                </div>
-                <div class="status-pill-item status-red">
-                  <strong data-i18n="features.bento1Status3Title">Бракує продуктів</strong>
-                  <span data-i18n="features.bento1Status3Sub">Точний перелік того, що треба докупити</span>
-                </div>
-              </div>
-            </div>
-            <div class="bento-media">
-              <img src="assets/images/screenshots/05-recommendations-pasta.jpg" alt="Рекомендації страв зі статусами" class="bento-img bento-img-curved">
-            </div>
+        <div class="features-benefits-grid">
+          <!-- Benefit 1 -->
+          <div class="benefit-item">
+            <span class="benefit-number" aria-hidden="true" data-i18n="features.b1Num">01</span>
+            <h3 class="benefit-title" data-i18n="features.b1Title">Точно знає, чого не вистачає</h3>
+            <p class="benefit-text" data-i18n="features.b1Text">
+              Nyamo враховує не тільки назву продукту, а й кількість — і одразу показує, що вже можна готувати.
+            </p>
           </div>
 
-          <!-- Bento 2: AI Photo Recognition -->
-          <div class="bento-item bento-medium">
-            <div class="bento-icon-wrapper">
-              <span class="bento-icon">📸</span>
-            </div>
-            <div class="bento-content">
-              <div class="bento-tag" data-i18n="features.bento2Tag">Google Gemini AI</div>
-              <h3 class="bento-title" data-i18n="features.bento2Title">Розпізнавання фото продуктів</h3>
-              <p class="bento-text" data-i18n="features.bento2Text">
-                Не хочеш вводити вручну? Зроби знімок полиці холодильника чи продуктів на столі. Штучний інтелект запропонує список, а ти підтвердиш його в зручному діалозі перед пошуком.
-              </p>
-              <div class="bento-note">
-                <span class="note-icon">🔒</span>
-                <span data-i18n="features.bento2Note">Фото не зберігаються на сервері після обробки</span>
-              </div>
-            </div>
+          <!-- Benefit 2 -->
+          <div class="benefit-item">
+            <span class="benefit-number" aria-hidden="true" data-i18n="features.b2Num">02</span>
+            <h3 class="benefit-title" data-i18n="features.b2Title">Просто покажи, що є</h3>
+            <p class="benefit-text" data-i18n="features.b2Text">
+              Сфотографуй продукти або додай їх вручну. Nyamo збере все в одному місці.
+            </p>
           </div>
 
-          <!-- Bento 3: Pantry "Комора" -->
-          <div class="bento-item bento-medium">
-            <div class="bento-icon-wrapper">
-              <span class="bento-icon">🏺</span>
-            </div>
-            <div class="bento-content">
-              <div class="bento-tag" data-i18n="features.bento3Tag">Зручність</div>
-              <h3 class="bento-title" data-i18n="features.bento3Title">Комора постійних запасів</h3>
-              <p class="bento-text" data-i18n="features.bento3Text">
-                Збережи свої постійні продукти (борошно, олія, спеції, сіль, гречка, крупи) в розділі «Комора». Під час нового приготування вивантажуй їх у пошук одним дотиком.
-              </p>
-            </div>
-          </div>
-
-          <!-- Bento 4: Step-by-Step Focus Mode -->
-          <div class="bento-item bento-medium">
-            <div class="bento-icon-wrapper">
-              <span class="bento-icon">👨‍🍳</span>
-            </div>
-            <div class="bento-content">
-              <div class="bento-tag" data-i18n="features.bento4Tag">Режим приготування</div>
-              <h3 class="bento-title" data-i18n="features.bento4Title">Покроковий фокус-режим</h3>
-              <p class="bento-text" data-i18n="features.bento4Text">
-                Великий контрастний шрифт, фокус лише на одному поточному кроці та великі кнопки переходу. Стан приготування зберігається в базі: якщо екран згасне чи ти відповіси на дзвінок — прогрес не зникне.
-              </p>
-            </div>
-          </div>
-
-          <!-- Bento 5: 100% Offline & Privacy -->
-          <div class="bento-item bento-medium">
-            <div class="bento-icon-wrapper">
-              <span class="bento-icon">🛡️</span>
-            </div>
-            <div class="bento-content">
-              <div class="bento-tag" data-i18n="features.bento5Tag">Безпека даних</div>
-              <h3 class="bento-title" data-i18n="features.bento5Title">100% Офлайн &amp; Приватність</h3>
-              <p class="bento-text" data-i18n="features.bento5Text">
-                Усі рецепти, словник на 170+ продуктів і ваші запаси зберігаються виключно на телефоні в локальній базі Room SQLite. Жодного примусового акаунта чи прихованого стеження за вами.
-              </p>
-            </div>
-          </div>
-
-          <!-- Bento 6: Dynamic Portions Recalculation -->
-          <div class="bento-item bento-large bento-reverse">
-            <div class="bento-content">
-              <div class="bento-tag" data-i18n="features.bento6Tag">Гнучкість</div>
-              <h3 class="bento-title" data-i18n="features.bento6Title">Динамічний перерахунок на будь-яку кількість порцій</h3>
-              <p class="bento-text" data-i18n="features.bento6Text">
-                Готуєш тільки для себе чи чекаєш компанію з 6 друзів? Обирай потрібну кількість порцій від 1 до 10 — грами, ложки та штуки інгредієнтів адаптуються автоматично, включно з текстами кроків.
-              </p>
-              <div class="portions-badge-demo">
-                <span class="pill-active">1 порція</span>
-                <span class="pill-active selected">2 порції</span>
-                <span class="pill-active">4 порції</span>
-                <span class="pill-active">6 порцій</span>
-              </div>
-            </div>
-            <div class="bento-media">
-              <img src="assets/images/screenshots/04-recipe-portions.jpg" alt="Перерахунок порцій у Nyamo" class="bento-img bento-img-curved">
-            </div>
+          <!-- Benefit 3 -->
+          <div class="benefit-item">
+            <span class="benefit-number" aria-hidden="true" data-i18n="features.b3Num">03</span>
+            <h3 class="benefit-title" data-i18n="features.b3Title">Твої дані залишаються твоїми</h3>
+            <p class="benefit-text" data-i18n="features.b3Text">
+              Ми не створюємо рекламний профіль і не продаємо твої дані.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- App Showcase / Screenshots Tabs Section -->
-    <section class="section showcase-section" id="showcase">
-      <div class="container">
-        <div class="section-header text-center">
-          <h2 class="section-title" data-i18n="showcase.title">Теплий, затишний та інтуїтивний</h2>
-          <p class="section-description" data-i18n="showcase.desc">
-            Дизайн Nyamo створений так, щоб готувати було легко та приємно. Погляньте на реальні екрани додатку.
-          </p>
-        </div>
-
-        <!-- Interactive Tab Buttons -->
-        <div class="showcase-tabs" role="tablist">
-          <button class="tab-btn active" data-target="tab-input" role="tab" aria-selected="true">
-            <span class="tab-number">1</span>
-            <span data-i18n="showcase.tab1Btn">Введення продуктів</span>
-          </button>
-          <button class="tab-btn" data-target="tab-spices" role="tab" aria-selected="false">
-            <span class="tab-number">2</span>
-            <span data-i18n="showcase.tab2Btn">Спеції та комора</span>
-          </button>
-          <button class="tab-btn" data-target="tab-results" role="tab" aria-selected="false">
-            <span class="tab-number">3</span>
-            <span data-i18n="showcase.tab3Btn">Розумний підбір</span>
-          </button>
-          <button class="tab-btn" data-target="tab-recipe" role="tab" aria-selected="false">
-            <span class="tab-number">4</span>
-            <span data-i18n="showcase.tab4Btn">Деталі рецепта</span>
-          </button>
-          <button class="tab-btn" data-target="tab-cooking" role="tab" aria-selected="false">
-            <span class="tab-number">5</span>
-            <span data-i18n="showcase.tab5Btn">Покроковий режим</span>
-          </button>
-          <button class="tab-btn" data-target="tab-ai" role="tab" aria-selected="false">
-            <span class="tab-number">6</span>
-            <span data-i18n="showcase.tab6Btn">AI Фотоконтроль</span>
-          </button>
-        </div>
-
-        <!-- Showcase Tab Panes -->
-        <div class="showcase-content-box">
-          <div class="tab-pane active" id="tab-input">
-            <div class="tab-grid">
-              <div class="tab-info">
-                <span class="tab-badge" data-i18n="showcase.tab1Badge">Етап 1: Додавання</span>
-                <h3 class="tab-heading" data-i18n="showcase.tab1Title">Швидке введення без обмежень</h3>
-                <p class="tab-description" data-i18n="showcase.tab1Desc">
-                  Вводьте продукти списком через кому або новий рядок (*«3 яйця, картопля 500г, томати»*). Розумний словник на 170+ канонічних продуктів розуміє українські відмінки, синоніми та пропонує швидкі підказки.
-                </p>
-                <ul class="tab-features-list">
-                  <li data-i18n="showcase.tab1F1">Швидкі підказки при введенні</li>
-                  <li data-i18n="showcase.tab1F2">Обробка неоднозначностей (наприклад, вибір виду сиру)</li>
-                  <li data-i18n="showcase.tab1F3">Підтримка грамів, мілілітрів, штук та ложок</li>
-                </ul>
-              </div>
-              <div class="tab-phone">
-                <img src="assets/images/screenshots/01-cook.png" alt="Екран введення продуктів у Nyamo" class="tab-phone-img">
-              </div>
-            </div>
+    <!-- Brand Statement Section -->
+    <section class="section brand-statement-section" id="brand-statement">
+      <div class="container max-w-narrow text-center">
+        <h2 class="brand-statement-heading" data-i18n="brandStatement.title">
+          Nyamo починає не з рецепта.<br>
+          Nyamo починає з того, що вже є у тебе.
+        </h2>
+        <div class="brand-statement-facts">
+          <div class="brand-fact-item">
+            <span class="brand-fact-icon" aria-hidden="true">✓</span>
+            <span class="brand-fact-text" data-i18n="brandStatement.fact1">Без обов’язкової підписки</span>
           </div>
-
-          <div class="tab-pane" id="tab-spices">
-            <div class="tab-grid">
-              <div class="tab-info">
-                <span class="tab-badge" data-i18n="showcase.tab2Badge">Етап 2: Приправи</span>
-                <h3 class="tab-heading" data-i18n="showcase.tab2Title">Повний контроль спецій та запасів</h3>
-                <p class="tab-description" data-i18n="showcase.tab2Desc">
-                  Сіль, чорний перець, олія та спеції не вважаються наявними за замовчуванням. Зручна панель спецій дозволяє швидко відзначити те, що дійсно є у шафці, без потреби вказувати точні грами солі.
-                </p>
-                <ul class="tab-features-list">
-                  <li data-i18n="showcase.tab2F1">26 популярних спецій та приправ</li>
-                  <li data-i18n="showcase.tab2F2">Вибір одним тапом без ручного зважування</li>
-                  <li data-i18n="showcase.tab2F3">Спеції не перевантажують список основних страв</li>
-                </ul>
-              </div>
-              <div class="tab-phone">
-                <img src="assets/images/screenshots/02-ingredients.png" alt="Панель спецій та продуктів у Nyamo" class="tab-phone-img">
-              </div>
-            </div>
+          <div class="brand-fact-item">
+            <span class="brand-fact-icon" aria-hidden="true">✓</span>
+            <span class="brand-fact-text" data-i18n="brandStatement.fact2">Працює з твоїми продуктами</span>
           </div>
-
-          <div class="tab-pane" id="tab-results">
-            <div class="tab-grid">
-              <div class="tab-info">
-                <span class="tab-badge" data-i18n="showcase.tab3Badge">Етап 3: Вибір страви</span>
-                <h3 class="tab-heading" data-i18n="showcase.tab3Title">Миттєві рекомендації з чіткими статусами</h3>
-                <p class="tab-description" data-i18n="showcase.tab3Desc">
-                  Застосунок одразу впорядковує страви за доступністю. Ви одразу бачите, що можна приготувати просто зараз, а для яких страв не вистачає лише одного доступного інгредієнта.
-                </p>
-                <ul class="tab-features-list">
-                  <li data-i18n="showcase.tab3F1">Фільтри за часом (15, 30, 45 хв, будь-який)</li>
-                  <li data-i18n="showcase.tab3F2">Фільтр кухонного обладнання (плита, духовка, мультиварка)</li>
-                  <li data-i18n="showcase.tab3F3">Збереження страв у власне «Обране»</li>
-                </ul>
-                <div class="recipe-screen-pills" style="margin-top: 18px;">
-                  <span style="font-size: 0.85rem; font-weight: 500; color: var(--dark-secondary); display: block; margin-bottom: 8px;">Варіанти рекомендацій:</span>
-                  <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <button type="button" class="btn-sub-screen active" data-target-tab="tab-results" data-target-img="assets/images/screenshots/03-recommendations.jpg">✨ Тости &amp; Бутерброди</button>
-                    <button type="button" class="btn-sub-screen" data-target-tab="tab-results" data-target-img="assets/images/screenshots/05-recommendations-pasta.jpg">🍝 Паста &amp; Карбонара</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-phone">
-                <img src="assets/images/screenshots/03-recommendations.jpg" alt="Результати підбору страв у Nyamo" class="tab-phone-img" id="tabResultsPhoneImg">
-              </div>
-            </div>
+          <div class="brand-fact-item">
+            <span class="brand-fact-icon" aria-hidden="true">✓</span>
+            <span class="brand-fact-text" data-i18n="brandStatement.fact3">Основні рецепти доступні офлайн</span>
           </div>
-
-          <div class="tab-pane" id="tab-recipe">
-            <div class="tab-grid">
-              <div class="tab-info">
-                <span class="tab-badge" data-i18n="showcase.tab4Badge">Етап 4: Рецепт</span>
-                <h3 class="tab-heading" data-i18n="showcase.tab4Title">Зручний перегляд рецепта та інгредієнтів</h3>
-                <p class="tab-description" data-i18n="showcase.tab4Desc">
-                  Кожен рецепт має апетитне зображення, точний час, список обладнання та деталізовані інгредієнти. Змінюйте кількість порцій на льоту!
-                </p>
-                <ul class="tab-features-list">
-                  <li data-i18n="showcase.tab4F1">Автоматичний перерахунок грамів під порції</li>
-                  <li data-i18n="showcase.tab4F2">Чіткий поділ на основні та опціональні продукти</li>
-                  <li data-i18n="showcase.tab4F3">Перевірені покрокові поради шефа</li>
-                </ul>
-                <div class="recipe-screen-pills" style="margin-top: 18px;">
-                  <span style="font-size: 0.85rem; font-weight: 500; color: var(--dark-secondary); display: block; margin-bottom: 8px;">Інші страви з додатку:</span>
-                  <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <button type="button" class="btn-sub-screen active" data-target-tab="tab-recipe" data-target-img="assets/images/screenshots/04-recipe-portions.jpg">🥪 Бутерброди</button>
-                    <button type="button" class="btn-sub-screen" data-target-tab="tab-recipe" data-target-img="assets/images/screenshots/recipe-detail-zucchini.jpg">🥒 Кабачок</button>
-                    <button type="button" class="btn-sub-screen" data-target-tab="tab-recipe" data-target-img="assets/images/screenshots/recipe-detail-eggplant.jpg">🍆 Баклажани</button>
-                    <button type="button" class="btn-sub-screen" data-target-tab="tab-recipe" data-target-img="assets/images/screenshots/recipe-detail-omelette.jpg">🍳 Омлет</button>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-phone">
-                <img src="assets/images/screenshots/04-recipe-portions.jpg" alt="Детальний екран рецепта у Nyamo" class="tab-phone-img" id="tabRecipePhoneImg">
-              </div>
-            </div>
-          </div>
-
-          <div class="tab-pane" id="tab-cooking">
-            <div class="tab-grid">
-              <div class="tab-info">
-                <span class="tab-badge" data-i18n="showcase.tab5Badge">Етап 5: Готування</span>
-                <h3 class="tab-heading" data-i18n="showcase.tab5Title">Покроковий кулінарний помічник</h3>
-                <p class="tab-description" data-i18n="showcase.tab5Desc">
-                  Забудьте про складні кулінарні простирадла тексту, де губишся, що робити далі. Nyamo показує кожен крок окремо з великим читабельним шрифтом.
-                </p>
-                <ul class="tab-features-list">
-                  <li data-i18n="showcase.tab5F1">Зручно читати навіть з відстані на столі</li>
-                  <li data-i18n="showcase.tab5F2">Прогрес зберігається локально в базі даних</li>
-                  <li data-i18n="showcase.tab5F3">Продукти не списуються примусово без згоди</li>
-                </ul>
-              </div>
-              <div class="tab-phone">
-                <img src="assets/images/screenshots/06-cooking.png" alt="Покроковий режим приготування страви" class="tab-phone-img">
-              </div>
-            </div>
-          </div>
-
-          <div class="tab-pane" id="tab-ai">
-            <div class="tab-grid">
-              <div class="tab-info">
-                <span class="tab-badge" data-i18n="showcase.tab6Badge">Етап 6: AI-контроль</span>
-                <h3 class="tab-heading" data-i18n="showcase.tab6Title">Прозоре розпізнавання за фото</h3>
-                <p class="tab-description" data-i18n="showcase.tab6Desc">
-                  Сфотографуйте вміст комори чи холодильника. Штучний інтелект Gemini визначить продукти та запропонує список, де ви зможете відредагувати кількість або видалити зайве одним рухом.
-                </p>
-                <ul class="tab-features-list">
-                  <li data-i18n="showcase.tab6F1">Підтримка галереї та системної камери</li>
-                  <li data-i18n="showcase.tab6F2">Повний контроль над списком перед збереженням</li>
-                  <li data-i18n="showcase.tab6F3">Безпечна передача з видаленням EXIF-метаданих</li>
-                </ul>
-              </div>
-              <div class="tab-phone">
-                <img src="assets/images/screenshots/07-photo-review.png" alt="AI фотоконтроль та перевірка продуктів" class="tab-phone-img">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Recipes Gallery Section -->
-    <section class="section recipes-section" id="recipes">
-      <div class="container">
-        <div class="section-header text-center">
-          <h2 class="section-title" data-i18n="recipes.title">60+ перевірених домашніх рецептів</h2>
-          <p class="section-description" data-i18n="recipes.desc">
-            Від традиційного українського борщу та золотистих дерунів до швидкої пасти болоньєзе й ніжних сирників.
-          </p>
-        </div>
-
-        <div class="recipes-gallery-grid">
-          <!-- Dish 1: Борщ -->
-          <div class="dish-card">
-            <div class="dish-image-wrapper">
-              <img src="assets/images/dishes/recipe_ukrainian_borscht.webp" alt="Український борщ" class="dish-image" loading="lazy">
-              <span class="dish-time-badge">⏱ 60 хв</span>
-            </div>
-            <div class="dish-body">
-              <span class="dish-category" data-i18n="recipes.d1Category">Плита · Традиційна кухня</span>
-              <h4 class="dish-name" data-i18n="recipes.d1Name">Справжній український борщ</h4>
-              <p class="dish-desc" data-i18n="recipes.d1Desc">Наваристий червоний борщ з буряком, картоплею, капустою та ароматною зеленню.</p>
-            </div>
-          </div>
-
-          <!-- Dish 2: Сирники -->
-          <div class="dish-card">
-            <div class="dish-image-wrapper">
-              <img src="assets/images/dishes/recipe_cottage_cheese_pancakes.webp" alt="Домашні сирники" class="dish-image" loading="lazy">
-              <span class="dish-time-badge">⏱ 25 хв</span>
-            </div>
-            <div class="dish-body">
-              <span class="dish-category" data-i18n="recipes.d2Category">Плита · Сніданок</span>
-              <h4 class="dish-name" data-i18n="recipes.d2Name">Домашні сирники</h4>
-              <p class="dish-desc" data-i18n="recipes.d2Desc">Ніжні золотисті сирники з кисломолочного сиру з хрусткою скоринкою та сметаною.</p>
-            </div>
-          </div>
-
-          <!-- Dish 3: Деруни -->
-          <div class="dish-card">
-            <div class="dish-image-wrapper">
-              <img src="assets/images/dishes/recipe_potato_pancakes_deruny.webp" alt="Хрусткі деруни" class="dish-image" loading="lazy">
-              <span class="dish-time-badge">⏱ 30 хв</span>
-            </div>
-            <div class="dish-body">
-              <span class="dish-category" data-i18n="recipes.d3Category">Плита · Основна страва</span>
-              <h4 class="dish-name" data-i18n="recipes.d3Name">Хрусткі деруни</h4>
-              <p class="dish-desc" data-i18n="recipes.d3Desc">Апетитні картопляні оладки з цибулею та хрусткою рум'яною скоринкою.</p>
-            </div>
-          </div>
-
-          <!-- Dish 4: Шакшука -->
-          <div class="dish-card">
-            <div class="dish-image-wrapper">
-              <img src="assets/images/dishes/recipe_shakshuka.webp" alt="Ароматна шакшука" class="dish-image" loading="lazy">
-              <span class="dish-time-badge">⏱ 25 хв</span>
-            </div>
-            <div class="dish-body">
-              <span class="dish-category" data-i18n="recipes.d4Category">Плита · Сніданок / вечеря</span>
-              <h4 class="dish-name" data-i18n="recipes.d4Name">Ароматна шакшука</h4>
-              <p class="dish-desc" data-i18n="recipes.d4Desc">Яйця, запечені в соковитому томатному соусі з солодким перцем, часником та травами.</p>
-            </div>
-          </div>
-
-          <!-- Dish 5: Паста Болоньєзе -->
-          <div class="dish-card">
-            <div class="dish-image-wrapper">
-              <img src="assets/images/dishes/recipe_pasta_bolognese_home.webp" alt="Паста болоньєзе" class="dish-image" loading="lazy">
-              <span class="dish-time-badge">⏱ 40 хв</span>
-            </div>
-            <div class="dish-body">
-              <span class="dish-category" data-i18n="recipes.d5Category">Плита · Ситна вечеря</span>
-              <h4 class="dish-name" data-i18n="recipes.d5Name">Паста болоньєзе по-домашньому</h4>
-              <p class="dish-desc" data-i18n="recipes.d5Desc">Класична паста з ніжним м'ясним соусом, стиглими томатами та сиром.</p>
-            </div>
-          </div>
-
-          <!-- Dish 6: Куряче філе -->
-          <div class="dish-card">
-            <div class="dish-image-wrapper">
-              <img src="assets/images/dishes/recipe_pan_seared_chicken_fillet.webp" alt="Соковите куряче філе" class="dish-image" loading="lazy">
-              <span class="dish-time-badge">⏱ 20 хв</span>
-            </div>
-            <div class="dish-body">
-              <span class="dish-category" data-i18n="recipes.d6Category">Плита · Швидка страва</span>
-              <h4 class="dish-name" data-i18n="recipes.d6Name">Соковите куряче філе</h4>
-              <p class="dish-desc" data-i18n="recipes.d6Desc">Швидка підрум'янена куряча грудка зі спеціями та золотистою скоринкою.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Comparison Section: Why Nyamo -->
-    <section class="section comparison-section" id="comparison">
-      <div class="container">
-        <div class="section-header text-center">
-          <h2 class="section-title" data-i18n="comparison.title">Чому саме Nyamo?</h2>
-          <p class="section-description" data-i18n="comparison.desc">
-            Погляньте, чим Nyamo відрізняється від звичайних кулінарних сайтів та додатків.
-          </p>
-        </div>
-
-        <div class="comparison-table-wrapper">
-          <table class="comparison-table">
-            <thead>
-              <tr>
-                <th class="col-feature" data-i18n="comparison.colCrit">Критерій</th>
-                <th class="col-other" data-i18n="comparison.colOther">Звичайні кулінарні сайти</th>
-                <th class="col-nyamo" data-i18n="comparison.colNyamo">Nyamo («Нямо»)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="feature-title" data-i18n="comparison.f1Title">Підбір з того, що є</td>
-                <td class="cell-neg" data-i18n="comparison.f1Other">✕ Вимагають купити 15 нових інгредієнтів</td>
-                <td class="cell-pos" data-i18n="comparison.f1Nyamo">✓ Шукає рецепти суворо під ваші продукти</td>
-              </tr>
-              <tr>
-                <td class="feature-title" data-i18n="comparison.f2Title">Розрахунок нестачі</td>
-                <td class="cell-neg" data-i18n="comparison.f2Other">✕ Незрозуміло, що є, а чого бракує</td>
-                <td class="cell-pos" data-i18n="comparison.f2Nyamo">✓ Точний список: наприклад, «бракує 1 яйця»</td>
-              </tr>
-              <tr>
-                <td class="feature-title" data-i18n="comparison.f3Title">Доступ та монетизація</td>
-                <td class="cell-neg" data-i18n="comparison.f3Other">✕ Пейволи на рецепти, платні щомісячні підписки</td>
-                <td class="cell-pos" data-i18n="comparison.f3Nyamo">✓ Усі 60+ рецептів відкриті та безкоштовні, без платних підписок</td>
-              </tr>
-              <tr>
-                <td class="feature-title" data-i18n="comparison.f4Title">Робота без інтернету</td>
-                <td class="cell-neg" data-i18n="comparison.f4Other">✕ Не працює без мережі</td>
-                <td class="cell-pos" data-i18n="comparison.f4Nyamo">✓ 100% офлайн (усі рецепти в базі Room)</td>
-              </tr>
-              <tr>
-                <td class="feature-title" data-i18n="comparison.f5Title">Приватність &amp; Дані</td>
-                <td class="cell-neg" data-i18n="comparison.f5Other">✕ Вимагають акаунт, збирають аналітику</td>
-                <td class="cell-pos" data-i18n="comparison.f5Nyamo">✓ Жодних акаунтів, усі дані тільки на пристрої</td>
-              </tr>
-              <tr>
-                <td class="feature-title" data-i18n="comparison.f6Title">Перерахунок порцій</td>
-                <td class="cell-neg" data-i18n="comparison.f6Other">✕ Фіксовано (найчастіше на 4 особи)</td>
-                <td class="cell-pos" data-i18n="comparison.f6Nyamo">✓ Миттєво від 1 до 10 порцій у всіх кроках</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </section>
@@ -1222,9 +839,10 @@
       <div class="container">
         <div class="download-card">
           <div class="download-content">
-            <h2 class="download-title" data-i18n="download.title">Почни готувати смачніше вже сьогодні</h2>
+            <span class="download-badge" data-i18n="download.badge">📱 Додаток для кухні</span>
+            <h2 class="download-title" data-i18n="download.title">Що приготуєш сьогодні?</h2>
             <p class="download-description" data-i18n="download.desc">
-              Завантажуй нативний Android-застосунок Nyamo абсолютно безкоштовно. Встановлюй APK або долучайся до закритої бети в Google Play.
+              Покажи Nyamo, що є вдома — решту ми допоможемо перетворити на вечерю.
             </p>
 
             <div class="download-buttons-group">
@@ -1234,88 +852,84 @@
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                <span data-i18n="download.btnApk">Завантажити APK (13.4 МБ)</span>
+                <span data-i18n="download.btnDownload">Завантажити Nyamo</span>
               </a>
 
               <a href="mailto:buisness@neoflux.fluxmarketplace.store?subject=Nyamo%20Beta%20Access" class="btn btn-outline-white btn-lg">
                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
                 </svg>
-                <span data-i18n="download.btnBeta">Запит на Google Play Beta</span>
+                <span data-i18n="download.btnGooglePlay">Google Play</span>
               </a>
             </div>
 
             <div class="download-meta">
-              <span data-i18n="download.metaOs">📱 Android 8.0+ (API 26–36)</span>
+              <span data-i18n="download.metaOffline">✓ Основні функції офлайн</span>
               <span>•</span>
-              <span data-i18n="download.metaTrackers">🔒 0 трекерів · Чистий білд</span>
+              <span data-i18n="download.metaFree">✓ Без обов'язкової підписки</span>
               <span>•</span>
-              <span data-i18n="download.metaVersion">⚡ Версія 1.0.0</span>
+              <span data-i18n="download.metaClean">✓ Безпечно та без трекерів</span>
             </div>
           </div>
 
           <div class="download-qr-box">
             <div class="qr-card">
               <div class="qr-code-svg">
-                <!-- High quality crisp QR code vector -->
-                <svg viewBox="0 0 120 120" width="160" height="160" class="qr-svg">
-                  <!-- Finder Patterns (Top-Left, Top-Right, Bottom-Left) -->
-                  <rect x="10" y="10" width="30" height="30" rx="4" fill="#49372E"/>
-                  <rect x="16" y="16" width="18" height="18" rx="2" fill="#FFFFFF"/>
-                  <rect x="21" y="21" width="8" height="8" rx="1" fill="#49372E"/>
+                <svg viewBox="0 0 120 120" width="150" height="150" class="qr-svg" aria-label="QR код для завантаження">
+                  <!-- Finder Patterns -->
+                  <rect x="10" y="10" width="30" height="30" rx="4" fill="#E8E3DE"/>
+                  <rect x="16" y="16" width="18" height="18" rx="2" fill="#14110F"/>
+                  <rect x="21" y="21" width="8" height="8" rx="1" fill="#EE6E4A"/>
 
-                  <rect x="80" y="10" width="30" height="30" rx="4" fill="#49372E"/>
-                  <rect x="86" y="16" width="18" height="18" rx="2" fill="#FFFFFF"/>
-                  <rect x="91" y="21" width="8" height="8" rx="1" fill="#49372E"/>
+                  <rect x="80" y="10" width="30" height="30" rx="4" fill="#E8E3DE"/>
+                  <rect x="86" y="16" width="18" height="18" rx="2" fill="#14110F"/>
+                  <rect x="91" y="21" width="8" height="8" rx="1" fill="#EE6E4A"/>
 
-                  <rect x="10" y="80" width="30" height="30" rx="4" fill="#49372E"/>
-                  <rect x="16" y="86" width="18" height="18" rx="2" fill="#FFFFFF"/>
-                  <rect x="21" y="91" width="8" height="8" rx="1" fill="#49372E"/>
+                  <rect x="10" y="80" width="30" height="30" rx="4" fill="#E8E3DE"/>
+                  <rect x="16" y="86" width="18" height="18" rx="2" fill="#14110F"/>
+                  <rect x="21" y="91" width="8" height="8" rx="1" fill="#EE6E4A"/>
 
-                  <!-- Data modules matrix -->
-                  <rect x="46" y="12" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="58" y="12" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="66" y="12" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="46" y="24" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="66" y="24" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="52" y="32" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="60" y="32" width="6" height="6" rx="1" fill="#49372E"/>
+                  <!-- Data modules matrix with warm Nyamo orange accents -->
+                  <rect x="46" y="12" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="58" y="12" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="66" y="12" width="6" height="6" rx="1" fill="#EE6E4A"/>
+                  <rect x="46" y="24" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="66" y="24" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="52" y="32" width="6" height="6" rx="1" fill="#EE6E4A"/>
+                  <rect x="60" y="32" width="6" height="6" rx="1" fill="#E8E3DE"/>
 
-                  <!-- Middle Section -->
-                  <rect x="12" y="48" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="24" y="48" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="36" y="48" width="6" height="6" rx="1" fill="#49372E"/>
+                  <rect x="12" y="48" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="24" y="48" width="6" height="6" rx="1" fill="#EE6E4A"/>
+                  <rect x="36" y="48" width="6" height="6" rx="1" fill="#E8E3DE"/>
                   <rect x="48" y="48" width="6" height="6" rx="1" fill="#EE6E4A"/>
-                  <rect x="60" y="48" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="74" y="48" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="88" y="48" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="100" y="48" width="6" height="6" rx="1" fill="#49372E"/>
+                  <rect x="60" y="48" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="74" y="48" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="88" y="48" width="6" height="6" rx="1" fill="#EE6E4A"/>
+                  <rect x="100" y="48" width="6" height="6" rx="1" fill="#E8E3DE"/>
 
-                  <rect x="18" y="60" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="32" y="60" width="6" height="6" rx="1" fill="#49372E"/>
+                  <rect x="18" y="60" width="6" height="6" rx="1" fill="#EE6E4A"/>
+                  <rect x="32" y="60" width="6" height="6" rx="1" fill="#E8E3DE"/>
                   <rect x="48" y="60" width="6" height="6" rx="1" fill="#EE6E4A"/>
                   <rect x="58" y="60" width="6" height="6" rx="1" fill="#EE6E4A"/>
-                  <rect x="70" y="60" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="84" y="60" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="98" y="60" width="6" height="6" rx="1" fill="#49372E"/>
+                  <rect x="70" y="60" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="84" y="60" width="6" height="6" rx="1" fill="#EE6E4A"/>
+                  <rect x="98" y="60" width="6" height="6" rx="1" fill="#E8E3DE"/>
 
-                  <rect x="46" y="74" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="60" y="74" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="72" y="74" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="86" y="74" width="6" height="6" rx="1" fill="#49372E"/>
+                  <rect x="46" y="74" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="60" y="74" width="6" height="6" rx="1" fill="#EE6E4A"/>
+                  <rect x="72" y="74" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="86" y="74" width="6" height="6" rx="1" fill="#E8E3DE"/>
 
-                  <!-- Bottom Right -->
-                  <rect x="48" y="88" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="62" y="88" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="76" y="88" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="90" y="88" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="102" y="88" width="6" height="6" rx="1" fill="#49372E"/>
+                  <rect x="48" y="88" width="6" height="6" rx="1" fill="#EE6E4A"/>
+                  <rect x="62" y="88" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="76" y="88" width="6" height="6" rx="1" fill="#EE6E4A"/>
+                  <rect x="90" y="88" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="102" y="88" width="6" height="6" rx="1" fill="#E8E3DE"/>
 
-                  <rect x="54" y="100" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="68" y="100" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="82" y="100" width="6" height="6" rx="1" fill="#49372E"/>
-                  <rect x="96" y="100" width="6" height="6" rx="1" fill="#49372E"/>
+                  <rect x="54" y="100" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="68" y="100" width="6" height="6" rx="1" fill="#EE6E4A"/>
+                  <rect x="82" y="100" width="6" height="6" rx="1" fill="#E8E3DE"/>
+                  <rect x="96" y="100" width="6" height="6" rx="1" fill="#E8E3DE"/>
                 </svg>
               </div>
               <p class="qr-caption" data-i18n="download.qrCaption">Наведи камеру смартфона для швидкого завантаження</p>
@@ -1329,71 +943,85 @@
     <section class="section faq-section" id="faq">
       <div class="container max-w-narrow">
         <div class="section-header text-center">
+          <span class="section-badge" data-i18n="faq.badge">❓ Відповіді на питання</span>
           <h2 class="section-title" data-i18n="faq.title">Часті запитання</h2>
         </div>
 
         <div class="accordion" id="faqAccordion">
-          <!-- Item 1 -->
+          <!-- Item 1: Offline -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q1">Чи справді додаток працює повністю без інтернету?</span>
+              <span class="accordion-title" data-i18n="faq.q1">Чи працює Nyamo без інтернету?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a1">
-                <strong>Так, на 100%!</strong> Увесь каталог перевірених домашніх рецептів, вбудований словник із понад 170 продуктів, база запасу «Комора» та розумний алгоритм RecipeMatcher зберігаються безпосередньо у локальній базі даних вашого смартфона. Інтернет потрібен виключно для опціональної функції AI-розпізнавання продуктів за фото.
+                Так. Рецепти, продукти та основні функції доступні офлайн. Інтернет потрібен лише для опціональної функції AI-розпізнавання продуктів за фотографією.
               </p>
             </div>
           </div>
 
-          <!-- Item 2 -->
+          <!-- Item 2: Free / Subscriptions -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q2">Як працює розпізнавання фото і що стається з моїми знімками?</span>
+              <span class="accordion-title" data-i18n="faq.q2">Чи безкоштовний Nyamo?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a2">
-                Ви обираєте фото або робите знімок через камеру. Перед надсиланням додаток автоматично очищає чутливі EXIF-метадані (геолокацію, модель камери) та передає стиснене зображення моделі Google Gemini. Сервер повертає список виявлених інгредієнтів, який ви власноруч перевіряєте та підтверджуєте. Сервер Nyamo не зберігає ваші фото у сховищі.
+                Так, Nyamo безкоштовний для кожного. Усі базові рецепти та функції доступні без обов'язкових платних підписок чи заблокованого контенту.
               </p>
             </div>
           </div>
 
-          <!-- Item 3 -->
+          <!-- Item 3: How photo recognition works -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q3">Чи платний Nyamo? Чи є приховані підписки?</span>
+              <span class="accordion-title" data-i18n="faq.q3">Як працює розпізнавання фото?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a3">
-                <strong>Додаток є безкоштовним для кожного користувача.</strong> Усі рецепти та функції відкриті відразу, без платних підписок чи заблокованого контенту. Додаток підтримується за рахунок ненав'язливої реклами, яка органічно вбудована та не заважає готувати.
+                Ти робиш знімок полиці холодильника чи продуктів на столі. Nyamo визначає інгредієнти та показує список, де можна перевірити та уточнити кількість перед збереженням.
               </p>
             </div>
           </div>
 
-          <!-- Item 4 -->
+          <!-- Item 4: What happens to photos / privacy -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q4">Як Nyamo розуміє, які спеції та сіль у мене є?</span>
+              <span class="accordion-title" data-i18n="faq.q4">Що відбувається з моїми фотографіями?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a4">
-                Ми не вважаємо сіль чи олію наявними автоматично — це часта помилка інших додатків. У Nyamo є окрема швидка шторка спецій, де можна відзначити сіль, перець та улюблені приправи в один клік, а також зберегти постійні запаси у розділ «Комора».
+                Розпізнавання фото потребує інтернету, але фото не зберігаються після обробки. Додаток видаляє чутливі EXIF-метадані перед відправкою, а твої кулінарні дані залишаються на пристрої.
               </p>
             </div>
           </div>
 
-          <!-- Item 5 -->
+          <!-- Item 5: Portions scaling -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q5">Чи списуються продукти після завершення готування?</span>
+              <span class="accordion-title" data-i18n="faq.q5">Чи можна змінювати кількість порцій?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a5">
-                Ні, Nyamo дбайливо ставиться до ваших записів і ніколи не видаляє інгредієнти самовільно. Ви самі вирішуєте, коли оновити список продуктів або очистити комору.
+                Так. У кожному рецепті можна обрати потрібну кількість порцій від 1 до 10. Грами, ложки та штуки інгредієнтів адаптуються автоматично, включно з текстами кроків.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 6: Spices and Pantry -->
+          <div class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+              <span class="accordion-title" data-i18n="faq.q6">Як додати спеції та постійні продукти?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-body">
+              <p data-i18n="faq.a6">
+                Сіль, олія та улюблені приправи відзначаються в окремій швидкій панелі спецій, а базові запаси зберігаються в розділі «Комора», щоб не вводити їх щоразу заново.
               </p>
             </div>
           </div>
@@ -1423,37 +1051,26 @@
         </div>
         <p class="footer-tagline" data-i18n="footer.tagline">Смачне з того, що є.</p>
         <p class="footer-copyright" data-i18n="footer.copyright">
-          © 2026 NeoFlux Technologies.<br>
-          Зроблено з любов'ю до смачної домашньої їжі в Україні 🇺🇦
+          © 2026 Nyamo. Усі права захищено.
         </p>
       </div>
 
       <div class="footer-col">
         <h4 class="footer-heading" data-i18n="footer.navHeading">Навігація</h4>
         <ul class="footer-links">
-          <li><a href="#hero" data-i18n="footer.navHome">Головна</a></li>
           <li><a href="#interactive-demo" data-i18n="footer.navDemo">Спробувати онлайн</a></li>
           <li><a href="#features" data-i18n="footer.navFeatures">Можливості</a></li>
-          <li><a href="#recipes" data-i18n="footer.navRecipes">Каталог страв</a></li>
+          <li><a href="#food-discovery" data-i18n="footer.navRecipes">Рецепти</a></li>
           <li><a href="#download" data-i18n="footer.navDownload">Завантажити</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4 class="footer-heading" data-i18n="footer.privacyHeading">Конфіденційність</h4>
+        <h4 class="footer-heading" data-i18n="footer.privacyHeading">Підтримка та приватність</h4>
         <ul class="footer-links">
           <li><a href="privacy-policy.html" data-i18n="footer.privacyPolicy">Політика конфіденційності</a></li>
           <li><a href="mailto:buisness@neoflux.fluxmarketplace.store" data-i18n="footer.support">Підтримка розробника</a></li>
-          <li><a href="mailto:buisness@neoflux.fluxmarketplace.store?subject=Beta%20Feedback" data-i18n="footer.feedback">Відгуки та пропозиції</a></li>
         </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4 class="footer-heading" data-i18n="footer.platformHeading">Платформа</h4>
-        <p class="footer-specs" data-i18n="footer.platformSpecs">
-          Android 8.0+ (Oreo, API 26) до Android 15/16 (API 36).<br>
-          Jetpack Compose, Room SQLite, Material 3.
-        </p>
       </div>
     </div>
   </footer>

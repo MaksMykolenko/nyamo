@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbarMotion();
   initMobileNav();
   initFaqAccordion();
-  initShowcaseTabs();
   initPlayground();
   initScrollReveal();
   initCameraScan();
@@ -39,7 +38,7 @@ function initNavbarMotion() {
   if (!header || !desktopNav || !pill) return;
 
   const navLinks = Array.from(desktopNav.querySelectorAll('.nav-link'));
-  const sectionIds = ['interactive-demo', 'features', 'recipes', 'faq'];
+  const sectionIds = ['interactive-demo', 'features', 'food-discovery', 'faq'];
   const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
   let activeSectionId = null;
@@ -108,11 +107,10 @@ function initNavbarMotion() {
       }
     });
 
-    // Camera Scan, Guided Cooking & Food Discovery Section continuity: map to interactive-demo
+    // Camera Scan & Guided Cooking continuity: map to interactive-demo
     const cameraSec = document.getElementById('camera-scan');
     const cookingSec = document.getElementById('cooking-mode');
-    const discoverySec = document.getElementById('food-discovery');
-    if (!currentSection && (cameraSec || cookingSec || discoverySec)) {
+    if (!currentSection && (cameraSec || cookingSec)) {
       if (cameraSec) {
         const cRect = cameraSec.getBoundingClientRect();
         if (cRect.top <= scrollTriggerPoint && cRect.bottom >= scrollTriggerPoint) {
@@ -122,12 +120,6 @@ function initNavbarMotion() {
       if (!currentSection && cookingSec) {
         const kRect = cookingSec.getBoundingClientRect();
         if (kRect.top <= scrollTriggerPoint && kRect.bottom >= scrollTriggerPoint) {
-          currentSection = 'interactive-demo';
-        }
-      }
-      if (!currentSection && discoverySec) {
-        const dRect = discoverySec.getBoundingClientRect();
-        if (dRect.top <= scrollTriggerPoint && dRect.bottom >= scrollTriggerPoint) {
           currentSection = 'interactive-demo';
         }
       }
@@ -254,57 +246,6 @@ function initFaqAccordion() {
   });
 }
 
-/* ==========================================================================
-   3. SHOWCASE TABS
-   ========================================================================== */
-function initShowcaseTabs() {
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const tabPanes = document.querySelectorAll('.tab-pane');
-
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-target');
-
-      // Update button states
-      tabButtons.forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-
-      // Switch active pane
-      tabPanes.forEach(pane => {
-        pane.classList.remove('active');
-        if (pane.id === targetId) {
-          pane.classList.add('active');
-        }
-      });
-    });
-  });
-
-  // Sub-screen switcher for recipe variants & recommendations
-  const subScreenButtons = document.querySelectorAll('.btn-sub-screen');
-  subScreenButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const parentPane = btn.closest('.tab-pane');
-      if (!parentPane) return;
-      const targetImgPath = btn.getAttribute('data-target-img');
-      const phoneImg = parentPane.querySelector('.tab-phone-img');
-      if (phoneImg && targetImgPath) {
-        phoneImg.style.opacity = '0.3';
-        phoneImg.style.transform = 'scale(0.97)';
-        setTimeout(() => {
-          phoneImg.src = targetImgPath;
-          phoneImg.style.opacity = '1';
-          phoneImg.style.transform = 'scale(1)';
-        }, 150);
-      }
-      parentPane.querySelectorAll('.btn-sub-screen').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-}
 
 /* ==========================================================================
    4. MULTILINGUAL DATA & RECIPEMATCHER PLAYGROUND
