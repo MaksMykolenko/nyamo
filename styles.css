@@ -169,9 +169,8 @@ button {
 }
 
 .section,
-section[id],
+section[id]:not(#hero),
 div[id].section,
-#hero,
 #interactive-demo,
 #camera-scan,
 #cooking-mode,
@@ -205,12 +204,14 @@ div[id].section,
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 18px;
+  left: 0;
+  right: 0;
   z-index: 1000;
   max-width: 1080px;
   width: calc(100% - 36px);
-  margin: 18px auto 0;
+  margin: 0 auto;
   background-color: rgba(20, 20, 20, 0.82);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -219,7 +220,6 @@ div[id].section,
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
   animation: navEntrance 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   transition: top 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              margin 0.35s cubic-bezier(0.22, 1, 0.36, 1),
               background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
               backdrop-filter 0.35s cubic-bezier(0.22, 1, 0.36, 1),
               -webkit-backdrop-filter 0.35s cubic-bezier(0.22, 1, 0.36, 1),
@@ -233,7 +233,7 @@ div[id].section,
 /* Scroll Morph State: gently tightens without casting heavy dark shadow over light sections */
 .site-header.is-scrolled {
   top: 10px;
-  margin-top: 10px;
+  margin: 0 auto;
   background-color: rgba(18, 18, 18, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -704,12 +704,14 @@ div[id].section,
    HERO SECTION: Onest Editorial & Premium Headline
    (64–68px desktop, line-height 1.04, tracking -0.04em, weight 550)
    ========================================================================== */
+#hero.hero-section,
 .hero-section {
-  padding: 56px 0 52px;
+  padding-top: 116px;
+  padding-bottom: 56px;
   overflow: hidden;
   position: relative;
   background:
-    radial-gradient(ellipse 65% 50% at 20% 0%, rgba(238, 110, 74, 0.18) 0%, rgba(30, 26, 23, 0) 65%),
+    radial-gradient(ellipse 65% 55% at 20% 0%, rgba(238, 110, 74, 0.18) 0%, rgba(30, 26, 23, 0) 65%),
     radial-gradient(ellipse 60% 45% at 85% 35%, rgba(37, 99, 235, 0.14) 0%, rgba(10, 10, 10, 0) 65%),
     linear-gradient(135deg, rgba(238, 110, 74, 0.08) 0%, rgba(10, 10, 10, 0) 45%, rgba(37, 99, 235, 0.08) 100%),
     var(--color-void-canvas);
@@ -3590,8 +3592,14 @@ div[id].section,
   .site-header {
     top: 10px;
     width: calc(100% - 20px);
-    margin: 10px auto 0;
+    margin: 0 auto;
     border-radius: 20px;
+  }
+
+  #hero.hero-section,
+  .hero-section {
+    padding-top: 88px;
+    padding-bottom: 40px;
   }
 
   .desktop-nav {
@@ -3629,9 +3637,8 @@ div[id].section,
   }
 
   .section,
-  section[id],
+  section[id]:not(#hero),
   div[id].section,
-  #hero,
   #interactive-demo,
   #camera-scan,
   #cooking-mode,
@@ -3865,8 +3872,10 @@ div[id].section,
     padding-bottom: 60px;
   }
 
+  #hero.hero-section,
   .hero-section {
-    padding: 44px 0 36px;
+    padding-top: 80px;
+    padding-bottom: 36px;
   }
 
   .hero-title {
