@@ -271,10 +271,12 @@ function getPluralWord(count, lang) {
     if (count % 10 === 1 && count % 100 !== 11) return 'страва';
     if (count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20)) return 'страви';
     return 'страв';
-  } else if (lang === 'en') {
-    return count === 1 ? 'dish' : 'dishes';
+  } else if (lang === 'pl') {
+    if (count === 1) return 'danie';
+    if (count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20)) return 'dania';
+    return 'dań';
   } else {
-    return 'yemek';
+    return count === 1 ? 'dish' : 'dishes';
   }
 }
 
@@ -283,29 +285,31 @@ function getPortionWord(count, lang) {
     if (count % 10 === 1 && count % 100 !== 11) return 'порція';
     if (count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20)) return 'порції';
     return 'порцій';
-  } else if (lang === 'en') {
-    return count === 1 ? 'portion' : 'portions';
+  } else if (lang === 'pl') {
+    if (count === 1) return 'porcja';
+    if (count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20)) return 'porcje';
+    return 'porcji';
   } else {
-    return 'porsiyon';
+    return count === 1 ? 'portion' : 'portions';
   }
 }
 
 const INGREDIENTS = [
-  { id: 'egg', names: { uk: 'Яйця курячі', en: 'Eggs', tr: 'Yumurta' }, emoji: '🥚', category: 'main' },
-  { id: 'tomato', names: { uk: 'Помідори', en: 'Tomatoes', tr: 'Domates' }, emoji: '🍅', category: 'main' },
-  { id: 'potato', names: { uk: 'Картопля', en: 'Potatoes', tr: 'Patates' }, emoji: '🥔', category: 'main' },
-  { id: 'onion', names: { uk: 'Цибуля', en: 'Onions', tr: 'Soğan' }, emoji: '🧅', category: 'main' },
-  { id: 'cottage_cheese', names: { uk: 'Кисломолочний сир', en: 'Cottage cheese', tr: 'Lor peyniri' }, emoji: '🧀', category: 'main' },
-  { id: 'wheat_flour', names: { uk: 'Борошно', en: 'Flour', tr: 'Un' }, emoji: '🌾', category: 'main' },
-  { id: 'hard_cheese', names: { uk: 'Твердий сир', en: 'Cheese', tr: 'Kaşar peyniri' }, emoji: '🧀', category: 'main' },
-  { id: 'pasta', names: { uk: 'Макарони', en: 'Pasta', tr: 'Makarna' }, emoji: '🍝', category: 'main' },
-  { id: 'chicken_fillet', names: { uk: 'Куряче філе', en: 'Chicken fillet', tr: 'Tavuk fileto' }, emoji: '🍗', category: 'main' },
-  { id: 'garlic', names: { uk: 'Часник', en: 'Garlic', tr: 'Sarımsak' }, emoji: '🧄', category: 'spice' },
-  { id: 'bell_pepper', names: { uk: 'Болгарський перець', en: 'Bell pepper', tr: 'Dolmalık biber' }, emoji: '🫑', category: 'main' },
-  { id: 'sour_cream', names: { uk: 'Сметана', en: 'Sour cream', tr: 'Ekşi krema' }, emoji: '🍶', category: 'main' },
-  { id: 'milk', names: { uk: 'Молоко', en: 'Milk', tr: 'Süt' }, emoji: '🥛', category: 'main' },
-  { id: 'sunflower_oil', names: { uk: 'Олія', en: 'Vegetable oil', tr: 'Sıvı yağ' }, emoji: '🫒', category: 'spice' },
-  { id: 'salt', names: { uk: 'Сіль & перець', en: 'Salt & pepper', tr: 'Tuz & karabiber' }, emoji: '🧂', category: 'spice' }
+  { id: 'egg', names: { uk: 'Яйця курячі', pl: 'Jajka kurze', en: 'Eggs' }, emoji: '🥚', category: 'main' },
+  { id: 'tomato', names: { uk: 'Помідори', pl: 'Pomidory', en: 'Tomatoes' }, emoji: '🍅', category: 'main' },
+  { id: 'potato', names: { uk: 'Картопля', pl: 'Ziemniaki', en: 'Potatoes' }, emoji: '🥔', category: 'main' },
+  { id: 'onion', names: { uk: 'Цибуля', pl: 'Cebula', en: 'Onions' }, emoji: '🧅', category: 'main' },
+  { id: 'cottage_cheese', names: { uk: 'Кисломолочний сир', pl: 'Twaróg', en: 'Cottage cheese' }, emoji: '🧀', category: 'main' },
+  { id: 'wheat_flour', names: { uk: 'Борошно', pl: 'Mąka pszenna', en: 'Flour' }, emoji: '🌾', category: 'main' },
+  { id: 'hard_cheese', names: { uk: 'Твердий сир', pl: 'Ser żółty', en: 'Cheese' }, emoji: '🧀', category: 'main' },
+  { id: 'pasta', names: { uk: 'Макарони', pl: 'Makaron', en: 'Pasta' }, emoji: '🍝', category: 'main' },
+  { id: 'chicken_fillet', names: { uk: 'Куряче філе', pl: 'Filet z kurczaka', en: 'Chicken fillet' }, emoji: '🍗', category: 'main' },
+  { id: 'garlic', names: { uk: 'Часник', pl: 'Czosnek', en: 'Garlic' }, emoji: '🧄', category: 'spice' },
+  { id: 'bell_pepper', names: { uk: 'Болгарський перець', pl: 'Papryka', en: 'Bell pepper' }, emoji: '🫑', category: 'main' },
+  { id: 'sour_cream', names: { uk: 'Сметана', pl: 'Śmietana', en: 'Sour cream' }, emoji: '🍶', category: 'main' },
+  { id: 'milk', names: { uk: 'Молоко', pl: 'Mleko', en: 'Milk' }, emoji: '🥛', category: 'main' },
+  { id: 'sunflower_oil', names: { uk: 'Олія', pl: 'Olej', en: 'Vegetable oil' }, emoji: '🫒', category: 'spice' },
+  { id: 'salt', names: { uk: 'Сіль & перець', pl: 'Sól i pieprz', en: 'Salt & pepper' }, emoji: '🧂', category: 'spice' }
 ];
 
 const RECIPES = [
@@ -331,6 +335,22 @@ const RECIPES = [
           'Вбийте яйця, посоліть за смаком і смажте 3–4 хвилини до готовності білка.'
         ]
       },
+      pl: {
+        title: 'Jajecznica z pomidorami',
+        description: 'Szybkie i soczyste śniadanie ze świeżymi pomidorami z patelni.',
+        prepTime: '15 min',
+        equipment: 'Kuchenka',
+        portions: {
+          2: ['3 jajka', '2 dojrzałe pomidory', '1 łyżka oleju', 'szczypta soli i pieprzu'],
+          4: ['6 jajek', '4 dojrzałe pomidory', '2 łyżki oleju', 'szczypta soli i pieprzu']
+        },
+        steps: [
+          'Umyj pomidory i pokrój na średnie kawałki.',
+          'Rozgrzej patelnię z olejem na średnim ogniu.',
+          'Podsmażaj pomidory przez 2–3 minuty, aż lekko zmiękną.',
+          'Wbij jajka, dopraw solą i smaż 3–4 minuty do ścięcia białek.'
+        ]
+      },
       en: {
         title: 'Scrambled Eggs with Tomatoes',
         description: 'Quick and juicy breakfast with fresh tomatoes in a sizzling pan.',
@@ -345,22 +365,6 @@ const RECIPES = [
           'Heat skillet with vegetable oil over medium heat.',
           'Sauté tomatoes for 2–3 minutes until soft.',
           'Crack in eggs, season with salt and fry 3–4 minutes until whites set.'
-        ]
-      },
-      tr: {
-        title: 'Domatesli Yumurta',
-        description: 'Taze domateslerle tavada hızlı ve sulu lezzetli bir kahvaltı.',
-        prepTime: '15 dk',
-        equipment: 'Ocak',
-        portions: {
-          2: ['3 yumurta', '2 olgun domates', '1 yemek kaşığı sıvı yağ', 'bir tutam tuz ve karabiber'],
-          4: ['6 yumurta', '4 olgun domates', '2 yemek kaşığı sıvı yağ', 'bir tutam tuz ve karabiber']
-        },
-        steps: [
-          'Domatesleri yıkayın ve orta boy dilimleyin.',
-          'Tavada sıvı yağı orta ateşte ısıtın.',
-          'Domatesleri 2–3 dakika hafifçe yumuşayana kadar soteleyin.',
-          'Yumurtaları kırın, tuz ekleyin ve aklar pişene kadar 3–4 dakika pişirin.'
         ]
       }
     }
@@ -387,6 +391,22 @@ const RECIPES = [
           'Зробіть ложкою заглиблення, обережно випустіть яйця та готуйте 5 хв під кришкою.'
         ]
       },
+      pl: {
+        title: 'Aromatyczna szakszuka',
+        description: 'Jajka duszone w aromatycznym sosie ze świeżych pomidorów i papryki.',
+        prepTime: '25 min',
+        equipment: 'Kuchenka',
+        portions: {
+          2: ['3 jajka', '2 pomidory', '1 papryka', '1 cebula', '1 łyżka oleju', 'sól i przyprawy'],
+          4: ['6 jajek', '4 pomidory', '2 papryki', '2 cebule', '2 łyżki oleju', 'sól i przyprawy']
+        },
+        steps: [
+          'Drobno posiekaj cebulę, paprykę i pomidory.',
+          'Podsmaż cebulę i paprykę przez 5–7 minut do miękkości.',
+          'Dodaj pomidory oraz sól i duś do uzyskania gęstego sosu.',
+          'Zrób łyżką wgłębienia, wbij jajka i gotuj pod przykryciem przez 5 minut.'
+        ]
+      },
       en: {
         title: 'Fragrant Shakshuka',
         description: 'Eggs poached in a spiced, rich sauce of ripe tomatoes and bell peppers.',
@@ -401,22 +421,6 @@ const RECIPES = [
           'Sauté onion and pepper for 5–7 minutes until tender.',
           'Add tomatoes and salt, simmer into a thick fragrant sauce.',
           'Make wells with a spoon, crack in eggs and cook 5 minutes covered.'
-        ]
-      },
-      tr: {
-        title: 'Baharatlı Şakşuka',
-        description: 'Olgun domates ve dolmalık biber sosunda pişen nefis poşe yumurtalar.',
-        prepTime: '25 dk',
-        equipment: 'Ocak',
-        portions: {
-          2: ['3 yumurta', '2 domates', '1 dolmalık biber', '1 soğan', '1 yemek kaşığı yağ', 'tuz ve baharatlar'],
-          4: ['6 yumurta', '4 domates', '2 dolmalık biber', '2 soğan', '2 yemek kaşığı yağ', 'tuz ve baharatlar']
-        },
-        steps: [
-          'Soğan, biber ve domatesleri küp şeklinde doğrayın.',
-          'Soğan ve biberi yumuşayana kadar 5–7 dakika soteleyin.',
-          'Domates ve tuz ekleyip koyu bir sos oluşana kadar kısık ateşte pişirin.',
-          'Kaşıkla yuvalar açıp yumurtaları kırın, kapağı kapalı 5 dakika pişirin.'
         ]
       }
     }
@@ -443,6 +447,22 @@ const RECIPES = [
           'Обсмажуйте по 3–4 хвилини з кожного боку до красивої скоринки. Подавайте зі сметаною.'
         ]
       },
+      pl: {
+        title: 'Chrupiące placki ziemniaczane',
+        description: 'Złociste, chrupiące tradycyjne placki ziemniaczane.',
+        prepTime: '30 min',
+        equipment: 'Kuchenka',
+        portions: {
+          2: ['500 g ziemniaków', '1 cebula', '1 jajko', '2 łyżki mąki', 'olej do smażenia', 'sól'],
+          4: ['1 kg ziemniaków', '2 cebule', '2 jajka', '4 łyżki mąki', 'olej do smażenia', 'sól']
+        },
+        steps: [
+          'Obierz ziemniaki i cebulę, zetrzyj na drobnej tarce.',
+          'Odsącz nadmiar płynu, dodaj jajko, mąkę i sól, dokładnie wymieszaj.',
+          'Rozgrzej olej na patelni i nakładaj masę łyżką.',
+          'Smaż po 3–4 minuty z każdej strony na złoty kolor. Podawaj ze śmietaną.'
+        ]
+      },
       en: {
         title: 'Crispy Deruny (Potato Pancakes)',
         description: 'Golden, crispy traditional potato pancakes with lacy browned edges.',
@@ -457,22 +477,6 @@ const RECIPES = [
           'Drain excess liquid, mix with egg, flour and salt.',
           'Heat oil in a skillet and drop spoonfuls of batter.',
           'Fry 3–4 minutes per side until crisp and golden. Serve with sour cream.'
-        ]
-      },
-      tr: {
-        title: 'Çıtır Deruny (Patates Mücveri)',
-        description: 'Dışı çıtır çıtır, içi yumuşacık altın sarısı patates mücveri.',
-        prepTime: '30 dk',
-        equipment: 'Ocak',
-        portions: {
-          2: ['500g patates', '1 soğan', '1 yumurta', '2 yemek kaşığı un', 'kızartma yağı', 'tuz'],
-          4: ['1kg patates', '2 soğan', '2 yumurta', '4 yemek kaşığı un', 'kızartma yağı', 'tuz']
-        },
-        steps: [
-          'Patates ve soğanı soyup ince rendeleyin.',
-          'Fazla suyunu sıkın, yumurta, un ve tuz ekleyip karıştırın.',
-          'Tavada yağı kızdırın ve karışımdan kaşık kaşık tavaya dökün.',
-          'Her iki tarafını 3–4 dakika altın sarısı olana kadar kızartın. Ekşi krema ile servis yapın.'
         ]
       }
     }
@@ -499,6 +503,22 @@ const RECIPES = [
           'Обсмажте на олії по 3 хвилини з кожного боку до рум\'яності.'
         ]
       },
+      pl: {
+        title: 'Domowe serniczki',
+        description: 'Delikatne w środku i złociste z zewnątrz placki z twarogu.',
+        prepTime: '25 min',
+        equipment: 'Kuchenka',
+        portions: {
+          2: ['350 g twarogu', '1 jajko', '50 g mąki', '1 łyżka oleju', 'cukier do smaku'],
+          4: ['700 g twarogu', '2 jajka', '100 g mąki', '2 łyżki oleju', 'cukier do smaku']
+        },
+        steps: [
+          'W misce rozgnieć twaróg z jajkiem i cukrem.',
+          'Dodaj mąkę i zagnieć miękkie ciasto.',
+          'Uformuj niewielkie krążki i lekko obtocz w mące.',
+          'Smaż na średnim ogniu po 3 minuty z każdej strony do zrumienienia.'
+        ]
+      },
       en: {
         title: 'Homemade Syrnyky (Cottage Cheese Pancakes)',
         description: 'Tender on the inside and delicately golden on the outside.',
@@ -513,22 +533,6 @@ const RECIPES = [
           'Add flour and knead into a soft, pliable dough.',
           'Shape into small patties and lightly dust with flour.',
           'Fry in oil for 3 minutes per side until golden. Serve warm.'
-        ]
-      },
-      tr: {
-        title: 'Ev Yapımı Sırniki (Lor Peynirli Pankek)',
-        description: 'İçi yumuşacık, dışı nar gibi kızarmış geleneksel lor peynirli pankekler.',
-        prepTime: '25 dk',
-        equipment: 'Ocak',
-        portions: {
-          2: ['350g lor peyniri', '1 yumurta', '50g un', '1 yemek kaşığı sıvı yağ', 'damak tadına göre şeker'],
-          4: ['700g lor peyniri', '2 yumurta', '100g un', '2 yemek kaşığı sıvı yağ', 'damak tadına göre şeker']
-        },
-        steps: [
-          'Bir kasede lor peynirini yumurta ve şeker ile ezin.',
-          'Unu ekleyip yumuşak bir hamur yoğurun.',
-          'Küçük yuvarlak köfteler yapıp hafifçe una bulayın.',
-          'Tavada orta ateşte her iki tarafını 3 dakika kızartın.'
         ]
       }
     }
@@ -555,6 +559,22 @@ const RECIPES = [
           'Подавайте відразу, доки сир тане та тягнеться.'
         ]
       },
+      pl: {
+        title: 'Makaron z serem',
+        description: 'Szybki, rozgrzewający makaron z ciągnącym się aromatycznym serem.',
+        prepTime: '20 min',
+        equipment: 'Kuchenka',
+        portions: {
+          2: ['200 g makaronu', '120 g sera żółtego', '1 łyżka oleju', 'sól do smaku'],
+          4: ['400 g makaronu', '240 g sera żółtego', '2 łyżki oleju', 'sól do smaku']
+        },
+        steps: [
+          'Ugotuj makaron w osolonej wodzie al dente.',
+          'Zetrzyj ser na tarce o średnich oczkach.',
+          'Odcedź makaron, wymieszaj z odrobiną oleju i gorący połącz z serem.',
+          'Podawaj od razu, gdy ser apetycznie się topi.'
+        ]
+      },
       en: {
         title: 'Pasta with Melted Cheese',
         description: 'Comforting, quick hot pasta with rich, gooey melted cheese.',
@@ -569,22 +589,6 @@ const RECIPES = [
           'Finely or coarsely grate the cheese.',
           'Drain pasta, toss with oil and immediately fold in cheese.',
           'Serve piping hot while cheese is stretchy and fragrant.'
-        ]
-      },
-      tr: {
-        title: 'Eriyen Kaşarlı Makarna',
-        description: 'Sıcak, hızlı ve uzayan lezzetli peynirli pratik makarna.',
-        prepTime: '20 dk',
-        equipment: 'Ocak',
-        portions: {
-          2: ['200g makarna', '120g kaşar peyniri', '1 yemek kaşığı sıvı yağ', 'tuz'],
-          4: ['400g makarna', '240g kaşar peyniri', '2 yemek kaşığı sıvı yağ', 'tuz']
-        },
-        steps: [
-          'Makarnayı tuzlu kaynar suda al dente haşlayın.',
-          'Kaşar peynirini rendeleyin.',
-          'Makarnayı süzün, yağ ve peynirle karıştırın.',
-          'Peynir erirken hemen sıcak servis yapın.'
         ]
       }
     }
@@ -611,6 +615,22 @@ const RECIPES = [
           'Готуйте на повільному вогні 8–10 хвилин, не відкриваючи кришку.'
         ]
       },
+      pl: {
+        title: 'Puszysty omlet mleczny',
+        description: 'Klasyczne, delikatne śniadanie o lekkiej puszystej strukturze.',
+        prepTime: '15 min',
+        equipment: 'Kuchenka',
+        portions: {
+          2: ['3 jajka', '120 ml mleka', '1 łyżeczka oleju', 'szczypta soli'],
+          4: ['6 jajek', '240 ml mleka', '1 łyżka oleju', 'szczypta soli']
+        },
+        steps: [
+          'Roztrzep jajka z mlekiem i solą na jednolitą pianę.',
+          'Posmaruj patelnię olejem i rozgrzej na średnim ogniu.',
+          'Wlej masę jajeczną i przykryj szczelną pokrywką.',
+          'Smaż na małym ogniu przez 8–10 minut bez podnoszenia pokrywki.'
+        ]
+      },
       en: {
         title: 'Fluffy Milk Omelette',
         description: 'A classic breakfast with an airy, cloud-like tender texture.',
@@ -625,22 +645,6 @@ const RECIPES = [
           'Grease skillet with oil and warm over medium heat.',
           'Pour in egg mixture and cover tightly with lid.',
           'Cook on low heat for 8–10 minutes without lifting lid.'
-        ]
-      },
-      tr: {
-        title: 'Kabarık Sütlü Omlet',
-        description: 'Hafif, yumuşacık ve bulut gibi kabaran klasik bir kahvaltı omleti.',
-        prepTime: '15 dk',
-        equipment: 'Ocak',
-        portions: {
-          2: ['3 yumurta', '120ml süt', '1 tatlı kaşığı sıvı yağ', 'bir tutam tuz'],
-          4: ['6 yumurta', '240ml süt', '1 yemek kaşığı sıvı yağ', 'bir tutam tuz']
-        },
-        steps: [
-          'Yumurtaları süt ve tuzla köpürene kadar çırpın.',
-          'Tavayı hafifçe yağlayıp orta ateşte ısıtın.',
-          'Karışımı tavaya döküp kapağını kapatın.',
-          'Kısık ateşte kapağını açmadan 8–10 dakika pişirin.'
         ]
       }
     }
@@ -667,6 +671,22 @@ const RECIPES = [
           'Дайте м\'ясу відпочити 2 хвилини перед нарізкою.'
         ]
       },
+      pl: {
+        title: 'Soczysty filet z kurczaka',
+        description: 'Aromatyczna pierś z kurczaka w ziołach ze złocistą skórką.',
+        prepTime: '20 min',
+        equipment: 'Kuchenka',
+        portions: {
+          2: ['400 g filetu z kurczaka', '1 łyżka oleju', 'sól i pieprz do smaku'],
+          4: ['800 g filetu z kurczaka', '2 łyżki oleju', 'sól i pieprz do smaku']
+        },
+        steps: [
+          'Opłucz i osusz filety, przekrój wzdłuż na cieńsze plastry.',
+          'Natrzyj solą, pieprzem i opcjonalnie czosnkiem.',
+          'Rozgrzej olej i smaż mięso po 3–4 minuty z każdej strony.',
+          'Odstaw na 2 minuty przed pokrojeniem.'
+        ]
+      },
       en: {
         title: 'Juicy Pan-Seared Chicken Fillet',
         description: 'Tender chicken breast with savory herbs and a crisp golden crust.',
@@ -681,22 +701,6 @@ const RECIPES = [
           'Rub with salt, pepper, and minced garlic.',
           'Heat oil in pan and sear fillets for 3–4 minutes per side.',
           'Rest meat 2 minutes before carving.'
-        ]
-      },
-      tr: {
-        title: 'Tavada Sulu Tavuk Fileto',
-        description: 'Baharatlarla lezzetlenmiş, dışı kızarmış sulu tavuk göğsü.',
-        prepTime: '20 dk',
-        equipment: 'Ocak',
-        portions: {
-          2: ['400g tavuk fileto', '1 yemek kaşığı sıvı yağ', 'damak tadına göre tuz ve karabiber'],
-          4: ['800g tavuk fileto', '2 yemek kaşığı sıvı yağ', 'damak tadına göre tuz ve karabiber']
-        },
-        steps: [
-          'Tavuk filetolarını yıkayıp kurulayın ve enlemesine ikiye kesin.',
-          'Tuz, karabiber ve isteğe göre sarımsakla ovalayın.',
-          'Tavada yağı kızdırıp her iki tarafını 3–4 dakika pişirin.',
-          'Dilimlemeden önce 2 dakika dinlendirin.'
         ]
       }
     }
@@ -722,6 +726,21 @@ const RECIPES = [
           'Викладіть на деко в один шар і запікайте при 200°C 35–40 хвилин.'
         ]
       },
+      pl: {
+        title: 'Pieczone ziemniaki z czosnkiem',
+        description: 'Aromatyczne cząstki ziemniaków z piekarnika z chrupiącą skórką.',
+        prepTime: '40 min',
+        equipment: 'Piekarnik',
+        portions: {
+          2: ['500 g ziemniaków', '3 ząbki czosnku', '2 łyżki oleju', 'sól do smaku'],
+          4: ['1 kg ziemniaków', '6 ząbków czosnku', '3 łyżki oleju', 'sól do smaku']
+        },
+        steps: [
+          'Dokładnie umyj ziemniaki i pokrój w łódeczki.',
+          'Wymieszaj ziemniaki z olejem, solą i posiekanym czosnkiem.',
+          'Ułóż na blasze w jednej warstwie i piecz w 200°C przez 35–40 minut.'
+        ]
+      },
       en: {
         title: 'Garlic Herb Baked Potatoes',
         description: 'Fragrant golden potato wedges roasted to crispy perfection.',
@@ -735,21 +754,6 @@ const RECIPES = [
           'Scrub potatoes clean and cut into wedges.',
           'Toss potato wedges with vegetable oil, salt and minced garlic.',
           'Spread in a single layer on baking sheet and roast at 200°C (400°F) for 35–40 minutes.'
-        ]
-      },
-      tr: {
-        title: 'Sarımsaklı Fırın Patates',
-        description: 'Fırında nar gibi kızarmış, kokusuyla iştah kabartan sarımsaklı patates dilimleri.',
-        prepTime: '40 dk',
-        equipment: 'Fırın',
-        portions: {
-          2: ['500g patates', '3 diş sarımsak', '2 yemek kaşığı sıvı yağ', 'tuz'],
-          4: ['1kg patates', '6 diş sarımsak', '3 yemek kaşığı sıvı yağ', 'tuz']
-        },
-        steps: [
-          'Patatesleri iyice yıkayıp elma dilim şeklinde doğrayın.',
-          'Sıvı yağ, ezilmiş sarımsak ve tuzla harmanlayın.',
-          'Fırın tepsisine tek kat dizip 200°C fırında 35–40 dakika pişirin.'
         ]
       }
     }
@@ -814,9 +818,9 @@ function renderChips() {
   const spiceIngs = INGREDIENTS.filter(i => i.category === 'spice');
 
   const groupLabels = {
-    uk: { main: '🛒 Продукти в наявності', spice: '🧂 Спеції та запаси (Комора)' },
-    en: { main: '🛒 Ingredients available', spice: '🧂 Spices & staples (Pantry)' },
-    tr: { main: '🛒 Mevcut malzemeler', spice: '🧂 Baharatlar ve kiler' }
+    uk: { main: '🛒 Продукти в наявності', spice: '🧂 Спеції та базові запаси' },
+    pl: { main: '🛒 Dostępne składniki', spice: '🧂 Przyprawy i podstawowe zapasy' },
+    en: { main: '🛒 Available ingredients', spice: '🧂 Spices & staples' }
   };
   const curLabels = groupLabels[lang] || groupLabels.uk;
 
@@ -837,67 +841,64 @@ function renderChips() {
       } else {
         selectedIngredients.add(ing.id);
       }
-      chip.classList.toggle('active', selectedIngredients.has(ing.id));
-      updateSelectedCount();
+      renderChips();
       renderResults();
     });
 
     return chip;
   }
 
-  // 1. Ingredients Available Group
+  // Render Main Ingredients
+  const mainHeader = document.createElement('div');
+  mainHeader.className = 'chips-group-title';
+  mainHeader.textContent = curLabels.main;
+  container.appendChild(mainHeader);
+
   const mainGroup = document.createElement('div');
   mainGroup.className = 'chips-group';
-  mainGroup.innerHTML = `<span class="chips-group-heading">${curLabels.main}</span>`;
-  const mainSubgrid = document.createElement('div');
-  mainSubgrid.className = 'chips-subgrid';
-  mainIngs.forEach(ing => mainSubgrid.appendChild(createChip(ing)));
-  mainGroup.appendChild(mainSubgrid);
+  mainIngs.forEach(ing => mainGroup.appendChild(createChip(ing)));
   container.appendChild(mainGroup);
 
-  // 2. Spices & Staples Group
+  // Render Spices & Staples
+  const spiceHeader = document.createElement('div');
+  spiceHeader.className = 'chips-group-title';
+  spiceHeader.textContent = curLabels.spice;
+  container.appendChild(spiceHeader);
+
   const spiceGroup = document.createElement('div');
-  spiceGroup.className = 'chips-group chips-group-spices';
-  spiceGroup.innerHTML = `<span class="chips-group-heading">${curLabels.spice}</span>`;
-  const spiceSubgrid = document.createElement('div');
-  spiceSubgrid.className = 'chips-subgrid';
-  spiceIngs.forEach(ing => spiceSubgrid.appendChild(createChip(ing)));
-  spiceGroup.appendChild(spiceSubgrid);
+  spiceGroup.className = 'chips-group';
+  spiceIngs.forEach(ing => spiceGroup.appendChild(createChip(ing)));
   container.appendChild(spiceGroup);
-
-  updateSelectedCount();
-}
-
-function updateSelectedCount() {
-  const countEl = document.getElementById('selectedCount');
-  if (countEl) {
-    const text = i18nText('playground.selectedCount', { n: selectedIngredients.size }, `Вибрано: ${selectedIngredients.size}`);
-    countEl.textContent = text;
-  }
 }
 
 function renderResults() {
-  const grid = document.getElementById('matchingRecipesGrid');
+  const container = document.getElementById('matchingRecipesGrid');
+  const countEl = document.getElementById('selectedCount');
   const summaryEl = document.getElementById('resultsSummary');
-  if (!grid) return;
+  if (!container) return;
 
   const lang = getLang();
-  grid.innerHTML = '';
+  if (countEl) {
+    countEl.textContent = i18nText('playground.selectedCount', { n: selectedIngredients.size }, `Вибрано: ${selectedIngredients.size}`);
+  }
 
   // Calculate matching for all recipes
   const evaluatedRecipes = RECIPES.map(rawRecipe => {
-    const locRecipe = getLocalizedRecipe(rawRecipe, lang);
-    const missing = rawRecipe.required.filter(id => !selectedIngredients.has(id));
+    const recipe = getLocalizedRecipe(rawRecipe, lang);
+    const scaledReq = rawRecipe.required;
+    const missing = scaledReq.filter(id => !selectedIngredients.has(id));
     const canCook = missing.length === 0;
+    const missingNames = missing.map(id => {
+      const found = INGREDIENTS.find(i => i.id === id);
+      return found ? getIngredientName(found, lang) : id;
+    });
+
     return {
       rawRecipe,
-      recipe: locRecipe,
+      recipe,
       canCook,
       missingCount: missing.length,
-      missingNames: missing.map(id => {
-        const found = INGREDIENTS.find(i => i.id === id);
-        return found ? getIngredientName(found, lang) : id;
-      })
+      missingNames
     };
   });
 
@@ -920,7 +921,7 @@ function renderResults() {
     }
   }
 
-  const andMoreText = lang === 'uk' ? ' та ще...' : (lang === 'tr' ? ' ve diğer...' : ' and more...');
+  const andMoreText = lang === 'uk' ? ' та ще...' : (lang === 'pl' ? ' i jeszcze...' : ' and more...');
   const cardReadyBadge = i18nText('playground.cardReady', {}, 'Є всі інгредієнти');
   const cardReadyDesc = i18nText('playground.cardReadyText', {}, '✓ Усі необхідні продукти є в наявності');
   const btnActionText = i18nText('playground.cardViewRecipe', {}, 'Переглянути рецепт');

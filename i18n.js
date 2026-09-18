@@ -2,8 +2,8 @@
  * Nyamo Internationalization (i18n) System
  * Supports:
  *  - Ukrainian (uk) [Default]
+ *  - Polish (pl)
  *  - English (en)
- *  - Turkish (tr)
  * Automatic Region/Locale Detection:
  *  - Query param (?lang=)
  *  - LocalStorage
@@ -13,23 +13,23 @@
 
 const NyamoI18n = (() => {
   const STORAGE_KEY = 'nyamo_user_lang';
-  const SUPPORTED_LANGS = ['uk', 'en', 'tr'];
+  const SUPPORTED_LANGS = ['uk', 'pl', 'en'];
   const DEFAULT_LANG = 'uk';
 
   const TRANSLATIONS = {
     uk: {
       meta: {
-        title: "Nyamo («Нямо») — Смачне з того, що є | Розумний кулінарний Android-додаток",
-        desc: "Nyamo допомагає знайти ідеальні рецепти з продуктів, які вже є на вашій кухні. 100% офлайн, без платних підписок, з точним алгоритмом підбору та AI-розпізнаванням за фото."
+        title: "Nyamo — Пошук страв із твоїх продуктів | Бета-тестування",
+        desc: "Nyamo допомагає знайти ідеї смачних страв із продуктів, які вже є вдома або на фото. Простий підбір страв, збереження прогресу та відкрите бета-тестування."
       },
       nav: {
-        demo: "Спробувати онлайн",
+        demo: "Спробувати демо",
         features: "Можливості",
         showcase: "Інтерфейс",
-        recipes: "Рецепти",
+        recipes: "Страви",
         comparison: "Чому Nyamo",
         faq: "FAQ",
-        download: "Завантажити"
+        download: "Долучитися до бети"
       },
       styleSwitcher: {
         label: "Стиль лендінгу:",
@@ -38,36 +38,39 @@ const NyamoI18n = (() => {
         minimalist: "C: Sunlit Minimalist"
       },
       hero: {
-        badgeMain: "✨ Розумний кулінарний помічник",
-        title: "Твій холодильник<br>вже знає, що<br><span class=\"text-highlight\">на вечерю.</span>",
-        titlePre: "Твій холодильник",
-        titleHighlight: "вже знає, що на вечерю.",
-        subtitle: "Покажи Nyamo, що є вдома. Отримай страви, які можеш приготувати просто зараз.",
-        ctaDownload: "Завантажити Nyamo",
-        ctaDemo: "Спробувати онлайн",
-        trustFree: "Безкоштовно назавжди",
-        trustOffline: "Працює без зв'язку",
-        trustRecipes: "60+ автентичних рецептів",
+        badgeMain: "✨ Бета-тестування сервісу",
+        title: "Є продукти, але не знаєш,<br><span class=\"text-highlight\">що приготувати?</span>",
+        titlePre: "Є продукти, але не знаєш,",
+        titleHighlight: "що приготувати?",
+        subtitle: "Обери продукти, які маєш, або додай їх за допомогою фото. Nyamo запропонує страви з каталогу рецептів.",
+        ctaDownload: "Долучитися до бета-тестування",
+        ctaDemo: "Спробувати демо",
+        trustFree: "Підбір за твоїми продуктами",
+        trustOffline: "Додавання за фото",
+        trustRecipes: "Відкрите бета-тестування",
+        trustMatch: "Підбір за твоїми продуктами",
+        trustPhoto: "Додавання за фото",
+        trustBeta: "Відкрите бета-тестування",
         foodCardTitle: "Ароматна шакшука",
         foodCardTime: "15 хв",
-        foodCardStatus: "✓ Всі продукти з холодильника",
+        foodCardStatus: "✓ Підходить за списком продуктів",
         foodCardMissing: "0 докуплено",
         foodCardServings: "2 порції",
         badgeEggs: "Яйця курячі",
-        badgeEggsSub: "3 шт. у наявності",
-        badgeEggsPill: "3 яйця у наявності",
+        badgeEggsSub: "3 шт. у списку",
+        badgeEggsPill: "3 яйця у списку",
         badgeTomatoes: "Стиглі томати",
-        badgeTomatoesSub: "2 шт. на полиці",
+        badgeTomatoesSub: "2 шт. у списку",
         badgeCanCook: "✓ Можна приготувати",
         badgeShakshuka: "Шакшука з томатами",
-        badgeAi: "AI-розпізнавання",
+        badgeAi: "Аналіз фото",
         badgeAiSub: "Google Gemini",
         badgeMissing: "Бракує: лише вершки"
       },
       playground: {
-        badge: "✨ Інтерактивний симулятор",
-        title: "Не шукай рецепт.<br>Готуй з того, що вже є.",
-        desc: "Обери продукти та спеції, які маєш під рукою. Nyamo покаже страви, які можна зготувати негайно, та точно попередить, якщо чогось бракує.",
+        badge: "✨ Інтерактивне демо",
+        title: "Обери продукти.<br>Подивись, що можна приготувати.",
+        desc: "Познач, що є вдома, і подивись варіанти страв із каталогу. Nyamo покаже точний збіг або чого саме не вистачає.",
         fridgeLabel: "Твій віртуальний холодильник",
         selectedCount: "Вибрано: {n}",
         presetLabel: "Швидкі набори:",
@@ -91,9 +94,9 @@ const NyamoI18n = (() => {
         pluralMany: "страв"
       },
       camera: {
-        tag: "Швидке сканування",
+        tag: "Додавання за фото",
         title: "Не хочеш додавати вручну?<br>Просто сфотографуй.",
-        desc: "Nyamo розпізнає продукти на фото, додасть їх у твій холодильник і одразу покаже, що можна приготувати.",
+        desc: "Сфотографуй те, що маєш на поличці чи на столі. Nyamo запропонує список продуктів для перевірки перед підбором страв.",
         labelTomatoes: "Помідори",
         labelEggs: "Яйця",
         labelCheese: "Сир",
@@ -101,8 +104,8 @@ const NyamoI18n = (() => {
         labelOnion: "Цибуля",
         labelHerbs: "Зелень",
         flowPhoto: "Фото",
-        flowDetected: "Розпізнано 6 продуктів",
-        readyDishes: "8 страв можна приготувати",
+        flowDetected: "Приклад розпізнавання: 6 продуктів",
+        readyDishes: "8 страв у каталозі",
         recipe1Title: "Ароматна шакшука",
         recipe1Meta: "⏱ 25 хв • 🍳 Плита",
         recipe2Title: "Пишний молочний омлет",
@@ -111,29 +114,30 @@ const NyamoI18n = (() => {
         badgeReady: "✓ Є всі інгредієнти"
       },
       cooking: {
-        tag: "Режим приготування",
-        title: "Далі просто готуй.<br>Nyamo проведе<br>крок за кроком.",
-        desc: "Один крок за раз, таймери під рукою та нічого зайвого перед очима.",
-        handsFree: "Руки зайняті? Наступний крок завжди перед тобою.",
+        tag: "Покроковий процес",
+        title: "Зрозумілі кроки<br>під час готування.",
+        desc: "Застосунок показує процес крок за кроком, щоб не губитися у великому тексті рецепта.",
+        handsFree: "Демонстраційний вигляд екрана приготування в застосунку.",
+        previewNote: "Демонстраційний вигляд екрана приготування в застосунку.",
         recipeTitle: "Шакшука з томатами",
         stepCountLabel: "Крок {n} з {total}",
         step3Num: "Крок 3 з 7",
         step3Text: "Додай помідори та тушкуй на середньому вогні.",
-        step3Sub: "Готуй на середньому вогні 5–7 хвилин.",
+        step3Sub: "Готуй на середньому вогні приблизно 5–7 хвилин.",
         step4Num: "Крок 4 з 7",
         step4Text: "Додай яйця та накрий сковороду.",
-        step4Sub: "Готуй під кришкою 4–5 хвилин.",
-        timerRemaining: "залишилось",
+        step4Sub: "Готуй під кришкою приблизно 4–5 хвилин.",
+        timerRemaining: "орієнтовно",
         btnBack: "← Назад",
         btnNext: "Далі →",
         floatingStep: "Крок 3 / 7",
         floatingStepNext: "Крок 4 / 7",
-        floatingTimer: "05:36"
+        floatingTimer: "05:00"
       },
       discovery: {
-        tag: "Що приготувати",
+        tag: "Ідеї страв",
         title: "На сьогодні точно<br>є що приготувати.",
-        subtitle: "Від швидкого сніданку до вечері з того, що вже лежить у холодильнику. 60+ домашніх рецептів — і каталог постійно росте.",
+        subtitle: "Від швидкого сніданку до ситної вечері з того, що вже лежить у холодильнику. Прості домашні страви на кожен день.",
         quote: "Менше думати.<br>Більше готувати.",
         readyBadge: "Є всі продукти",
         recipeShakshuka: "Шакшука з томатами",
@@ -150,60 +154,62 @@ const NyamoI18n = (() => {
         recipeOmeletteMeta: "10 хв"
       },
       features: {
-        badge: "💡 Переваги Nyamo",
-        title: "Продумано для спокійного готування",
-        desc: "Без зайвого шуму, складних налаштувань та перевантажених інтерфейсів.",
+        badge: "💡 Чому Nyamo",
+        title: "Продумано для повсякденного готування",
+        desc: "Допомагає визначитися з їжею швидко, без зайвого шуму та складних налаштувань.",
         b1Num: "01",
-        b1Title: "Точно знає, чого не вистачає",
-        b1Text: "Nyamo враховує не тільки назву продукту, а й кількість — і одразу показує, що вже можна готувати.",
+        b1Title: "Підбір за твоїми продуктами",
+        b1Text: "Вкажи, що є вдома — Nyamo знайде страви й чітко підкаже, якщо чогось бракує для повної порції.",
         b2Num: "02",
-        b2Title: "Просто покажи, що є",
-        b2Text: "Сфотографуй продукти або додай їх вручну. Nyamo збере все в одному місці.",
+        b2Title: "Додавання продуктів за фото",
+        b2Text: "Зроби знімок інгредієнтів на кухні, підтвердь розпізнаний список у діалозі та одразу дивись рецепти.",
         b3Num: "03",
-        b3Title: "Твої дані залишаються твоїми",
-        b3Text: "Ми не створюємо рекламний профіль і не продаємо твої дані."
+        b3Title: "Прості щоденні страви",
+        b3Text: "Каталог звичних домашніх страв без екзотичних інгредієнтів, який поступово розширюється разом із тестувальниками."
       },
       brandStatement: {
-        title: "Nyamo починає не з рецепта.<br>Nyamo починає з того, що вже є у тебе.",
-        fact1: "Без обов’язкової підписки",
-        fact2: "Працює з твоїми продуктами",
-        fact3: "Основні рецепти доступні офлайн"
+        title: "Nyamo починає не зі списку покупок.<br>Nyamo починає з того, що вже є вдома.",
+        fact1: "Підбір страв із наявного",
+        fact2: "Додавання продуктів за фото",
+        fact3: "Зворотний зв'язок у беті"
       },
       download: {
-        badge: "📱 Додаток для кухні",
-        title: "Що приготуєш сьогодні?",
-        desc: "Покажи Nyamo, що є вдома — решту ми допоможемо перетворити на вечерю.",
-        btnDownload: "Завантажити Nyamo",
-        btnGooglePlay: "Google Play",
-        metaOffline: "✓ Основні функції офлайн",
-        metaFree: "✓ Без обов'язкової підписки",
-        metaClean: "✓ Безпечно та без трекерів",
-        qrCaption: "Наведи камеру смартфона для швидкого завантаження"
+        badge: "📱 Бета-тестування",
+        title: "Спробуй Nyamo у бета-тестуванні",
+        desc: "Допоможи нам зробити додаток зручнішим. Завантажуй бета-версію на Android або надішли запит на тестування.",
+        btnDownload: "Завантажити APK (Бета)",
+        btnGooglePlay: "Запит на бета-тест",
+        metaOffline: "✓ Для Android-пристроїв",
+        metaFree: "✓ Без створення акаунту в беті",
+        metaClean: "✓ Версія для iOS — у планах",
+        qrCaption: "Наведи камеру смартфона, щоб надіслати запит на участь у бета-тестуванні"
       },
       faq: {
         badge: "❓ Відповіді на питання",
         title: "Часті запитання",
-        q1: "Чи працює Nyamo без інтернету?",
-        a1: "Так. Рецепти, продукти та основні функції доступні офлайн. Інтернет потрібен лише для опціональної функції AI-розпізнавання продуктів за фотографією.",
-        q2: "Чи безкоштовний Nyamo?",
-        a2: "Так, Nyamo безкоштовний для кожного. Усі базові рецепти та функції доступні без обов'язкових платних підписок чи заблокованого контенту.",
-        q3: "Як працює розпізнавання фото?",
-        a3: "Ти робиш знімок полиці холодильника чи продуктів на столі. Nyamo визначає інгредієнти та показує список, де можна перевірити та уточнити кількість перед збереженням.",
-        q4: "Що відбувається з моїми фотографіями?",
-        a4: "Розпізнавання фото потребує інтернету, але фото не зберігаються після обробки. Додаток видаляє чутливі EXIF-метадані перед відправкою, а твої кулінарні дані залишаються на пристрої.",
-        q5: "Чи можна змінювати кількість порцій?",
-        a5: "Так. У кожному рецепті можна обрати потрібну кількість порцій від 1 до 10. Грами, ложки та штуки інгредієнтів адаптуються автоматично, включно з текстами кроків.",
-        q6: "Як додати спеції та постійні продукти?",
-        a6: "Сіль, олія та улюблені приправи відзначаються в окремій швидкій панелі спецій, а базові запаси зберігаються в розділі «Комора», щоб не вводити їх щоразу заново."
+        q1: "Як Nyamo підбирає страви?",
+        a1: "Ти вказуєш наявні інгредієнти вручну або за допомогою фото. Алгоритм порівнює їх із базою рецептів, враховує необхідні пропорції та показує, які страви можна приготувати повністю, а де не вистачає кількох складників.",
+        q2: "Як долучитися до бета-тестування?",
+        a2: "Ти можеш завантажити поточну тестову збірку для Android прямо з сайту або надіслати запит на пошту buisness@neoflux.fluxmarketplace.store, щоб отримати доступ та ділитися відгуками.",
+        q3: "Чи потрібен обліковий запис для використання?",
+        a3: "У поточній бета-версії реєстрація та акаунт не потрібні — твої списки та збережений прогрес зберігаються локально на пристрої. У майбутніх версіях плануються акаунти для синхронізації між пристроями.",
+        q4: "Як працює додавання продуктів за фото?",
+        a4: "Ти фотографуєш продукти на поличці чи столі. Фото відправляється на захищений сервер для розпізнавання, після чого додаток показує діалог перевірки, де ти можеш підтвердити, відредагувати чи прибрати будь-який розпізнаний продукт.",
+        q5: "Чи працює Nyamo без інтернету?",
+        a5: "Перегляд уже збережених рецептів та ручний підбір доступні офлайн. Інтернет потрібен для розпізнавання нових продуктів за фотографією. Повноцінний автономний режим для каталогу планується розвивати далі.",
+        q6: "Чи буде додаток платним або з рекламою?",
+        a6: "Під час відкритого бета-тестування додаток доступний безкоштовно. На етапі публічного релізу планується модель із ненав'язливою рекламою та розглядається підписка на додаткові можливості.",
+        q7: "Чи планується версія для iOS?",
+        a7: "Так, розробка версії для iPhone є в офіційних планах команди. Вона з'явиться після відпрацювання ключових функцій та зворотного зв'язку на Android."
       },
       footer: {
-        tagline: "Смачне з того, що є.",
+        tagline: "Смачне з того, що є вдома.",
         copyright: "© 2026 Nyamo. Усі права захищено.",
         navHeading: "Навігація",
-        navDemo: "Спробувати онлайн",
+        navDemo: "Спробувати демо",
         navFeatures: "Можливості",
-        navRecipes: "Рецепти",
-        navDownload: "Завантажити",
+        navRecipes: "Страви",
+        navDownload: "Бета-тест",
         privacyHeading: "Підтримка та приватність",
         privacyPolicy: "Політика конфіденційності",
         support: "Підтримка розробника"
@@ -217,19 +223,225 @@ const NyamoI18n = (() => {
       }
     },
 
-    en: {
+    pl: {
       meta: {
-        title: "Nyamo — Cook Great Meals With What You Have | Smart Recipe Matcher",
-        desc: "Nyamo matches delicious home recipes with the ingredients already in your kitchen. 100% offline-first, no paywalls, smart RecipeMatcher & AI fridge photo scanner."
+        title: "Nyamo — Szukaj dań ze swoich składników | Testy beta",
+        desc: "Nyamo pomaga znaleźć pomysły na pyszne posiłki ze składników, które masz w domu lub na zdjęciu. Prosty dobór dań, zapis postępów i otwarte testy beta."
       },
       nav: {
-        demo: "Try Online",
+        demo: "Wypróbuj demo",
+        features: "Możliwości",
+        showcase: "Interfejs",
+        recipes: "Dania",
+        comparison: "Dlaczego Nyamo",
+        faq: "FAQ",
+        download: "Dołącz do bety"
+      },
+      styleSwitcher: {
+        label: "Styl wizualny:",
+        editorial: "A: Editorial Cookbook",
+        kinetic: "B: Kinetic Studio",
+        minimalist: "C: Sunlit Minimalist"
+      },
+      hero: {
+        badgeMain: "✨ Testy beta aplikacji",
+        title: "Masz składniki, ale nie wiesz,<br><span class=\"text-highlight\">co ugotować?</span>",
+        titlePre: "Masz składniki, ale nie wiesz,",
+        titleHighlight: "co ugotować?",
+        subtitle: "Wybierz składniki, które masz w kuchni, lub dodaj je ze zdjęcia. Nyamo zaproponuje dania z katalogu przepisów.",
+        ctaDownload: "Dołącz do testów beta",
+        ctaDemo: "Wypróbuj demo",
+        trustFree: "Dobór z Twoich składników",
+        trustOffline: "Dodawanie ze zdjęcia",
+        trustRecipes: "Otwarte testy beta",
+        trustMatch: "Dobór z Twoich składników",
+        trustPhoto: "Dodawanie ze zdjęcia",
+        trustBeta: "Otwarte testy beta",
+        foodCardTitle: "Aromatyczna szakszuka",
+        foodCardTime: "15 min",
+        foodCardStatus: "✓ Pasuje do Twoich składników",
+        foodCardMissing: "0 do dokupienia",
+        foodCardServings: "2 porcje",
+        badgeEggs: "Jaja kurze",
+        badgeEggsSub: "3 szt. na liście",
+        badgeEggsPill: "3 jajka na liście",
+        badgeTomatoes: "Dojrzałe pomidory",
+        badgeTomatoesSub: "2 szt. na liście",
+        badgeCanCook: "✓ Można gotować",
+        badgeShakshuka: "Szakszuka z pomidorami",
+        badgeAi: "Analiza zdjęcia",
+        badgeAiSub: "Google Gemini",
+        badgeMissing: "Brakuje: tylko śmietanki"
+      },
+      playground: {
+        badge: "✨ Interaktywne demo",
+        title: "Wybierz składniki.<br>Zobacz, co możesz ugotować.",
+        desc: "Zaznacz, co masz pod ręką, i zobacz propozycje dań z bazy przepisów. Nyamo pokaże pełne dopasowania lub wskaże brakujące elementy.",
+        fridgeLabel: "Twoja wirtualna lodówka",
+        selectedCount: "Wybrano: {n}",
+        presetLabel: "Szybkie zestawy:",
+        presetBreakfast: "Śniadanie",
+        presetPotato: "Placki i ziemniaki",
+        presetPasta: "Makaron z serem",
+        presetReset: "Wyczyść",
+        resultsTitle: "Dobrane dania",
+        resultsEmpty: "Wybierz składniki powyżej, aby zobaczyć pasujące dania",
+        resultsReady: "🟢 Gotowe do przygotowania: {n} {plural}",
+        portionsLabel: "Porcje:",
+        portion2: "2 porcje",
+        portion4: "4 porcje",
+        cardReady: "Wszystkie składniki",
+        cardReadyText: "✓ Masz wszystkie potrzebne składniki",
+        cardMissing: "Brakuje: {n}",
+        cardMissingText: "Brakuje: {items}",
+        cardViewRecipe: "Zobacz przepis",
+        pluralOne: "danie",
+        pluralFew: "dania",
+        pluralMany: "dań"
+      },
+      camera: {
+        tag: "Dodawanie ze zdjęcia",
+        title: "Nie chcesz wpisywać ręcznie?<br>Po prostu zrób zdjęcie.",
+        desc: "Zrób zdjęcie produktów na półce lub blacie. Nyamo rozpozna składniki i pozwoli Ci sprawdzić listę przed doborem przepisów.",
+        labelTomatoes: "Pomidory",
+        labelEggs: "Jajka",
+        labelCheese: "Ser",
+        labelMilk: "Mleko",
+        labelOnion: "Cebula",
+        labelHerbs: "Zielenina",
+        flowPhoto: "Zdjęcie",
+        flowDetected: "Przykład rozpoznania: 6 składników",
+        readyDishes: "8 dań w katalogu",
+        recipe1Title: "Aromatyczna szakszuka",
+        recipe1Meta: "⏱ 25 min • 🍳 Płyta",
+        recipe2Title: "Puszysty omlet mleczny",
+        recipe2Meta: "⏱ 10 min • 🍳 Patelnia",
+        viewRecipe: "Zobacz przepis",
+        badgeReady: "✓ Wszystkie składniki"
+      },
+      cooking: {
+        tag: "Krok po kroku",
+        title: "Przejrzyste instrukcje<br>podczas gotowania.",
+        desc: "Aplikacja prowadzi Cię przez proces krok po kroku, bez gubienia się w długim tekście przepisu.",
+        handsFree: "Podgląd demonstracyjny ekranu gotowania w aplikacji.",
+        previewNote: "Podgląd demonstracyjny ekranu gotowania w aplikacji.",
+        recipeTitle: "Szakszuka z pomidorami",
+        stepCountLabel: "Krok {n} z {total}",
+        step3Num: "Krok 3 z 7",
+        step3Text: "Dodaj pomidory i duś na średnim ogniu.",
+        step3Sub: "Gotuj na średnim ogniu przez około 5–7 minut.",
+        step4Num: "Krok 4 z 7",
+        step4Text: "Wbij jajka i przykryj patelnię.",
+        step4Sub: "Gotuj pod przykryciem przez około 4–5 minut.",
+        timerRemaining: "orientacyjnie",
+        btnBack: "← Wstecz",
+        btnNext: "Dalej →",
+        floatingStep: "Krok 3 / 7",
+        floatingStepNext: "Krok 4 / 7",
+        floatingTimer: "05:00"
+      },
+      discovery: {
+        tag: "Pomysły na dania",
+        title: "Na dziś na pewno<br>znajdziesz coś pysznego.",
+        subtitle: "Od szybkiego śniadania po sycącą kolację z tego, co już czeka w lodówce. Proste domowe posiłki na co dzień.",
+        quote: "Mniej myślenia.<br>Więcej gotowania.",
+        readyBadge: "Komplet składników",
+        recipeShakshuka: "Szakszuka z pomidorami",
+        recipeShakshukaMeta: "25 min",
+        recipePasta: "Kremowy makaron",
+        recipePastaMeta: "20 min",
+        recipeSyrnyky: "Domowe syrniki",
+        recipeSyrnykyMeta: "25 min",
+        recipeChicken: "Kurczak w ziołach",
+        recipeChickenMeta: "30 min",
+        recipePotatoes: "Chrupiące ziemniaki",
+        recipePotatoesMeta: "35 min",
+        recipeOmelette: "Puszysty omlet",
+        recipeOmeletteMeta: "10 min"
+      },
+      features: {
+        badge: "💡 Dlaczego Nyamo",
+        title: "Stworzone do codziennego gotowania",
+        desc: "Pomaga szybko podjąć decyzję o posiłku, bez chaosu i skomplikowanych opcji.",
+        b1Num: "01",
+        b1Title: "Dobór ze składników w domu",
+        b1Text: "Zaznacz, co masz w kuchni — Nyamo znajdzie pasujące dania i wskaże ewentualne brakujące produkty.",
+        b2Num: "02",
+        b2Title: "Dodawanie produktów ze zdjęcia",
+        b2Text: "Zrób zdjęcie półki w lodówce, potwierdź rozpoznane produkty w oknie dialogowym i od razu przeglądaj dania.",
+        b3Num: "03",
+        b3Title: "Proste codzienne posiłki",
+        b3Text: "Baza łatwych domowych dań bez wyszukanych składników, sukcesywnie rozwijana wspólnie z testerami."
+      },
+      brandStatement: {
+        title: "Nyamo nie zaczyna od listy zakupów.<br>Nyamo zaczyna od tego, co masz w kuchni.",
+        fact1: "Dobór dań z tego, co masz",
+        fact2: "Dodawanie ze zdjęcia",
+        fact3: "Wpływ na rozwój w becie"
+      },
+      download: {
+        badge: "📱 Testy beta",
+        title: "Wypróbuj Nyamo w wersji beta",
+        desc: "Pomóż nam ulepszyć aplikację. Pobierz wersję testową na Androida lub wyślij zgłoszenie beta-testera.",
+        btnDownload: "Pobierz APK (Beta)",
+        btnGooglePlay: "Zgłoś się do bety",
+        metaOffline: "✓ Dla urządzeń z Androidem",
+        metaFree: "✓ Bez konieczności konta w becie",
+        metaClean: "✓ Wersja iOS — w planach",
+        qrCaption: "Skieruj aparat telefonu, aby wysłać zgłoszenie do testów beta"
+      },
+      faq: {
+        badge: "❓ Pytania i odpowiedzi",
+        title: "Często zadawane pytania",
+        q1: "Jak Nyamo dobiera dania?",
+        a1: "Podajesz posiadane składniki ręcznie lub za pomocą zdjęcia. Algorytm porównuje je z bazą przepisów, uwzględniając proporcje, i pokazuje dania gotowe do zrobienia oraz te, do których brakuje kilku składników.",
+        q2: "Jak dołączyć do testów beta?",
+        a2: "Możesz pobrać aktualną wersję testową na Androida bezpośrednio ze strony lub wysłać wiadomość na buisness@neoflux.fluxmarketplace.store, aby otrzymać dostęp i przekazywać swoje uwagi.",
+        q3: "Czy do korzystania z aplikacji potrzebne jest konto?",
+        a3: "W obecnej wersji beta rejestracja i konto nie są wymagane — Twoje listy produktów i postępy są zapisywane lokalnie na urządzeniu. W przyszłych wersjach planujemy konta do synchronizacji danych między urządzeniami.",
+        q4: "Jak działa dodawanie produktów ze zdjęcia?",
+        a4: "Robisz zdjęcie półki w lodówce lub blatu. Zdjęcie trafia do bezpiecznej analizy rozpoznawania, po czym aplikacja wyświetla okno sprawdzania, w którym możesz potwierdzić, edytować lub usunąć rozpoznane składniki.",
+        q5: "Czy Nyamo działa bez internetu?",
+        a5: "Przeglądanie zapisanych przepisów i ręczny dobór działają w trybie offline. Połączenie z internetem jest wymagane do rozpoznawania produktów ze zdjęcia. Pełny tryb offline dla całego katalogu będzie dalej rozwijany.",
+        q6: "Czy aplikacja będzie płatna lub zawierać reklamy?",
+        a6: "Podczas otwartych testów beta aplikacja jest dostępna bezpłatnie. W wersji publicznej planowany jest model z nienachalnymi reklamami oraz rozważana jest subskrypcja na dodatkowe funkcje.",
+        q7: "Czy planowana jest wersja na iOS?",
+        a7: "Tak, stworzenie wersji na iPhone'a znajduje się w oficjalnych planach zespołu. Pojawi się ona po dopracowaniu kluczowych funkcji i zebraniu opinii z wersji na Androida."
+      },
+      footer: {
+        tagline: "Pyszne posiłki z tego, co masz w domu.",
+        copyright: "© 2026 Nyamo. Wszelkie prawa zastrzeżone.",
+        navHeading: "Nawigacja",
+        navDemo: "Wypróbuj demo",
+        navFeatures: "Możliwości",
+        navRecipes: "Dania",
+        navDownload: "Testy beta",
+        privacyHeading: "Wsparcie i prywatność",
+        privacyPolicy: "Polityka prywatności",
+        support: "Kontakt z twórcą"
+      },
+      modal: {
+        readyBadge: "🟢 Można gotować",
+        missingBadge: "🔴 Brakuje składników",
+        portionsHeading: "Składniki na {n} {plural}:",
+        stepsHeading: "Krok po kroku:",
+        btnCook: "Gotuj w aplikacji Nyamo"
+      }
+    },
+
+    en: {
+      meta: {
+        title: "Nyamo — Find Dishes From Your Ingredients | Beta Testing",
+        desc: "Nyamo helps you discover delicious meal ideas from ingredients you already have at home or on photo. Simple meal matching, saved progress, and open beta testing."
+      },
+      nav: {
+        demo: "Try Demo",
         features: "Features",
         showcase: "App Screens",
-        recipes: "Recipes",
+        recipes: "Dishes",
         comparison: "Why Nyamo",
         faq: "FAQ",
-        download: "Download"
+        download: "Join Beta"
       },
       styleSwitcher: {
         label: "Visual Direction:",
@@ -238,62 +450,65 @@ const NyamoI18n = (() => {
         minimalist: "C: Sunlit Minimalist"
       },
       hero: {
-        badgeMain: "✨ Smart Kitchen Companion",
-        title: "Your fridge<br>already knows what's<br><span class=\"text-highlight\">for dinner.</span>",
-        titlePre: "Your fridge",
-        titleHighlight: "already knows what's for dinner.",
-        subtitle: "Show Nyamo what you have at home. Instantly get dishes you can cook right now.",
-        ctaDownload: "Download Nyamo",
-        ctaDemo: "Try Online",
-        trustFree: "100% Free Forever",
-        trustOffline: "Works Completely Offline",
-        trustRecipes: "60+ Tested Home Recipes",
-        foodCardTitle: "Shakshuka with Toast",
+        badgeMain: "✨ App Beta Testing",
+        title: "Got ingredients, but no idea<br><span class=\"text-highlight\">what to cook?</span>",
+        titlePre: "Got ingredients, but no idea",
+        titleHighlight: "what to cook?",
+        subtitle: "Choose what you have at home or add ingredients from a photo. Nyamo suggests meals from its recipe collection.",
+        ctaDownload: "Join the Beta",
+        ctaDemo: "Try the Demo",
+        trustFree: "Match from your ingredients",
+        trustOffline: "Add with a photo",
+        trustRecipes: "Open beta testing",
+        trustMatch: "Match from your ingredients",
+        trustPhoto: "Add with a photo",
+        trustBeta: "Open beta testing",
+        foodCardTitle: "Aromatic Shakshuka",
         foodCardTime: "15 min",
-        foodCardStatus: "✓ All items in your fridge",
-        foodCardMissing: "0 items to buy",
+        foodCardStatus: "✓ Matches your ingredients",
+        foodCardMissing: "0 needed",
         foodCardServings: "2 servings",
-        badgeEggs: "Chicken eggs",
-        badgeEggsSub: "3 pcs in fridge",
-        badgeEggsPill: "3 eggs in stock",
-        badgeTomatoes: "Ripe tomatoes",
-        badgeTomatoesSub: "2 pcs on shelf",
+        badgeEggs: "Fresh Eggs",
+        badgeEggsSub: "3 pcs on list",
+        badgeEggsPill: "3 eggs on list",
+        badgeTomatoes: "Ripe Tomatoes",
+        badgeTomatoesSub: "2 pcs on list",
         badgeCanCook: "✓ Ready to Cook",
-        badgeShakshuka: "Shakshuka with tomatoes",
-        badgeAi: "AI Recognition",
+        badgeShakshuka: "Tomato Shakshuka",
+        badgeAi: "Photo Analysis",
         badgeAiSub: "Google Gemini",
-        badgeMissing: "Missing: only heavy cream"
+        badgeMissing: "Missing: only cream"
       },
       playground: {
-        badge: "✨ Interactive Simulator",
-        title: "Don't look for recipes.<br>Cook with what you already have.",
-        desc: "Pick ingredients and spices you have on hand. Nyamo instantly surfaces meals you can make right away and shows exactly what's missing.",
-        fridgeLabel: "Your Virtual Pantry",
+        badge: "✨ Interactive Preview",
+        title: "Pick your ingredients.<br>See what you can cook.",
+        desc: "Select what's in your kitchen and discover matching recipes. Nyamo highlights complete matches or points out what's missing.",
+        fridgeLabel: "Your Virtual Fridge",
         selectedCount: "Selected: {n}",
-        presetLabel: "Quick Sets:",
+        presetLabel: "Quick presets:",
         presetBreakfast: "Breakfast",
-        presetPotato: "Pancakes & Potato",
-        presetPasta: "Cheesy Pasta",
-        presetReset: "Clear All",
+        presetPotato: "Pancakes & Potatoes",
+        presetPasta: "Cheese Pasta",
+        presetReset: "Clear",
         resultsTitle: "Matched Dishes",
-        resultsEmpty: "Select ingredients above to see matched dishes",
+        resultsEmpty: "Select ingredients above to see matching dishes",
         resultsReady: "🟢 Ready to cook: {n} {plural}",
         portionsLabel: "Portions:",
         portion2: "2 portions",
         portion4: "4 portions",
-        cardReady: "All ingredients available",
-        cardReadyText: "✓ All required ingredients are available",
+        cardReady: "All Ingredients Ready",
+        cardReadyText: "✓ You have all the required ingredients",
         cardMissing: "Missing: {n}",
         cardMissingText: "Missing: {items}",
-        cardViewRecipe: "View recipe",
+        cardViewRecipe: "View Recipe",
         pluralOne: "dish",
         pluralFew: "dishes",
         pluralMany: "dishes"
       },
       camera: {
-        tag: "Quick Scan",
-        title: "Don't want to enter ingredients manually?<br>Just take a photo.",
-        desc: "Nyamo identifies ingredients in the photo, adds them to your fridge, and immediately shows what you can cook.",
+        tag: "Add From Photo",
+        title: "Don't feel like typing?<br>Just take a photo.",
+        desc: "Snap a picture of what's on your counter or fridge shelf. Nyamo detects the ingredients and lets you review the list before finding recipes.",
         labelTomatoes: "Tomatoes",
         labelEggs: "Eggs",
         labelCheese: "Cheese",
@@ -301,109 +516,112 @@ const NyamoI18n = (() => {
         labelOnion: "Onion",
         labelHerbs: "Herbs",
         flowPhoto: "Photo",
-        flowDetected: "6 ingredients recognized",
-        readyDishes: "8 dishes ready to cook",
-        recipe1Title: "Fragrant Shakshuka",
-        recipe1Meta: "⏱ 25 min • 🍳 Stove",
+        flowDetected: "Detection sample: 6 items",
+        readyDishes: "8 dishes in collection",
+        recipe1Title: "Aromatic Shakshuka",
+        recipe1Meta: "⏱ 25 min • 🍳 Stovetop",
         recipe2Title: "Fluffy Milk Omelette",
         recipe2Meta: "⏱ 10 min • 🍳 Pan",
-        viewRecipe: "View recipe",
-        badgeReady: "✓ All ingredients available"
+        viewRecipe: "View Recipe",
+        badgeReady: "✓ All ingredients in kitchen"
       },
       cooking: {
-        tag: "Guided Cooking",
-        title: "Now simply cook.<br>Nyamo guides you<br>step by step.",
-        desc: "One step at a time, timers at hand, and zero clutter in sight.",
-        handsFree: "Hands busy? The next step is always right before you.",
-        recipeTitle: "Shakshuka with Tomatoes",
+        tag: "Step-by-Step Mode",
+        title: "Clear guidance<br>while you cook.",
+        desc: "The app guides you step by step so you never get lost in a block of recipe text.",
+        handsFree: "Preview of the guided cooking screen in the Nyamo app.",
+        previewNote: "Preview of the guided cooking screen in the Nyamo app.",
+        recipeTitle: "Tomato Shakshuka",
         stepCountLabel: "Step {n} of {total}",
         step3Num: "Step 3 of 7",
-        step3Text: "Add the tomatoes and simmer gently.",
-        step3Sub: "Cook over medium heat for 5–7 minutes.",
+        step3Text: "Add tomatoes and simmer over medium heat.",
+        step3Sub: "Cook over medium heat for about 5–7 minutes.",
         step4Num: "Step 4 of 7",
-        step4Text: "Crack in the eggs and cover the skillet.",
-        step4Sub: "Cook covered for 4–5 minutes.",
-        timerRemaining: "remaining",
+        step4Text: "Crack in the eggs and cover the pan.",
+        step4Sub: "Cook covered for about 4–5 minutes.",
+        timerRemaining: "approximate",
         btnBack: "← Back",
         btnNext: "Next →",
         floatingStep: "Step 3 / 7",
         floatingStepNext: "Step 4 / 7",
-        floatingTimer: "05:36"
+        floatingTimer: "05:00"
       },
       discovery: {
-        tag: "What to cook",
-        title: "There’s definitely something<br>to cook today.",
-        subtitle: "From a quick breakfast to dinner made with what’s already in your fridge. 60+ home recipes — and the collection keeps growing.",
-        quote: "Less thinking.<br>More cooking.",
-        readyBadge: "All ingredients available",
-        recipeShakshuka: "Shakshuka with Tomatoes",
+        tag: "Recipe Ideas",
+        title: "You definitely have<br>something good to cook.",
+        subtitle: "From quick breakfasts to satisfying dinners made from everyday kitchen staples. Wholesome home meals for every day.",
+        quote: "Less wondering.<br>More cooking.",
+        readyBadge: "All items ready",
+        recipeShakshuka: "Tomato Shakshuka",
         recipeShakshukaMeta: "25 min",
         recipePasta: "Creamy Pasta",
         recipePastaMeta: "20 min",
-        recipeSyrnyky: "Homemade Syrnyky",
+        recipeSyrnyky: "Cottage Cheese Syrnyky",
         recipeSyrnykyMeta: "25 min",
-        recipeChicken: "Herb Roasted Chicken",
+        recipeChicken: "Herb Chicken Fillet",
         recipeChickenMeta: "30 min",
-        recipePotatoes: "Crispy Potatoes",
+        recipePotatoes: "Crispy Garlic Potatoes",
         recipePotatoesMeta: "35 min",
         recipeOmelette: "Fluffy Omelette",
         recipeOmeletteMeta: "10 min"
       },
       features: {
-        badge: "💡 Nyamo Benefits",
-        title: "Designed for Calm, Effortless Cooking",
-        desc: "No clutter, no tedious configurations, and no overwhelming interfaces.",
+        badge: "💡 Why Nyamo",
+        title: "Designed for Everyday Cooking",
+        desc: "Helps you decide what to eat quickly, without clutter, ads overload, or complex setups.",
         b1Num: "01",
-        b1Title: "Knows Exactly What's Missing",
-        b1Text: "Nyamo accounts for ingredient names and quantities — instantly showing what you can cook right away.",
+        b1Title: "Match from What You Have",
+        b1Text: "Tell Nyamo what's in your kitchen and discover meals you can make, with clear notes on any missing items.",
         b2Num: "02",
-        b2Title: "Simply Show What You Have",
-        b2Text: "Snap a photo of your fridge or add items manually. Nyamo keeps everything in one neat place.",
+        b2Title: "Add Items with a Photo",
+        b2Text: "Take a quick photo of your fridge shelf, review detected items in the confirmation dialog, and browse recipes.",
         b3Num: "03",
-        b3Title: "Your Data Stays Yours",
-        b3Text: "We don't build ad profiles or sell your data. Your cooking stays on your device."
+        b3Title: "Simple Everyday Recipes",
+        b3Text: "A growing collection of familiar home recipes made from basic ingredients, expanded together with our beta community."
       },
       brandStatement: {
-        title: "Nyamo doesn’t start with a recipe.<br>Nyamo starts with what you already have.",
-        fact1: "No mandatory subscription",
-        fact2: "Works with your ingredients",
-        fact3: "Core recipes available offline"
+        title: "Nyamo doesn't start with a grocery list.<br>Nyamo starts with what's already in your kitchen.",
+        fact1: "Match with what you have",
+        fact2: "Add ingredients from photo",
+        fact3: "Shape the product in beta"
       },
       download: {
-        badge: "📱 Kitchen Companion App",
-        title: "What will you cook today?",
-        desc: "Show Nyamo what you have at home — we'll help you turn it into dinner.",
-        btnDownload: "Download Nyamo",
-        btnGooglePlay: "Google Play",
-        metaOffline: "✓ Core features offline",
-        metaFree: "✓ No mandatory subscription",
-        metaClean: "✓ Safe & tracker-free",
-        qrCaption: "Scan with your phone camera for instant download"
+        badge: "📱 Beta Testing",
+        title: "Try Nyamo in Beta Testing",
+        desc: "Help us shape the app. Download the Android beta build or send us a note to join the testing group.",
+        btnDownload: "Download APK (Beta)",
+        btnGooglePlay: "Request Beta Access",
+        metaOffline: "✓ For Android devices",
+        metaFree: "✓ No account required in beta",
+        metaClean: "✓ iOS version in roadmap",
+        qrCaption: "Scan with your phone camera to request beta access via email"
       },
       faq: {
-        badge: "❓ Common Questions",
+        badge: "❓ Questions & Answers",
         title: "Frequently Asked Questions",
-        q1: "Does Nyamo work offline?",
-        a1: "Yes. Recipes, ingredients, and core features are available offline. Internet is only required for the optional AI fridge photo recognition.",
-        q2: "Is Nyamo free?",
-        a2: "Yes, Nyamo is free for everyone. All core recipes and features are unlocked without mandatory paid subscriptions or gated content.",
-        q3: "How does photo recognition work?",
-        a3: "Snap a photo of your fridge shelf or ingredients on the counter. Nyamo identifies items and presents an editable list so you can verify quantities before saving.",
-        q4: "What happens to my photos?",
-        a4: "Photo recognition requires an internet connection, but photos are never stored after processing. Sensitive EXIF metadata is stripped before sending, and your cooking data stays on your device.",
-        q5: "Can I adjust the number of servings?",
-        a5: "Yes. Every recipe scales smoothly from 1 to 10 servings. Grams, spoons, and piece counts automatically recalculate, including step-by-step cooking instructions.",
-        q6: "How do I manage spices and pantry staples?",
-        a6: "Salt, oil, and spices can be quickly toggled in a dedicated Spices sheet, and permanent staples stay in your Pantry so you never need to re-enter them."
+        q1: "How does Nyamo match recipes?",
+        a1: "You enter your ingredients manually or snap a photo. The app matches them against the recipe catalog, accounts for amounts, and indicates which dishes you can make right away and which ones need a couple of extra items.",
+        q2: "How do I join the beta testing?",
+        a2: "You can download the current Android test APK directly from our website or email us at buisness@neoflux.fluxmarketplace.store to request access and share your feedback.",
+        q3: "Do I need an account to use Nyamo?",
+        a3: "In the current beta release, no account or registration is required — your ingredients and saved cooking progress stay locally on your device. Accounts and cloud sync are planned for future releases.",
+        q4: "How does photo ingredient scanning work?",
+        a4: "You take a photo of your fridge shelf or counter. The image is securely processed to suggest ingredient names, after which Nyamo shows a review dialog where you can edit, confirm, or remove any item before saving.",
+        q5: "Does Nyamo work offline?",
+        a5: "Browsing saved recipes and manual ingredient matching work offline. An internet connection is required for photo recognition. Expanded offline capabilities are planned as the catalog grows.",
+        q6: "Will Nyamo be paid or show ads?",
+        a6: "During open beta testing, the app is completely free. In the public release, we plan an unobtrusive ad-supported tier and are considering a subscription for premium features.",
+        q7: "Is an iOS version planned?",
+        a7: "Yes, an iPhone version is officially on our roadmap. It will be released following feature stabilization and feedback on Android."
       },
       footer: {
-        tagline: "Delicious meals from what you have.",
+        tagline: "Great food from what you have at home.",
         copyright: "© 2026 Nyamo. All rights reserved.",
         navHeading: "Navigation",
-        navDemo: "Try Online",
+        navDemo: "Try Demo",
         navFeatures: "Features",
-        navRecipes: "Recipes",
-        navDownload: "Download",
+        navRecipes: "Dishes",
+        navDownload: "Beta",
         privacyHeading: "Support & Privacy",
         privacyPolicy: "Privacy Policy",
         support: "Developer Support"
@@ -412,208 +630,8 @@ const NyamoI18n = (() => {
         readyBadge: "🟢 Ready to Cook",
         missingBadge: "🔴 Missing Ingredients",
         portionsHeading: "Ingredients for {n} {plural}:",
-        stepsHeading: "Step-by-step instructions:",
+        stepsHeading: "Step-by-Step Instructions:",
         btnCook: "Cook in Nyamo App"
-      }
-    },
-
-    tr: {
-      meta: {
-        title: "Nyamo — Evdeki Malzemelerle Lezzetli Yemekler | Akıllı Tarif Uygulaması",
-        desc: "Nyamo, mutfağınızda olan malzemelerle harika ev yemekleri tarifleri bulur. %100 çevrimdışı, aboneliksiz, akıllı RecipeMatcher ve yapay zeka fotoğraf tarayıcısı."
-      },
-      nav: {
-        demo: "Çevrimiçi Dene",
-        features: "Özellikler",
-        showcase: "Arayüz",
-        recipes: "Tarifler",
-        comparison: "Neden Nyamo",
-        faq: "SSS",
-        download: "İndir"
-      },
-      styleSwitcher: {
-        label: "Tasarım Yönü:",
-        editorial: "A: Editorial Cookbook",
-        kinetic: "B: Kinetic Studio",
-        minimalist: "C: Sunlit Minimalist"
-      },
-      hero: {
-        badgeMain: "✨ Akıllı Ev Mutfak Asistanı",
-        title: "Buzdolabınız<br>akşama ne pişireceğini<br><span class=\"text-highlight\">zaten biliyor.</span>",
-        titlePre: "Buzdolabınız",
-        titleHighlight: "akşam yemeğinde ne olduğunu zaten biliyor.",
-        subtitle: "Evde hangi malzemelerin olduğunu Nyamo'ya göster. Hemen pişirebileceğin yemekleri anında keşfet.",
-        ctaDownload: "Nyamo'yu İndir",
-        ctaDemo: "Çevrimiçi Dene",
-        trustFree: "Sonsuza Dek Ücretsiz",
-        trustOffline: "%100 Çevrimdışı Çalışır",
-        trustRecipes: "60+ Denenmiş Ev Tarifi",
-        foodCardTitle: "Domatesli Şakşuka",
-        foodCardTime: "15 dk",
-        foodCardStatus: "✓ Buzdolabındaki tüm ürünler",
-        foodCardMissing: "0 satın alınacak",
-        foodCardServings: "2 porsiyon",
-        badgeEggs: "Tavuk yumurtası",
-        badgeEggsSub: "3 adet mevcut",
-        badgeEggsPill: "3 yumurta mevcut",
-        badgeTomatoes: "Olgun domates",
-        badgeTomatoesSub: "2 adet rafta",
-        badgeCanCook: "✓ Pişirmeye Hazır",
-        badgeShakshuka: "Domatesli Şakşuka",
-        badgeAi: "Yapay Zeka Tarama",
-        badgeAiSub: "Google Gemini",
-        badgeMissing: "Eksik: yalnızca krema"
-      },
-      playground: {
-        badge: "✨ İnteraktif Simülatör",
-        title: "Tarif arama.<br>Evde olanla hemen pişir.",
-        desc: "Elinizdeki malzemeleri ve baharatları seçin. Nyamo hemen pişirebileceğiniz yemekleri göstersin ve eksikleri tam olarak belirtsin.",
-        fridgeLabel: "Sanal Kileriniz",
-        selectedCount: "Seçilen: {n}",
-        presetLabel: "Hızlı Paketler:",
-        presetBreakfast: "Kahvaltı",
-        presetPotato: "Patates & Mücver",
-        presetPasta: "Peynirli Makarna",
-        presetReset: "Temizle",
-        resultsTitle: "Eşleşen Yemekler",
-        resultsEmpty: "Eşleşen tarifleri görmek için yukarıdan malzeme seçin",
-        resultsReady: "🟢 Pişirmeye hazır: {n} {plural}",
-        portionsLabel: "Porsiyon:",
-        portion2: "2 porsiyon",
-        portion4: "4 porsiyon",
-        cardReady: "Tüm malzemeler var",
-        cardReadyText: "✓ Tüm gerekli malzemeler mevcut",
-        cardMissing: "Eksik: {n}",
-        cardMissingText: "Eksik: {items}",
-        cardViewRecipe: "Tarifi gör",
-        pluralOne: "yemek",
-        pluralFew: "yemek",
-        pluralMany: "yemek"
-      },
-      camera: {
-        tag: "Hızlı Tarama",
-        title: "Malzemeleri tek tek girmek istemiyor musun?<br>Fotoğrafını çek yeter.",
-        desc: "Nyamo fotoğraftaki malzemeleri tanır, dolabına ekler ve hemen pişirebileceğin yemekleri gösterir.",
-        labelTomatoes: "Domates",
-        labelEggs: "Yumurta",
-        labelCheese: "Peynir",
-        labelMilk: "Süt",
-        labelOnion: "Soğan",
-        labelHerbs: "Yeşillik",
-        flowPhoto: "Fotoğraf",
-        flowDetected: "6 malzeme tanımlandı",
-        readyDishes: "8 yemek pişirmeye hazır",
-        recipe1Title: "Baharatlı Şakşuka",
-        recipe1Meta: "⏱ 25 dk • 🍳 Ocak",
-        recipe2Title: "Kabarmış Sütlü Omlet",
-        recipe2Meta: "⏱ 10 dk • 🍳 Tava",
-        viewRecipe: "Tarifi gör",
-        badgeReady: "✓ Tüm malzemeler var"
-      },
-      cooking: {
-        tag: "Rehberli Pişirme",
-        title: "Artık sadece pişir.<br>Nyamo adım adım<br>eşlik eder.",
-        desc: "Tek seferde tek adım, elinin altında zamanlayıcılar ve göz yormayan sadelik.",
-        handsFree: "Eller meşgul mü? Sıradaki adım her an karşında.",
-        recipeTitle: "Domatesli Şakşuka",
-        stepCountLabel: "Adım {n} / {total}",
-        step3Num: "Adım 3 / 7",
-        step3Text: "Domatesleri ekle ve hafifçe pişir.",
-        step3Sub: "Orta ateşte 5–7 dakika pişirin.",
-        step4Num: "Adım 4 / 7",
-        step4Text: "Yumurtaları kırın ve tavanın kapağını kapatın.",
-        step4Sub: "Kapağı kapalı 4–5 dakika pişirin.",
-        timerRemaining: "kaldı",
-        btnBack: "← Geri",
-        btnNext: "İleri →",
-        floatingStep: "Adım 3 / 7",
-        floatingStepNext: "Adım 4 / 7",
-        floatingTimer: "05:36"
-      },
-      discovery: {
-        tag: "Ne pişirsem",
-        title: "Bugün kesinlikle<br>pişirecek bir şey var.",
-        subtitle: "Hızlı bir kahvaltıdan buzdolabında olanlarla sıcacık bir akşam yemeğine. 60+ ev tarifi — ve katalog sürekli büyüyor.",
-        quote: "Daha az düşünce.<br>Daha çok yemek.",
-        readyBadge: "Tüm malzemeler var",
-        recipeShakshuka: "Domatesli Şakşuka",
-        recipeShakshukaMeta: "25 dk",
-        recipePasta: "Kremalı Makarna",
-        recipePastaMeta: "20 dk",
-        recipeSyrnyky: "Ev Yapımı Syrnyky",
-        recipeSyrnykyMeta: "25 dk",
-        recipeChicken: "Otlu Tavuk",
-        recipeChickenMeta: "30 dk",
-        recipePotatoes: "Kıtır Patates",
-        recipePotatoesMeta: "35 dk",
-        recipeOmelette: "Kabarmış Omlet",
-        recipeOmeletteMeta: "10 dk"
-      },
-      features: {
-        badge: "💡 Nyamo Avantajları",
-        title: "Huzurlu Yemek Pişirme İçin Tasarlandı",
-        desc: "Gereksiz karmaşa, zor ayarlar ve göz yoran arayüzler olmadan.",
-        b1Num: "01",
-        b1Title: "Neyin Eksik Olduğunu Tam Olarak Bilir",
-        b1Text: "Nyamo sadece malzeme adını değil miktarını da hesaba katar — ve hemen ne pişirebileceğinizi gösterir.",
-        b2Num: "02",
-        b2Title: "Sadece Elindekileri Göster",
-        b2Text: "Malzemelerin fotoğrafını çek veya elle ekle. Nyamo her şeyi tek bir yerde toplasın.",
-        b3Num: "03",
-        b3Title: "Verileriniz Yalnızca Size Aittir",
-        b3Text: "Reklam profili oluşturmuyoruz ve verilerinizi satmıyoruz."
-      },
-      brandStatement: {
-        title: "Nyamo bir tarifle başlamaz.<br>Nyamo sizde olan malzemelerle başlar.",
-        fact1: "Zorunlu abonelik yok",
-        fact2: "Elinizdeki malzemelerle çalışır",
-        fact3: "Temel tarifler internetsiz erişilebilir"
-      },
-      download: {
-        badge: "📱 Mutfak Asistanı",
-        title: "Bugün ne pişireceksin?",
-        desc: "Evde ne olduğunu Nyamo'ya göster — gerisini akşam yemeğine dönüştürmene yardımcı olalım.",
-        btnDownload: "Nyamo'yu İndir",
-        btnGooglePlay: "Google Play",
-        metaOffline: "✓ Temel özellikler internetsiz",
-        metaFree: "✓ Zorunlu abonelik yok",
-        metaClean: "✓ Güvenli ve izleyicisiz",
-        qrCaption: "Hemen indirmek için telefon kameranızı doğrultun"
-      },
-      faq: {
-        badge: "❓ Sorular ve Cevaplar",
-        title: "Sıkça Sorulan Sorular",
-        q1: "Nyamo internetsiz çalışır mı?",
-        a1: "Evet. Tarifler, malzemeler ve temel özellikler çevrimdışı kullanılabilir. İnternet yalnızca isteğe bağlı fotoğraftan malzeme tanıma özelliği için gereklidir.",
-        q2: "Nyamo ücretsiz mi?",
-        a2: "Evet, Nyamo herkes için tamamen ücretsizdir. Tüm temel tarifler ve özellikler zorunlu ücretli abonelik veya kilitli içerik olmadan sunulur.",
-        q3: "Fotoğraftan tanıma nasıl çalışır?",
-        a3: "Buzdolabı rafının veya tezgahtaki malzemelerin fotoğrafını çekersiniz. Nyamo malzemeleri tanır ve kaydetmeden önce miktarları doğrulayabileceğiniz bir liste sunar.",
-        q4: "Fotoğraflarıma ne olur?",
-        a4: "Fotoğraf tanıma internet gerektirir ancak fotoğraflar işlemden sonra saklanmaz. Hassas EXIF meta verileri temizlenir ve yemek verileriniz cihazınızda kalır.",
-        q5: "Porsiyon sayısı değiştirilebilir mi?",
-        a5: "Evet. Her tarifte 1'den 10'a kadar porsiyon seçebilirsiniz. Gramlar, kaşıklar ve adetler adım metinleri dahil otomatik olarak uyarlanır.",
-        q6: "Baharatlar ve temel stoklar nasıl eklenir?",
-        a6: "Tuz, sıvı yağ ve sevdiğiniz baharatlar hızlı baharat panelinden işaretlenir; temel stoklar ise her seferinde yeniden yazmamanız için Kiler bölümünde saklanır."
-      },
-      footer: {
-        tagline: "Evdeki malzemelerle lezzetli yemekler.",
-        copyright: "© 2026 Nyamo. Tüm hakları saklıdır.",
-        navHeading: "Gezinme",
-        navDemo: "Çevrimiçi Dene",
-        navFeatures: "Özellikler",
-        navRecipes: "Tarifler",
-        navDownload: "İndir",
-        privacyHeading: "Destek ve Gizlilik",
-        privacyPolicy: "Gizlilik Politikası",
-        support: "Geliştirici Desteği"
-      },
-      modal: {
-        readyBadge: "🟢 Pişirmeye Hazır",
-        missingBadge: "🔴 Eksik Malzemeler",
-        portionsHeading: "{n} {plural} için malzemeler:",
-        stepsHeading: "Adım Adım Talimatlar:",
-        btnCook: "Nyamo Uygulamasında Pişir"
       }
     }
   };
@@ -623,7 +641,7 @@ const NyamoI18n = (() => {
    * 1. URL search param (?lang=)
    * 2. localStorage saved preference
    * 3. Browser languages (navigator.languages / navigator.language)
-   * 4. User timezone heuristics (Europe/Kyiv, Europe/Istanbul, etc.)
+   * 4. User timezone heuristics (Europe/Kyiv, Europe/Warsaw, etc.)
    */
   function detectLanguage() {
     // 1. URL parameter
@@ -645,8 +663,8 @@ const NyamoI18n = (() => {
       if (timeZone.includes('Kyiv') || timeZone.includes('Kiev') || timeZone.includes('Uzhgorod') || timeZone.includes('Zaporozhye')) {
         return 'uk';
       }
-      if (timeZone.includes('Istanbul')) {
-        return 'tr';
+      if (timeZone.includes('Warsaw')) {
+        return 'pl';
       }
     } catch (e) {
       // ignore
@@ -659,15 +677,15 @@ const NyamoI18n = (() => {
       if (code === 'uk' || code === 'ru' || code === 'be') {
         return 'uk';
       }
-      if (code === 'tr') {
-        return 'tr';
+      if (code === 'pl') {
+        return 'pl';
       }
       if (code === 'en') {
         return 'en';
       }
     }
 
-    // Fallback: If not recognized, default to 'uk' or 'en'
+    // Fallback: If not recognized, default to 'uk'
     return DEFAULT_LANG;
   }
 
@@ -746,8 +764,8 @@ const NyamoI18n = (() => {
   }
 
   function updateSwitcherUI(lang) {
-    const flags = { uk: '🇺🇦', en: '🇬🇧', tr: '🇹🇷' };
-    const codes = { uk: 'UA', en: 'EN', tr: 'TR' };
+    const flags = { uk: '🇺🇦', pl: '🇵🇱', en: '🇬🇧' };
+    const codes = { uk: 'UA', pl: 'PL', en: 'EN' };
 
     const flagEl = document.querySelector('.lang-current-flag');
     const codeEl = document.querySelector('.lang-current-code');
@@ -807,6 +825,10 @@ const NyamoI18n = (() => {
     TRANSLATIONS
   };
 })();
+
+if (typeof window !== 'undefined') {
+  window.NyamoI18n = NyamoI18n;
+}
 
 // Auto-initialize on load
 if (document.readyState === 'loading') {

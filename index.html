@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nyamo («Нямо») — Смачне з того, що є | Розумний кулінарний Android-додаток</title>
+  <title>Nyamo — Пошук страв із твоїх продуктів | Бета-тестування</title>
   
-  <meta name="description" content="Nyamo допомагає знайти ідеальні рецепти з продуктів, які вже є на вашій кухні. 100% офлайн, без платних підписок, з точним алгоритмом підбору та AI-розпізнаванням за фото.">
-  <meta name="keywords" content="Nyamo, Нямо, рецепти з того що є, що приготувати, кулінарний додаток, рецепти офлайн, розумний підбір страв, українські рецепти">
+  <meta name="description" content="Nyamo допомагає знайти ідеї смачних страв із продуктів, які вже є вдома або на фото. Простий підбір страв, збереження прогресу та відкрите бета-тестування.">
+  <meta name="keywords" content="Nyamo, Нямо, що приготувати, рецепти з продуктів, підбір страв, бета-тестування, рецепти за фото, кулінарний помічник">
   <meta name="author" content="NeoFlux Technologies">
   <meta name="theme-color" content="#0a0a0a">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nyamo.app/">
-  <meta property="og:title" content="Nyamo — Смачне з того, що є">
-  <meta property="og:description" content="Готуй смачні домашні страви з тих інгредієнтів, які вже є у твоєму холодильнику. Працює на 100% офлайн, без платних підписок.">
+  <meta property="og:title" content="Nyamo — Пошук страв із твоїх продуктів | Бета-тестування">
+  <meta property="og:description" content="Знаходь ідеї смачних страв із продуктів, які вже є вдома або на фото. Простий підбір страв, збереження прогресу та відкрите бета-тестування.">
   <meta property="og:image" content="assets/images/feature-graphic-1024x500.png">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nyamo — Смачне з того, що є">
-  <meta name="twitter:description" content="Розумний підбір страв із продуктів під рукою. Безпечно, приватно та без інтернету.">
+  <meta name="twitter:title" content="Nyamo — Пошук страв із твоїх продуктів">
+  <meta name="twitter:description" content="Знаходь ідеї смачних страв із продуктів, які вже є вдома або на фото. Простий підбір страв та відкрите бета-тестування.">
   <meta name="twitter:image" content="assets/images/feature-graphic-1024x500.png">
 
   <!-- Favicon -->
@@ -45,9 +45,9 @@
 
       <nav class="desktop-nav" aria-label="Головне меню" id="desktopNav">
         <span class="nav-active-pill" id="navActivePill" aria-hidden="true"></span>
-        <a href="#interactive-demo" class="nav-link" data-i18n="nav.demo">Спробувати онлайн</a>
+        <a href="#interactive-demo" class="nav-link" data-i18n="nav.demo">Спробувати демо</a>
         <a href="#features" class="nav-link" data-i18n="nav.features">Можливості</a>
-        <a href="#food-discovery" class="nav-link" data-i18n="nav.recipes">Рецепти</a>
+        <a href="#food-discovery" class="nav-link" data-i18n="nav.recipes">Страви</a>
         <a href="#faq" class="nav-link" data-i18n="nav.faq">FAQ</a>
       </nav>
 
@@ -64,13 +64,13 @@
               <span class="flag">🇺🇦</span>
               <span class="name">Українська</span>
             </button>
+            <button class="lang-option" data-lang="pl">
+              <span class="flag">🇵🇱</span>
+              <span class="name">Polski</span>
+            </button>
             <button class="lang-option" data-lang="en">
               <span class="flag">🇬🇧</span>
               <span class="name">English</span>
-            </button>
-            <button class="lang-option" data-lang="tr">
-              <span class="flag">🇹🇷</span>
-              <span class="name">Türkçe</span>
             </button>
           </div>
         </div>
@@ -81,7 +81,7 @@
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
-          Завантажити
+          Долучитися до бети
         </a>
         <button class="menu-toggle" id="menuToggle" aria-label="Відкрити меню" aria-expanded="false">
           <span class="hamburger-line"></span>
@@ -98,16 +98,16 @@
           <span class="mobile-lang-label">Мова / Language:</span>
           <div class="mobile-lang-buttons">
             <button class="mobile-lang-btn active" data-lang="uk">🇺🇦 UA</button>
+            <button class="mobile-lang-btn" data-lang="pl">🇵🇱 PL</button>
             <button class="mobile-lang-btn" data-lang="en">🇬🇧 EN</button>
-            <button class="mobile-lang-btn" data-lang="tr">🇹🇷 TR</button>
           </div>
         </div>
-        <a href="#interactive-demo" class="mobile-nav-link" data-i18n="nav.demo">Спробувати онлайн</a>
+        <a href="#interactive-demo" class="mobile-nav-link" data-i18n="nav.demo">Спробувати демо</a>
         <a href="#features" class="mobile-nav-link" data-i18n="nav.features">Можливості</a>
-        <a href="#food-discovery" class="mobile-nav-link" data-i18n="nav.recipes">Рецепти</a>
+        <a href="#food-discovery" class="mobile-nav-link" data-i18n="nav.recipes">Страви</a>
         <a href="#faq" class="mobile-nav-link" data-i18n="nav.faq">FAQ</a>
         <div class="mobile-nav-footer">
-          <a href="#download" class="btn btn-primary btn-block" data-i18n="hero.ctaDownload">Завантажити Nyamo</a>
+          <a href="#download" class="btn btn-primary btn-block" data-i18n="hero.ctaDownload">Долучитися до бета-тестування</a>
         </div>
       </nav>
     </div>
@@ -119,13 +119,12 @@
       <div class="container hero-grid">
         <div class="hero-content">
           <h1 class="hero-title" data-i18n="hero.title">
-            Твій холодильник<br>
-            вже знає, що<br>
-            <span class="text-highlight">на вечерю.</span>
+            Є продукти, але не знаєш,<br>
+            <span class="text-highlight">що приготувати?</span>
           </h1>
 
           <p class="hero-subtitle" data-i18n="hero.subtitle">
-            Покажи Nyamo, що є вдома. Отримай страви, які можеш приготувати просто зараз.
+            Обери продукти, які маєш, або додай їх за допомогою фото. Nyamo запропонує страви з каталогу рецептів.
           </p>
 
           <div class="hero-cta-group">
@@ -135,26 +134,26 @@
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
-              <span data-i18n="hero.ctaDownload">Завантажити Nyamo</span>
+              <span data-i18n="hero.ctaDownload">Долучитися до бета-тестування</span>
             </a>
 
             <a href="#interactive-demo" class="btn btn-secondary btn-lg">
-              <span data-i18n="hero.ctaDemo">Спробувати онлайн</span>
+              <span data-i18n="hero.ctaDemo">Спробувати демо</span>
             </a>
           </div>
 
           <div class="hero-trust-row">
             <div class="trust-pill">
               <span class="trust-icon">✓</span>
-              <span data-i18n="hero.trustFree">Безкоштовно назавжди</span>
+              <span data-i18n="hero.trustFree">Підбір за твоїми продуктами</span>
             </div>
             <div class="trust-pill">
               <span class="trust-icon">✓</span>
-              <span data-i18n="hero.trustOffline">Працює без зв'язку</span>
+              <span data-i18n="hero.trustOffline">Додавання за фото</span>
             </div>
             <div class="trust-pill">
               <span class="trust-icon">✓</span>
-              <span data-i18n="hero.trustRecipes">60+ автентичних рецептів</span>
+              <span data-i18n="hero.trustRecipes">Відкрите бета-тестування</span>
             </div>
           </div>
         </div>
@@ -172,7 +171,7 @@
               </div>
               <div class="food-plate-details">
                 <strong class="food-plate-title" data-i18n="hero.foodCardTitle">Ароматна шакшука</strong>
-                <p class="food-plate-subtitle" data-i18n="hero.foodCardStatus">✓ Всі продукти з холодильника</p>
+                <p class="food-plate-subtitle" data-i18n="hero.foodCardStatus">✓ Підходить за списком продуктів</p>
                 <div class="food-plate-meta">
                   <span class="badge-mini-green" data-i18n="hero.foodCardMissing">0 докуплено</span>
                   <span class="badge-mini-servings" data-i18n="hero.foodCardServings">2 порції</span>
@@ -183,7 +182,7 @@
             <!-- Floating Element 2: Compact Supporting Pill -->
             <div class="floating-card floating-pill-compact">
               <span class="floating-emoji">🥚</span>
-              <strong data-i18n="hero.badgeEggsPill">3 яйця у наявності</strong>
+              <strong data-i18n="hero.badgeEggsPill">3 яйця у списку</strong>
             </div>
 
             <!-- Floating Element 3: Recipe Status Card -->
@@ -217,11 +216,11 @@
       <div class="container">
         <div class="section-header text-center">
           <h2 class="section-title reveal-item" data-i18n="playground.title">
-            Не шукай рецепт.<br>
-            Готуй з того, що вже є.
+            Обери продукти.<br>
+            Подивись, що можна приготувати.
           </h2>
           <p class="section-description reveal-item reveal-delay-1" data-i18n="playground.desc">
-            Обери продукти та спеції, які маєш під рукою. Nyamo покаже страви, які можна зготувати негайно, та точно попередить, якщо чогось бракує.
+            Познач, що є вдома, і подивись варіанти страв із каталогу. Nyamo покаже точний збіг або чого саме не вистачає.
           </p>
         </div>
 
@@ -279,13 +278,13 @@
       <div class="container">
         <!-- Section Header -->
         <div class="section-header text-center">
-          <div class="section-badge" data-i18n="camera.tag">Швидке сканування</div>
+          <div class="section-badge" data-i18n="camera.tag">Додавання за фото</div>
           <h2 class="section-title" data-i18n="camera.title">
             Не хочеш додавати вручну?<br>
             Просто сфотографуй.
           </h2>
           <p class="section-description" data-i18n="camera.desc">
-            Nyamo розпізнає продукти на фото, додасть їх у твій холодильник і одразу покаже, що можна приготувати.
+            Сфотографуй те, що маєш на поличці чи на столі. Nyamo запропонує список продуктів для перевірки перед підбором страв.
           </p>
         </div>
 
@@ -389,7 +388,7 @@
                 </div>
                 <div class="workflow-result-badge">
                   <span class="workflow-dot"></span>
-                  <span data-i18n="camera.flowDetected">Розпізнано 6 продуктів</span>
+                  <span data-i18n="camera.flowDetected">Приклад розпізнавання: 6 продуктів</span>
                 </div>
               </div>
 
@@ -431,7 +430,7 @@
               <div class="scan-ready-block">
                 <div class="scan-ready-header">
                   <span class="scan-ready-badge-icon">⚡️</span>
-                  <h3 class="scan-ready-title" data-i18n="camera.readyDishes">8 страв можна приготувати</h3>
+                  <h3 class="scan-ready-title" data-i18n="camera.readyDishes">8 страв у каталозі</h3>
                 </div>
 
                 <div class="scan-recipes-pair">
@@ -483,19 +482,18 @@
         <div class="cooking-editorial-grid">
           <!-- LEFT: Editorial Storytelling Content (45%) -->
           <div class="cooking-content-col">
-            <div class="cooking-badge" data-i18n="cooking.tag">Режим приготування</div>
+            <div class="cooking-badge" data-i18n="cooking.tag">Покроковий процес</div>
             <h2 class="cooking-title" data-i18n="cooking.title">
-              Далі просто готуй.<br>
-              Nyamo проведе<br>
-              крок за кроком.
+              Зрозумілі кроки<br>
+              під час готування.
             </h2>
             <p class="cooking-description" data-i18n="cooking.desc">
-              Один крок за раз, таймери під рукою та нічого зайвого перед очима.
+              Застосунок показує процес крок за кроком, щоб не губитися у великому тексті рецепта.
             </p>
 
             <div class="cooking-handsfree-note">
-              <span class="handsfree-icon">✋</span>
-              <span class="handsfree-text" data-i18n="cooking.handsFree">Руки зайняті? Наступний крок завжди перед тобою.</span>
+              <span class="handsfree-icon">ℹ️</span>
+              <span class="handsfree-text" data-i18n="cooking.handsFree">Демонстраційний вигляд екрана приготування в застосунку.</span>
             </div>
           </div>
 
@@ -512,7 +510,7 @@
               <!-- Floating Element 2: Active Timer Pill (top-right) -->
               <div class="cooking-floating-pill cooking-float-timer" id="cookingFloatTimer">
                 <span class="float-timer-icon">⏱</span>
-                <strong class="float-timer-digits" id="cookingFloatTimerDigits">05:36</strong>
+                <strong class="float-timer-digits" id="cookingFloatTimerDigits">05:00</strong>
               </div>
 
               <!-- Smartphone Device Frame -->
@@ -548,7 +546,7 @@
                       </h3>
 
                       <p class="cooking-instruction-sub" id="cookingInstructionSub" data-i18n="cooking.step3Sub">
-                        Готуй на середньому вогні 5–7 хвилин.
+                        Готуй на середньому вогні приблизно 5–7 хвилин.
                       </p>
 
                       <!-- Compact Timer Block (connected directly below instruction) -->
@@ -561,8 +559,8 @@
                           <span class="timer-play-icon">⏱</span>
                         </div>
                         <div class="cooking-timer-compact-info">
-                          <span class="cooking-timer-time" id="cookingTimerTime">05:36</span>
-                          <span class="cooking-timer-label" data-i18n="cooking.timerRemaining">залишилось</span>
+                          <span class="cooking-timer-time" id="cookingTimerTime">05:00</span>
+                          <span class="cooking-timer-label" data-i18n="cooking.timerRemaining">орієнтовно</span>
                         </div>
                       </div>
                     </div>
@@ -590,12 +588,12 @@
       <div class="container">
         <!-- Section Header (Editorial, aligned slightly left of center) -->
         <div class="discovery-header">
-          <span class="discovery-tag" data-i18n="discovery.tag">Що приготувати</span>
+          <span class="discovery-tag" data-i18n="discovery.tag">Ідеї страв</span>
           <h2 class="discovery-title" data-i18n="discovery.title">
             На сьогодні точно<br>є що приготувати.
           </h2>
           <p class="discovery-subtitle" data-i18n="discovery.subtitle">
-            Від швидкого сніданку до вечері з того, що вже лежить у холодильнику. 60+ домашніх рецептів — і каталог постійно росте.
+            Від швидкого сніданку до ситної вечері з того, що вже лежить у холодильнику. Прості домашні страви на кожен день.
           </p>
         </div>
 
@@ -772,10 +770,10 @@
     <section class="section features-section" id="features">
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-badge" data-i18n="features.badge">💡 Переваги Nyamo</span>
-          <h2 class="section-title" data-i18n="features.title">Продумано для спокійного готування</h2>
+          <span class="section-badge" data-i18n="features.badge">💡 Чому Nyamo</span>
+          <h2 class="section-title" data-i18n="features.title">Продумано для повсякденного готування</h2>
           <p class="section-description" data-i18n="features.desc">
-            Без зайвого шуму, складних налаштувань та перевантажених інтерфейсів.
+            Допомагає визначитися з їжею швидко, без зайвого шуму та складних налаштувань.
           </p>
         </div>
 
@@ -783,27 +781,27 @@
           <!-- Benefit 1 -->
           <div class="benefit-item">
             <span class="benefit-number" aria-hidden="true" data-i18n="features.b1Num">01</span>
-            <h3 class="benefit-title" data-i18n="features.b1Title">Точно знає, чого не вистачає</h3>
+            <h3 class="benefit-title" data-i18n="features.b1Title">Підбір за твоїми продуктами</h3>
             <p class="benefit-text" data-i18n="features.b1Text">
-              Nyamo враховує не тільки назву продукту, а й кількість — і одразу показує, що вже можна готувати.
+              Вкажи, що є вдома — Nyamo знайде страви й чітко підкаже, якщо чогось бракує для повної порції.
             </p>
           </div>
 
           <!-- Benefit 2 -->
           <div class="benefit-item">
             <span class="benefit-number" aria-hidden="true" data-i18n="features.b2Num">02</span>
-            <h3 class="benefit-title" data-i18n="features.b2Title">Просто покажи, що є</h3>
+            <h3 class="benefit-title" data-i18n="features.b2Title">Додавання продуктів за фото</h3>
             <p class="benefit-text" data-i18n="features.b2Text">
-              Сфотографуй продукти або додай їх вручну. Nyamo збере все в одному місці.
+              Зроби знімок інгредієнтів на кухні, підтвердь розпізнаний список у діалозі та одразу дивись рецепти.
             </p>
           </div>
 
           <!-- Benefit 3 -->
           <div class="benefit-item">
             <span class="benefit-number" aria-hidden="true" data-i18n="features.b3Num">03</span>
-            <h3 class="benefit-title" data-i18n="features.b3Title">Твої дані залишаються твоїми</h3>
+            <h3 class="benefit-title" data-i18n="features.b3Title">Прості щоденні страви</h3>
             <p class="benefit-text" data-i18n="features.b3Text">
-              Ми не створюємо рекламний профіль і не продаємо твої дані.
+              Каталог звичних домашніх страв без екзотичних інгредієнтів, який поступово розширюється разом із тестувальниками.
             </p>
           </div>
         </div>
@@ -814,21 +812,21 @@
     <section class="section brand-statement-section" id="brand-statement">
       <div class="container max-w-narrow text-center">
         <h2 class="brand-statement-heading" data-i18n="brandStatement.title">
-          Nyamo починає не з рецепта.<br>
-          Nyamo починає з того, що вже є у тебе.
+          Nyamo починає не зі списку покупок.<br>
+          Nyamo починає з того, що вже є вдома.
         </h2>
         <div class="brand-statement-facts">
           <div class="brand-fact-item">
             <span class="brand-fact-icon" aria-hidden="true">✓</span>
-            <span class="brand-fact-text" data-i18n="brandStatement.fact1">Без обов’язкової підписки</span>
+            <span class="brand-fact-text" data-i18n="brandStatement.fact1">Підбір страв із наявного</span>
           </div>
           <div class="brand-fact-item">
             <span class="brand-fact-icon" aria-hidden="true">✓</span>
-            <span class="brand-fact-text" data-i18n="brandStatement.fact2">Працює з твоїми продуктами</span>
+            <span class="brand-fact-text" data-i18n="brandStatement.fact2">Додавання продуктів за фото</span>
           </div>
           <div class="brand-fact-item">
             <span class="brand-fact-icon" aria-hidden="true">✓</span>
-            <span class="brand-fact-text" data-i18n="brandStatement.fact3">Основні рецепти доступні офлайн</span>
+            <span class="brand-fact-text" data-i18n="brandStatement.fact3">Зворотний зв'язок у беті</span>
           </div>
         </div>
       </div>
@@ -839,10 +837,10 @@
       <div class="container">
         <div class="download-card">
           <div class="download-content">
-            <span class="download-badge" data-i18n="download.badge">📱 Додаток для кухні</span>
-            <h2 class="download-title" data-i18n="download.title">Що приготуєш сьогодні?</h2>
+            <span class="download-badge" data-i18n="download.badge">📱 Бета-тестування</span>
+            <h2 class="download-title" data-i18n="download.title">Спробуй Nyamo у бета-тестуванні</h2>
             <p class="download-description" data-i18n="download.desc">
-              Покажи Nyamo, що є вдома — решту ми допоможемо перетворити на вечерю.
+              Допоможи нам зробити додаток зручнішим. Завантажуй бета-версію на Android або надішли запит на тестування.
             </p>
 
             <div class="download-buttons-group">
@@ -852,23 +850,23 @@
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                <span data-i18n="download.btnDownload">Завантажити Nyamo</span>
+                <span data-i18n="download.btnDownload">Завантажити APK (Бета)</span>
               </a>
 
               <a href="mailto:buisness@neoflux.fluxmarketplace.store?subject=Nyamo%20Beta%20Access" class="btn btn-outline-white btn-lg">
                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polygon points="5 3 19 12 5 21 5 3"></polygon>
                 </svg>
-                <span data-i18n="download.btnGooglePlay">Google Play</span>
+                <span data-i18n="download.btnGooglePlay">Запит на бета-тест</span>
               </a>
             </div>
 
             <div class="download-meta">
-              <span data-i18n="download.metaOffline">✓ Основні функції офлайн</span>
+              <span data-i18n="download.metaOffline">✓ Для Android-пристроїв</span>
               <span>•</span>
-              <span data-i18n="download.metaFree">✓ Без обов'язкової підписки</span>
+              <span data-i18n="download.metaFree">✓ Без створення акаунту в беті</span>
               <span>•</span>
-              <span data-i18n="download.metaClean">✓ Безпечно та без трекерів</span>
+              <span data-i18n="download.metaClean">✓ Версія для iOS — у планах</span>
             </div>
           </div>
 
@@ -932,7 +930,7 @@
                   <rect x="96" y="100" width="6" height="6" rx="1" fill="#E8E3DE"/>
                 </svg>
               </div>
-              <p class="qr-caption" data-i18n="download.qrCaption">Наведи камеру смартфона для швидкого завантаження</p>
+              <p class="qr-caption" data-i18n="download.qrCaption">Наведи камеру смартфона, щоб надіслати запит на участь у бета-тестуванні</p>
             </div>
           </div>
         </div>
@@ -948,41 +946,41 @@
         </div>
 
         <div class="accordion" id="faqAccordion">
-          <!-- Item 1: Offline -->
+          <!-- Item 1: Recipe Matching -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q1">Чи працює Nyamo без інтернету?</span>
+              <span class="accordion-title" data-i18n="faq.q1">Як Nyamo підбирає страви?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a1">
-                Так. Рецепти, продукти та основні функції доступні офлайн. Інтернет потрібен лише для опціональної функції AI-розпізнавання продуктів за фотографією.
+                Ти вказуєш наявні інгредієнти вручну або за допомогою фото. Алгоритм порівнює їх із базою рецептів, враховує необхідні пропорції та показує, які страви можна приготувати повністю, а де не вистачає кількох складників.
               </p>
             </div>
           </div>
 
-          <!-- Item 2: Free / Subscriptions -->
+          <!-- Item 2: How to join beta -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q2">Чи безкоштовний Nyamo?</span>
+              <span class="accordion-title" data-i18n="faq.q2">Як долучитися до бета-тестування?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a2">
-                Так, Nyamo безкоштовний для кожного. Усі базові рецепти та функції доступні без обов'язкових платних підписок чи заблокованого контенту.
+                Ти можеш завантажити поточну тестову збірку для Android прямо з сайту або надіслати запит на пошту buisness@neoflux.fluxmarketplace.store, щоб отримати доступ та ділитися відгуками.
               </p>
             </div>
           </div>
 
-          <!-- Item 3: How photo recognition works -->
+          <!-- Item 3: Account / Registration -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q3">Як працює розпізнавання фото?</span>
+              <span class="accordion-title" data-i18n="faq.q3">Чи потрібен обліковий запис для використання?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a3">
-                Ти робиш знімок полиці холодильника чи продуктів на столі. Nyamo визначає інгредієнти та показує список, де можна перевірити та уточнити кількість перед збереженням.
+                У поточній бета-версії реєстрація та акаунт не потрібні — твої списки та збережений прогрес зберігаються локально на пристрої. У майбутніх версіях плануються акаунти для синхронізації між пристроями.
               </p>
             </div>
           </div>
@@ -990,38 +988,51 @@
           <!-- Item 4: What happens to photos / privacy -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q4">Що відбувається з моїми фотографіями?</span>
+              <span class="accordion-title" data-i18n="faq.q4">Як працює додавання продуктів за фото?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a4">
-                Розпізнавання фото потребує інтернету, але фото не зберігаються після обробки. Додаток видаляє чутливі EXIF-метадані перед відправкою, а твої кулінарні дані залишаються на пристрої.
+                Ти фотографуєш продукти на поличці чи столі. Фото відправляється на захищений сервер для розпізнавання, після чого додаток показує діалог перевірки, де ти можеш підтвердити, відредагувати чи прибрати будь-який розпізнаний продукт.
               </p>
             </div>
           </div>
 
-          <!-- Item 5: Portions scaling -->
+          <!-- Item 5: Offline work -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q5">Чи можна змінювати кількість порцій?</span>
+              <span class="accordion-title" data-i18n="faq.q5">Чи працює Nyamo без інтернету?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a5">
-                Так. У кожному рецепті можна обрати потрібну кількість порцій від 1 до 10. Грами, ложки та штуки інгредієнтів адаптуються автоматично, включно з текстами кроків.
+                Перегляд уже збережених рецептів та ручний підбір доступні офлайн. Інтернет потрібен для розпізнавання нових продуктів за фотографією. Повноцінний автономний режим для каталогу планується розвивати далі.
               </p>
             </div>
           </div>
 
-          <!-- Item 6: Spices and Pantry -->
+          <!-- Item 6: Ads and Pricing -->
           <div class="accordion-item">
             <button class="accordion-header" aria-expanded="false">
-              <span class="accordion-title" data-i18n="faq.q6">Як додати спеції та постійні продукти?</span>
+              <span class="accordion-title" data-i18n="faq.q6">Чи буде додаток платним або з рекламою?</span>
               <span class="accordion-icon">+</span>
             </button>
             <div class="accordion-body">
               <p data-i18n="faq.a6">
-                Сіль, олія та улюблені приправи відзначаються в окремій швидкій панелі спецій, а базові запаси зберігаються в розділі «Комора», щоб не вводити їх щоразу заново.
+                Під час відкритого бета-тестування додаток доступний безкоштовно. На етапі публічного релізу планується модель із ненав'язливою рекламою та розглядається підписка на додаткові можливості.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 7: iOS Version -->
+          <div class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+              <span class="accordion-title" data-i18n="faq.q7">Чи планується версія для iOS?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-body">
+              <p data-i18n="faq.a7">
+                Так, розробка версії для iPhone є в офіційних планах команди. Вона з'явиться після відпрацювання ключових функцій та зворотного зв'язку на Android.
               </p>
             </div>
           </div>
@@ -1049,7 +1060,7 @@
           <img src="assets/images/icon-512.png" alt="Nyamo" class="footer-icon">
           <span class="footer-brand-name">Nyamo</span>
         </div>
-        <p class="footer-tagline" data-i18n="footer.tagline">Смачне з того, що є.</p>
+        <p class="footer-tagline" data-i18n="footer.tagline">Смачне з того, що є вдома.</p>
         <p class="footer-copyright" data-i18n="footer.copyright">
           © 2026 Nyamo. Усі права захищено.
         </p>
@@ -1058,10 +1069,10 @@
       <div class="footer-col">
         <h4 class="footer-heading" data-i18n="footer.navHeading">Навігація</h4>
         <ul class="footer-links">
-          <li><a href="#interactive-demo" data-i18n="footer.navDemo">Спробувати онлайн</a></li>
+          <li><a href="#interactive-demo" data-i18n="footer.navDemo">Спробувати демо</a></li>
           <li><a href="#features" data-i18n="footer.navFeatures">Можливості</a></li>
-          <li><a href="#food-discovery" data-i18n="footer.navRecipes">Рецепти</a></li>
-          <li><a href="#download" data-i18n="footer.navDownload">Завантажити</a></li>
+          <li><a href="#food-discovery" data-i18n="footer.navRecipes">Страви</a></li>
+          <li><a href="#download" data-i18n="footer.navDownload">Бета-тест</a></li>
         </ul>
       </div>
 
