@@ -706,13 +706,13 @@ div[id].section,
    ========================================================================== */
 #hero.hero-section,
 .hero-section {
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: calc(100vh - 80px);
+  min-height: calc(100dvh - 80px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 116px;
-  padding-bottom: 60px;
+  padding-top: 108px;
+  padding-bottom: 24px;
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
@@ -1056,7 +1056,7 @@ div[id].section,
    Controlled 100px bridge with subtle warm orange glow
    ========================================================================== */
 .hero-transition-bleed {
-  height: 100px;
+  height: 80px;
   width: 100%;
   position: relative;
   background: linear-gradient(180deg, 
